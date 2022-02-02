@@ -28,7 +28,9 @@ const StyledSelect = styled.select`
 `;
 
 const SelectPlayerDiv = styled.div`
-  margin: 5rem 20%;
+  margin: 5rem 15%;
+  display: flex;
+  align-items: bottom;
 `;
 
 const Logo = styled.img`
@@ -73,6 +75,7 @@ const Listen = () => {
         <option value="Tidal">Tidal</option>
         <option value="Apple">Apple Music</option>
       </StyledSelect>
+      <MusicSlider player={player} />
       <MusicSlider player={player} />
     </div>
   );

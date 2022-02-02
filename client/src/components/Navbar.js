@@ -34,10 +34,11 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const LinkButton = styled.div`
+const LinkButton = styled(Link)`
   background: ${(props) => props.theme.color.highlight1};
   color: ${(props) => props.theme.color.textDark};
   font-weight: 600;
+  text-decoration: none;
   padding: 8px 2rem;
   border-radius: 5px;
 `;
