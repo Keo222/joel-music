@@ -39,6 +39,7 @@ const Logo = styled.img`
   object-fit: contain;
   margin-left: 3rem;
   cursor: pointer;
+  user-select: none;
 `;
 
 const Listen = () => {

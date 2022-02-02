@@ -17,29 +17,20 @@ import Hire from "./pages/Hire";
 // Components
 import Navbar from "./components/Navbar";
 
-// Styled Elements
-const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: ${(props) => props.theme.color.background};
-`;
-
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Background>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/listen" element={<Listen />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/hire" element={<Hire />} />
-          </Routes>
-        </Router>
-      </Background>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/listen" element={<Listen />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/hire" element={<Hire />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 };
