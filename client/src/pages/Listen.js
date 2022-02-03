@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { animated } from "react-spring";
 
 // Components
 import MusicSlider from "../components/MusicSlider";
@@ -13,37 +14,31 @@ import appleWhite from "../icons/apple-white.svg";
 import appleColor from "../icons/apple-color.svg";
 
 // Styled Elements
-const StyledSelect = styled.select`
-  border: none;
-  border-radius: 5px;
-  padding: 3px 4px;
-  display: block;
-  margin: 5rem 23% 0;
-  font-size: 1.4rem;
-
-  &:focus {
-    outline: none;
-    box-shadow: 0px 2px 100px rgba(46, 224, 234, 0.6);
-  }
-`;
 
 const SelectPlayerDiv = styled.div`
-  margin: 5rem 15%;
+  margin: 2rem 8%;
   display: flex;
   align-items: bottom;
 `;
 
-const Logo = styled.img`
+const Logo = styled(animated.img)`
   width: 50px;
   height: 50px;
   object-fit: contain;
   margin-left: 3rem;
   cursor: pointer;
   user-select: none;
+  filter: green;
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.8);
+  }
 `;
 
 const Listen = () => {
   const [player, setPlayer] = useState("Spotify");
+
   const changePlayer = (newPlayer) => {
     setPlayer(newPlayer);
   };
@@ -66,7 +61,7 @@ const Listen = () => {
           onClick={() => changePlayer("Apple")}
         />
       </SelectPlayerDiv>
-      <StyledSelect
+      {/* <StyledSelect
         name="player"
         id="player"
         onChange={(e) => changePlayer(e.target.value)}
@@ -75,9 +70,9 @@ const Listen = () => {
         <option value="Spotify">Spotify</option>
         <option value="Tidal">Tidal</option>
         <option value="Apple">Apple Music</option>
-      </StyledSelect>
-      <MusicSlider player={player} />
-      <MusicSlider player={player} />
+      </StyledSelect> */}
+      <MusicSlider player={player} genre="Folk" />
+      <MusicSlider player={player} genre="Girlfriend Music" />
     </div>
   );
 };

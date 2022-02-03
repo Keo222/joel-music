@@ -61,7 +61,7 @@ const tracks = [
 // SLIDER ELEMENTS
 const TrackAndArrows = styled.div`
   width: 70%;
-  margin: 10rem auto;
+  margin: 5rem auto;
   display: flex;
   align-items: center;
 `;
@@ -78,6 +78,13 @@ const RightArrowSVG = styled.img`
   margin-left: 2rem;
   cursor: pointer;
   user-select: none;
+`;
+
+const TrackAndTitle = styled.div``;
+
+const GenreTitle = styled.h3`
+  font-size: 2rem;
+  color: ${(props) => props.theme.color.textLight};
 `;
 
 // TRACK PLAYER ELEMENT
@@ -140,7 +147,7 @@ const ToggleArrowSVG = styled.img`
   user-select: none;
 `;
 
-const MusicSlider = ({ player }) => {
+const MusicSlider = ({ player, genre }) => {
   const [current, setCurrent] = useState(0);
   const length = tracks.length;
 
@@ -236,48 +243,49 @@ const MusicSlider = ({ player }) => {
   return (
     <TrackAndArrows>
       <LeftArrowSVG src={leftArrow} onClick={() => prevTrack()} />
-      {transitions((styles, i) => (
-        <TrackContainer>
-          <TrackDiv style={styles}>
-            <EmbedDiv>{playerSwitch(tracks[i])}</EmbedDiv>
+      <TrackAndTitle>
+        <GenreTitle>{genre}</GenreTitle>
+        {transitions((styles, i) => (
+          <TrackContainer>
+            <TrackDiv style={styles}>
+              <EmbedDiv>{playerSwitch(tracks[i])}</EmbedDiv>
 
-            <animated.div style={expand}>
-              <TrackInfoDiv ref={heightRef}>
-                {/* {showInfo && ( */}
-                <BasicsDiv>
-                  <InfoPoint>{tracks[current].work}</InfoPoint>
-                  <InfoPoint>{tracks[current].year}</InfoPoint>
-                </BasicsDiv>
-                {/* )} */}
-              </TrackInfoDiv>
-            </animated.div>
+              <animated.div style={expand}>
+                <TrackInfoDiv ref={heightRef}>
+                  <BasicsDiv>
+                    <InfoPoint>{tracks[current].work}</InfoPoint>
+                    <InfoPoint>{tracks[current].year}</InfoPoint>
+                  </BasicsDiv>
+                </TrackInfoDiv>
+              </animated.div>
 
-            {showInfo ? (
-              <TrackInfoToggle
-                open={showInfo}
-                onClick={() => setShowInfo(!showInfo)}
-              >
-                See Less
-                <ToggleArrowSVG
-                  src={upArrow}
-                  alt="arrow down to open dropdown"
-                />
-              </TrackInfoToggle>
-            ) : (
-              <TrackInfoToggle
-                open={showInfo}
-                onClick={() => setShowInfo(!showInfo)}
-              >
-                See More
-                <ToggleArrowSVG
-                  src={downArrow}
-                  alt="arrow down to open dropdown"
-                />
-              </TrackInfoToggle>
-            )}
-          </TrackDiv>
-        </TrackContainer>
-      ))}
+              {showInfo ? (
+                <TrackInfoToggle
+                  open={showInfo}
+                  onClick={() => setShowInfo(!showInfo)}
+                >
+                  See Less
+                  <ToggleArrowSVG
+                    src={upArrow}
+                    alt="arrow down to open dropdown"
+                  />
+                </TrackInfoToggle>
+              ) : (
+                <TrackInfoToggle
+                  open={showInfo}
+                  onClick={() => setShowInfo(!showInfo)}
+                >
+                  See More
+                  <ToggleArrowSVG
+                    src={downArrow}
+                    alt="arrow down to open dropdown"
+                  />
+                </TrackInfoToggle>
+              )}
+            </TrackDiv>
+          </TrackContainer>
+        ))}
+      </TrackAndTitle>
       <RightArrowSVG src={rightArrow} onClick={() => nextTrack()} />
     </TrackAndArrows>
   );
