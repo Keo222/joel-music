@@ -25,7 +25,7 @@ import { useMeasure } from "react-use";
 // SLIDER ELEMENTS
 const TrackAndArrows = styled.div`
   width: 70%;
-  margin: 10rem auto;
+  margin: 2rem auto 5rem;
   display: flex;
   align-items: center;
 `;
@@ -44,11 +44,28 @@ const RightArrowSVG = styled.img`
   user-select: none;
 `;
 
+const TopRow = styled.div`
+  width: 70%;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+`;
+
+const Bumper = styled.div`
+  width: 50px;
+`;
+
+const TitleContainer = styled.div`
+  min-width: 600px;
+  width: 81rem;
+  margin: 0 auto;
+`;
+
 const GenreTitle = styled.h3`
   font-size: 2rem;
   color: ${(props) => props.theme.color.textLight};
-  width: 60%;
-  margin: 0 auto;
+  margin-left: 3rem;
+  width: 100%;
 `;
 
 // TRACK PLAYER ELEMENT
@@ -205,50 +222,59 @@ const MusicSlider = ({ player, genre, tracks }) => {
   };
   // HTML Elements
   return (
-    <TrackAndArrows>
-      <LeftArrowSVG src={leftArrow} onClick={() => prevTrack()} />
-      {transitions((styles, i) => (
-        <TrackContainer>
-          <TrackDiv style={styles}>
-            <EmbedDiv>{playerSwitch(tracks[i])}</EmbedDiv>
+    <>
+      <TopRow>
+        <Bumper>&nbsp;</Bumper>
+        <TitleContainer>
+          <GenreTitle>{genre}</GenreTitle>
+        </TitleContainer>
+        <Bumper>&nbsp;</Bumper>
+      </TopRow>
+      <TrackAndArrows>
+        <LeftArrowSVG src={leftArrow} onClick={() => prevTrack()} />
+        {transitions((styles, i) => (
+          <TrackContainer>
+            <TrackDiv style={styles}>
+              <EmbedDiv>{playerSwitch(tracks[i])}</EmbedDiv>
 
-            <animated.div style={expand}>
-              <TrackInfoDiv ref={heightRef}>
-                <BasicsDiv>
-                  <InfoPoint>{tracks[current].work}</InfoPoint>
-                  <InfoPoint>{tracks[current].year}</InfoPoint>
-                </BasicsDiv>
-              </TrackInfoDiv>
-            </animated.div>
+              <animated.div style={expand}>
+                <TrackInfoDiv ref={heightRef}>
+                  <BasicsDiv>
+                    <InfoPoint>{tracks[current].work}</InfoPoint>
+                    <InfoPoint>{tracks[current].year}</InfoPoint>
+                  </BasicsDiv>
+                </TrackInfoDiv>
+              </animated.div>
 
-            {showInfo ? (
-              <TrackInfoToggle
-                open={showInfo}
-                onClick={() => setShowInfo(!showInfo)}
-              >
-                See Less
-                <ToggleArrowSVG
-                  src={upArrow}
-                  alt="arrow down to open dropdown"
-                />
-              </TrackInfoToggle>
-            ) : (
-              <TrackInfoToggle
-                open={showInfo}
-                onClick={() => setShowInfo(!showInfo)}
-              >
-                See More
-                <ToggleArrowSVG
-                  src={downArrow}
-                  alt="arrow down to open dropdown"
-                />
-              </TrackInfoToggle>
-            )}
-          </TrackDiv>
-        </TrackContainer>
-      ))}
-      <RightArrowSVG src={rightArrow} onClick={() => nextTrack()} />
-    </TrackAndArrows>
+              {showInfo ? (
+                <TrackInfoToggle
+                  open={showInfo}
+                  onClick={() => setShowInfo(!showInfo)}
+                >
+                  See Less
+                  <ToggleArrowSVG
+                    src={upArrow}
+                    alt="arrow down to open dropdown"
+                  />
+                </TrackInfoToggle>
+              ) : (
+                <TrackInfoToggle
+                  open={showInfo}
+                  onClick={() => setShowInfo(!showInfo)}
+                >
+                  See More
+                  <ToggleArrowSVG
+                    src={downArrow}
+                    alt="arrow down to open dropdown"
+                  />
+                </TrackInfoToggle>
+              )}
+            </TrackDiv>
+          </TrackContainer>
+        ))}
+        <RightArrowSVG src={rightArrow} onClick={() => nextTrack()} />
+      </TrackAndArrows>
+    </>
   );
 };
 

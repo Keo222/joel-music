@@ -14,9 +14,17 @@ import appleWhite from "../icons/apple-white.svg";
 import appleColor from "../icons/apple-color.svg";
 
 // Tracks
-import { girlfriend, tracks, original, folk } from "../temp_db/json-tracks";
+import {
+  girlfriend,
+  tracks,
+  original,
+  folk,
+} from "../temp_db/json-tracks";
 
 // Styled Elements
+const PageDiv = styled.div`
+  margin-bottom: 15rem;
+`;
 
 const SelectPlayerDiv = styled.div`
   margin: 2rem 8% 5rem;
@@ -46,7 +54,7 @@ const Listen = () => {
     setPlayer(newPlayer);
   };
   return (
-    <div>
+    <PageDiv>
       <SelectPlayerDiv>
         <Logo
           src={player === "Spotify" ? spotifyColor : spotifyWhite}
@@ -80,8 +88,12 @@ const Listen = () => {
         player={player}
         genre="Girlfriend Music"
       />
-      <MusicSlider tracks={original} player={player} genre="Original Music" />
-    </div>
+      <MusicSlider
+        tracks={original}
+        player={player}
+        genre="Original Music"
+      />
+    </PageDiv>
   );
 };
 
