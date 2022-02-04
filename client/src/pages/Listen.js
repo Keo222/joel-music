@@ -13,10 +13,13 @@ import tidalColor from "../icons/tidal-color.png";
 import appleWhite from "../icons/apple-white.svg";
 import appleColor from "../icons/apple-color.svg";
 
+// Tracks
+import { girlfriend, tracks, original, folk } from "../temp_db/json-tracks";
+
 // Styled Elements
 
 const SelectPlayerDiv = styled.div`
-  margin: 2rem 8%;
+  margin: 2rem 8% 5rem;
   display: flex;
   align-items: bottom;
 `;
@@ -71,8 +74,13 @@ const Listen = () => {
         <option value="Tidal">Tidal</option>
         <option value="Apple">Apple Music</option>
       </StyledSelect> */}
-      <MusicSlider player={player} genre="Folk" />
-      <MusicSlider player={player} genre="Girlfriend Music" />
+      <MusicSlider tracks={folk} player={player} genre="Folk" />
+      <MusicSlider
+        tracks={girlfriend}
+        player={player}
+        genre="Girlfriend Music"
+      />
+      <MusicSlider tracks={original} player={player} genre="Original Music" />
     </div>
   );
 };

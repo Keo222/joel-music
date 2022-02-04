@@ -22,46 +22,10 @@ import {
 
 import { useMeasure } from "react-use";
 
-const tracks = [
-  {
-    title: "Astronaut Man",
-    artist: "Eledy",
-    work: "Mixed",
-    year: "2019",
-    spotifySrc:
-      "https://open.spotify.com/embed/track/2eHp1gOry585glXT5iSxpf?utm_source=generator",
-    appleSrc:
-      "https://embed.music.apple.com/us/album/astronaut-man/1538034887?i=1538034888",
-    tidalSrc: "https://embed.tidal.com/tracks/160329063",
-  },
-  {
-    title: "Mole Hills",
-    artist: "Crete",
-    work: "Mixed & Mastered",
-    year: "2018",
-    spotifySrc:
-      "https://open.spotify.com/embed/track/7lQnbTONZ0DiIZwR6OzpFl?utm_source=generator",
-    appleSrc:
-      "https://embed.music.apple.com/us/album/mole-hills/1390203695?i=1390203974",
-    tidalSrc: "https://embed.tidal.com/tracks/89429697",
-  },
-  {
-    title: "You Feel Far",
-    artist: "Novel Mover",
-    work: "Original Music",
-    year: "2021",
-    spotifySrc:
-      "https://open.spotify.com/embed/track/7w4s3kyQmTUvfaWDJrTbfp?utm_source=generator",
-    appleSrc:
-      "https://embed.music.apple.com/us/album/you-feel-far/1593246124?i=1593246125",
-    tidalSrc: "https://embed.tidal.com/tracks/203547808",
-  },
-];
-
 // SLIDER ELEMENTS
 const TrackAndArrows = styled.div`
   width: 70%;
-  margin: 5rem auto;
+  margin: 10rem auto;
   display: flex;
   align-items: center;
 `;
@@ -80,11 +44,11 @@ const RightArrowSVG = styled.img`
   user-select: none;
 `;
 
-const TrackAndTitle = styled.div``;
-
 const GenreTitle = styled.h3`
   font-size: 2rem;
   color: ${(props) => props.theme.color.textLight};
+  width: 60%;
+  margin: 0 auto;
 `;
 
 // TRACK PLAYER ELEMENT
@@ -147,7 +111,7 @@ const ToggleArrowSVG = styled.img`
   user-select: none;
 `;
 
-const MusicSlider = ({ player, genre }) => {
+const MusicSlider = ({ player, genre, tracks }) => {
   const [current, setCurrent] = useState(0);
   const length = tracks.length;
 
@@ -243,49 +207,46 @@ const MusicSlider = ({ player, genre }) => {
   return (
     <TrackAndArrows>
       <LeftArrowSVG src={leftArrow} onClick={() => prevTrack()} />
-      <TrackAndTitle>
-        <GenreTitle>{genre}</GenreTitle>
-        {transitions((styles, i) => (
-          <TrackContainer>
-            <TrackDiv style={styles}>
-              <EmbedDiv>{playerSwitch(tracks[i])}</EmbedDiv>
+      {transitions((styles, i) => (
+        <TrackContainer>
+          <TrackDiv style={styles}>
+            <EmbedDiv>{playerSwitch(tracks[i])}</EmbedDiv>
 
-              <animated.div style={expand}>
-                <TrackInfoDiv ref={heightRef}>
-                  <BasicsDiv>
-                    <InfoPoint>{tracks[current].work}</InfoPoint>
-                    <InfoPoint>{tracks[current].year}</InfoPoint>
-                  </BasicsDiv>
-                </TrackInfoDiv>
-              </animated.div>
+            <animated.div style={expand}>
+              <TrackInfoDiv ref={heightRef}>
+                <BasicsDiv>
+                  <InfoPoint>{tracks[current].work}</InfoPoint>
+                  <InfoPoint>{tracks[current].year}</InfoPoint>
+                </BasicsDiv>
+              </TrackInfoDiv>
+            </animated.div>
 
-              {showInfo ? (
-                <TrackInfoToggle
-                  open={showInfo}
-                  onClick={() => setShowInfo(!showInfo)}
-                >
-                  See Less
-                  <ToggleArrowSVG
-                    src={upArrow}
-                    alt="arrow down to open dropdown"
-                  />
-                </TrackInfoToggle>
-              ) : (
-                <TrackInfoToggle
-                  open={showInfo}
-                  onClick={() => setShowInfo(!showInfo)}
-                >
-                  See More
-                  <ToggleArrowSVG
-                    src={downArrow}
-                    alt="arrow down to open dropdown"
-                  />
-                </TrackInfoToggle>
-              )}
-            </TrackDiv>
-          </TrackContainer>
-        ))}
-      </TrackAndTitle>
+            {showInfo ? (
+              <TrackInfoToggle
+                open={showInfo}
+                onClick={() => setShowInfo(!showInfo)}
+              >
+                See Less
+                <ToggleArrowSVG
+                  src={upArrow}
+                  alt="arrow down to open dropdown"
+                />
+              </TrackInfoToggle>
+            ) : (
+              <TrackInfoToggle
+                open={showInfo}
+                onClick={() => setShowInfo(!showInfo)}
+              >
+                See More
+                <ToggleArrowSVG
+                  src={downArrow}
+                  alt="arrow down to open dropdown"
+                />
+              </TrackInfoToggle>
+            )}
+          </TrackDiv>
+        </TrackContainer>
+      ))}
       <RightArrowSVG src={rightArrow} onClick={() => nextTrack()} />
     </TrackAndArrows>
   );
