@@ -1,7 +1,158 @@
-import React from "react";
+import React, {useState} from "react";
+import styled from "styled-components";
+
+// Styled Elements
+
+const ContactContainer = styled.div`
+  width: 90%;
+  max-width: 800px;
+  margin: 5rem auto 2rem;
+  transform: translateX(-80px);
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  color: ${(props) => props.theme.color.textLight};
+  font-size: 1.6rem;
+  line-height: 2.5rem;
+`;
+
+const Label = styled.label`
+  text-align: right;
+  margin-right: 3rem;
+  grid-row-start: ${(props) => props.rowStart};
+  grid-row-end: ${(props) => props.rowEnd};
+  grid-column-start: ${(props) => props.colStart};
+  grid-column-end: ${(props) => props.colEnd};
+`;
+const Input = styled.input`
+  margin-bottom: 2rem;
+  grid-row-start: ${(props) => props.rowStart};
+  grid-row-end: ${(props) => props.rowEnd};
+  grid-column-start: ${(props) => props.colStart};
+  grid-column-end: ${(props) => props.colEnd};
+`;
+
+const StyledSelect = styled.select`
+  height: 2.5rem;
+  grid-row-start: ${(props) => props.rowStart};
+  grid-row-end: ${(props) => props.rowEnd};
+  grid-column-start: ${(props) => props.colStart};
+  grid-column-end: ${(props) => props.colEnd};
+`;
+const StyledTextArea = styled.textarea`
+  grid-row-start: ${(props) => props.rowStart};
+  grid-row-end: ${(props) => props.rowEnd};
+  grid-column-start: ${(props) => props.colStart};
+  grid-column-end: ${(props) => props.colEnd};
+  height: 15rem;
+`;
+
+const EstimatedCost = styled.p`
+  color: ${(props) => props.theme.color.textLight};
+  text-align: right;
+  font-size: 2.2rem;
+  font-weight: 300;
+  display: block;
+  grid-column-start: 3;
+  grid-column-end: -1;
+`;
+
+const BoldSpan = styled.span`
+  font-weight: 700;
+  color: ${(props) => props.theme.color.highlight3};
+`;
+
+const SubmitBtn = styled.button`
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: ${(props) => props.theme.color.textDark};
+  padding: 1.5rem 4rem;
+  border-radius: 5px;
+  background: ${(props) => props.theme.color.highlight1};
+  margin: 1rem auto 5rem;
+  border: none;
+  cursor: pointer;
+`;
 
 const Hire = () => {
-  return <div>Hire</div>;
+  const [tracks, setTracks] = useState(1);
+  return (
+    <div>
+      <ContactContainer>
+        <Label htmlFor="name">Name:</Label>
+        <Input type="text" name="name" id="name" />
+        <Label
+          rowStart={1}
+          rowEnd={2}
+          colStart={3}
+          htmlFor="work"
+        >
+          Work:
+        </Label>
+        <StyledSelect
+          type="select"
+          name="work"
+          id="work"
+          rowStart={1}
+          rowEnd={2}
+          colStart={4}
+        >
+          <option value="Mix">Mix</option>
+          <option value="Master">Master</option>
+          <option value="Mix/Master">Mix & Master</option>
+        </StyledSelect>
+        <Label
+          rowStart={2}
+          rowEnd={3}
+          colStart={3}
+          htmlFor="numSongs"
+        >
+          Tracks:
+        </Label>
+        <StyledSelect
+          type="select"
+          name="numSongs"
+          id="numSongs"
+          rowStart={2}
+          rowEnd={3}
+          colStart={4}
+          onChange={(e) => setTracks(e.target.value)}
+        >
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+          <option value={6}>6</option>
+          <option value={7}>7</option>
+          <option value={8}>8</option>
+          <option value={9}>9</option>
+          <option value={10}>10</option>
+          <option value={11}>11</option>
+          <option value={12}>12</option>
+        </StyledSelect>
+        <Label htmlFor="email">Email:</Label>
+        <Input type="email" name="email" id="email" />
+        <Label htmlFor="subject" rowStart={3}>
+          Subject:
+        </Label>
+        <Input
+          colStart={2}
+          colEnd={-1}
+          type="text"
+          name="subject"
+          id="subject"
+        />
+        <Label htmlFor="message">Message:</Label>
+        <StyledTextArea colStart={2} colEnd={-1} />
+        <EstimatedCost>
+          <BoldSpan>Estimate:</BoldSpan> ${tracks*10000}.00
+        </EstimatedCost>
+      </ContactContainer>
+      <SubmitBtn>Submit</SubmitBtn>
+    </div>
+  );
 };
 
 export default Hire;

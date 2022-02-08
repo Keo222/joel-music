@@ -11,6 +11,11 @@ const Nav = styled.nav`
   margin: 0 auto;
   font-size: 1.6rem;
   font-weight: 500;
+  display: grid;
+  grid-template-columns: 1fr 240px 1fr;
+`;
+
+const NavLinks = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,6 +51,7 @@ const LinkButton = styled(Link)`
 const ImageContainer = styled.div`
   width: 16rem;
   height: 20rem;
+  margin: 0 4rem;
 `;
 
 const Logo = styled.img`
@@ -57,15 +63,19 @@ const Logo = styled.img`
 const Navbar = () => {
   return (
     <Nav>
-      <StyledLink to="/">Home</StyledLink>
-      <StyledLink to="/about">About</StyledLink>
-      <StyledLink to="/listen">Listen</StyledLink>
+      <NavLinks>
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/about">About</StyledLink>
+        <StyledLink to="/listen">Listen</StyledLink>
+      </NavLinks>
       <ImageContainer>
         <Logo src={lightbulbWhite} />
       </ImageContainer>
-      <StyledLink to="/contact">Contact</StyledLink>
-      <StyledLink to="/pricing">Pricing</StyledLink>
-      <LinkButton to="/hire">Hire</LinkButton>
+      <NavLinks>
+        <StyledLink to="/contact">Contact</StyledLink>
+        <StyledLink to="/pricing">Pricing</StyledLink>
+        <LinkButton to="/hire">Hire</LinkButton>
+      </NavLinks>
     </Nav>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { animated } from "react-spring";
 
@@ -14,12 +14,7 @@ import appleWhite from "../icons/apple-white.svg";
 import appleColor from "../icons/apple-color.svg";
 
 // Tracks
-import {
-  girlfriend,
-  tracks,
-  original,
-  folk,
-} from "../temp_db/json-tracks";
+import { girlfriend, allTracks, original, folk } from "../temp_db/json-tracks";
 
 // Styled Elements
 const PageDiv = styled.div`
@@ -28,6 +23,16 @@ const PageDiv = styled.div`
 
 const SelectPlayerDiv = styled.div`
   margin: 2rem 8% 5rem;
+`;
+
+const SelectPlayerLabel = styled.p`
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: ${(props) => props.theme.color.textLight};
+`;
+
+const SelectPlayerLogos = styled.div`
+  margin-left: 1rem;
   display: flex;
   align-items: bottom;
 `;
@@ -48,51 +53,48 @@ const Logo = styled(animated.img)`
 `;
 
 const Listen = () => {
-  const [player, setPlayer] = useState("Spotify");
+  const [player, setPlayer] = useState(
+    localStorage.getItem("player") || "Spotify"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("player", player);
+  }, [player]);
 
   const changePlayer = (newPlayer) => {
     setPlayer(newPlayer);
   };
+
+  const featuredTracks = allTracks.filter((t) => t.featured);
   return (
     <PageDiv>
       <SelectPlayerDiv>
-        <Logo
-          src={player === "Spotify" ? spotifyColor : spotifyWhite}
-          alt="spotify logo unselected"
-          onClick={() => changePlayer("Spotify")}
-        />
-        <Logo
-          src={player === "Tidal" ? tidalColor : tidalWhite}
-          alt="apple logo unselected"
-          onClick={() => changePlayer("Tidal")}
-        />
-        <Logo
-          src={player === "Apple" ? appleColor : appleWhite}
-          alt="apple logo unselected"
-          onClick={() => changePlayer("Apple")}
-        />
+        <SelectPlayerLabel>Select Streaming Service:</SelectPlayerLabel>
+        <SelectPlayerLogos>
+          <Logo
+            src={player === "Spotify" ? spotifyColor : spotifyWhite}
+            alt="spotify logo unselected"
+            onClick={() => changePlayer("Spotify")}
+          />
+          <Logo
+            src={player === "Tidal" ? tidalColor : tidalWhite}
+            alt="apple logo unselected"
+            onClick={() => changePlayer("Tidal")}
+          />
+          <Logo
+            src={player === "Apple" ? appleColor : appleWhite}
+            alt="apple logo unselected"
+            onClick={() => changePlayer("Apple")}
+          />
+        </SelectPlayerLogos>
       </SelectPlayerDiv>
-      {/* <StyledSelect
-        name="player"
-        id="player"
-        onChange={(e) => changePlayer(e.target.value)}
-        value={player}
-      >
-        <option value="Spotify">Spotify</option>
-        <option value="Tidal">Tidal</option>
-        <option value="Apple">Apple Music</option>
-      </StyledSelect> */}
-      <MusicSlider tracks={folk} player={player} genre="Folk" />
+      <MusicSlider tracks={featuredTracks} player={player} genre="Featured" />
       <MusicSlider
         tracks={girlfriend}
         player={player}
         genre="Girlfriend Music"
       />
-      <MusicSlider
-        tracks={original}
-        player={player}
-        genre="Original Music"
-      />
+      <MusicSlider tracks={original} player={player} genre="Original Music" />
     </PageDiv>
   );
 };

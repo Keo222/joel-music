@@ -239,6 +239,7 @@ const MusicSlider = ({ player, genre, tracks }) => {
 
               <animated.div style={expand}>
                 <TrackInfoDiv ref={heightRef}>
+                  {tracks[current].title}
                   <BasicsDiv>
                     <InfoPoint>{tracks[current].work}</InfoPoint>
                     <InfoPoint>{tracks[current].year}</InfoPoint>
