@@ -8,13 +8,18 @@ import lightbulbWhite from "../images/lightbulb-white.png";
 import hamburger from "../icons/hamburger-white.svg";
 import closeHamburger from "../icons/x-white.svg";
 
+// Components
+import DropdownNav from "./DropdownNav";
+
 // Styled Elements
 const SmallNav = styled.nav`
   display: none;
   height: 15rem;
+  width: 100%;
   font-size: 1.6rem;
   font-weight: 500;
   justify-content: space-between;
+  z-index: 100;
   @media screen and (${(props) => props.theme.responsive.lg}) {
     display: flex;
   } ;
@@ -116,6 +121,7 @@ const HamburgerOpenIcon = styled.img`
   display: none;
   margin-top: 2.5rem;
   margin-right: 2rem;
+  cursor: pointer;
   @media screen and (${(props) => props.theme.responsive.sm}) {
     display: block;
   } ;
@@ -123,6 +129,7 @@ const HamburgerOpenIcon = styled.img`
 
 const Navbar = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+
   return (
     <>
       <SmallNav>
@@ -158,6 +165,9 @@ const Navbar = () => {
           <LinkButton to="/hire">Hire</LinkButton>
         </NavLinksRight>
       </LargeNav>
+      {hamburgerOpen && (
+        <DropdownNav setHamburgerOpen={setHamburgerOpen} />
+      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // Styled Elements
@@ -72,7 +72,11 @@ const SubmitBtn = styled.button`
   background: ${(props) => props.theme.color.highlight1};
   margin: 1rem auto 5rem;
   border: none;
+  transition: all 0.3s;
   cursor: pointer;
+  &:hover,
+  &:active {
+    filter: brightness(0.7);
 `;
 
 const Hire = () => {
@@ -82,12 +86,7 @@ const Hire = () => {
       <ContactContainer>
         <Label htmlFor="name">Name:</Label>
         <Input type="text" name="name" id="name" />
-        <Label
-          rowStart={1}
-          rowEnd={2}
-          colStart={3}
-          htmlFor="work"
-        >
+        <Label rowStart={1} rowEnd={2} colStart={3} htmlFor="work">
           Work:
         </Label>
         <StyledSelect
@@ -102,12 +101,7 @@ const Hire = () => {
           <option value="Master">Master</option>
           <option value="Mix/Master">Mix & Master</option>
         </StyledSelect>
-        <Label
-          rowStart={2}
-          rowEnd={3}
-          colStart={3}
-          htmlFor="numSongs"
-        >
+        <Label rowStart={2} rowEnd={3} colStart={3} htmlFor="numSongs">
           Tracks:
         </Label>
         <StyledSelect
@@ -147,7 +141,7 @@ const Hire = () => {
         <Label htmlFor="message">Message:</Label>
         <StyledTextArea colStart={2} colEnd={-1} />
         <EstimatedCost>
-          <BoldSpan>Estimate:</BoldSpan> ${tracks*10000}.00
+          <BoldSpan>Estimate:</BoldSpan> ${tracks * 10000}.00
         </EstimatedCost>
       </ContactContainer>
       <SubmitBtn>Submit</SubmitBtn>

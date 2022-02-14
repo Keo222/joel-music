@@ -108,19 +108,6 @@ export const original = [
 
 export const allTracks = [
   {
-    title: "Astronaut Man",
-    artist: "Eledy",
-    work: "Mixed",
-    year: "2020",
-    genre: "Girlfriend",
-    featured: true,
-    spotifySrc:
-      "https://open.spotify.com/embed/track/2eHp1gOry585glXT5iSxpf?utm_source=generator",
-    appleSrc:
-      "https://embed.music.apple.com/us/album/astronaut-man/1538034887?i=1538034888",
-    tidalSrc: "https://embed.tidal.com/tracks/160329063",
-  },
-  {
     title: "You Make it Easy",
     artist: "Eledy",
     work: "Mixed & Mastered",
@@ -134,12 +121,25 @@ export const allTracks = [
     tidalSrc: "https://embed.tidal.com/tracks/121941242",
   },
   {
+    title: "Astronaut Man",
+    artist: "Eledy",
+    work: "Mixed",
+    year: "2020",
+    genre: "Girlfriend",
+    featured: true,
+    spotifySrc:
+      "https://open.spotify.com/embed/track/2eHp1gOry585glXT5iSxpf?utm_source=generator",
+    appleSrc:
+      "https://embed.music.apple.com/us/album/astronaut-man/1538034887?i=1538034888",
+    tidalSrc: "https://embed.tidal.com/tracks/160329063",
+  },
+  {
     title: "Absolution",
     artist: "Eledy",
     work: "Mastered",
     year: "2020",
     genre: "Girlfriend",
-    featured: true,
+    featured: false,
     spotifySrc:
       "https://open.spotify.com/embed/track/0G2gm1WLzlVxChQT7Jf1Hi",
     appleSrc:
@@ -178,7 +178,7 @@ export const allTracks = [
     work: "Mixed",
     year: "2017",
     genre: "Folk",
-    featured: false,
+    featured: true,
     spotifySrc:
       "https://open.spotify.com/embed/track/6o27JR6sr3pqEwlsQT2FVh",
     appleSrc:
