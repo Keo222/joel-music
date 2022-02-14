@@ -57,7 +57,12 @@ const SubmitBtn = styled.button`
   background: ${(props) => props.theme.color.highlight1};
   margin: 5rem auto;
   border: none;
+  transition: all 0.3s;
   cursor: pointer;
+  &:hover,
+  &:active {
+    filter: brightness(0.7);
+  }
 `;
 
 const Contact = () => {

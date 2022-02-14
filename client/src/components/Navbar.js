@@ -79,8 +79,13 @@ const LinkButton = styled(Link)`
   color: ${(props) => props.theme.color.textDark};
   font-weight: 600;
   text-decoration: none;
-  padding: 8px 2rem;
+  padding: 0.8rem 2rem;
   border-radius: 5px;
+  transition: all 0.3s;
+  &:hover,
+  &:active {
+    filter: brightness(0.7);
+  }
 `;
 
 const SmallImageContainer = styled.div`
