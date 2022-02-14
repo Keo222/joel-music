@@ -14,11 +14,16 @@ import appleWhite from "../icons/apple-white.svg";
 import appleColor from "../icons/apple-color.svg";
 
 // Tracks
-import { girlfriend, allTracks, original, folk } from "../temp_db/json-tracks";
+import {
+  girlfriend,
+  allTracks,
+  original,
+  folk,
+} from "../temp_db/json-tracks";
 
 // Styled Elements
 const PageDiv = styled.div`
-  margin-bottom: 15rem;
+  margin-bottom: 10rem;
 `;
 
 const SelectPlayerDiv = styled.div`
@@ -88,13 +93,22 @@ const Listen = () => {
           />
         </SelectPlayerLogos>
       </SelectPlayerDiv>
-      <MusicSlider tracks={featuredTracks} player={player} genre="Featured" />
+      <MusicSlider
+        tracks={featuredTracks}
+        player={player}
+        genre="Featured"
+      />
       <MusicSlider
         tracks={girlfriend}
         player={player}
         genre="Girlfriend Music"
       />
-      <MusicSlider tracks={original} player={player} genre="Original Music" />
+      <MusicSlider
+        tracks={original}
+        player={player}
+        genre="Original Music"
+      />
+      <MusicSlider tracks={folk} player={player} genre="Folk" />
     </PageDiv>
   );
 };

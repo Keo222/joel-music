@@ -1,24 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 // Image
 import lightbulbWhite from "../images/lightbulb-white.png";
+// Icon
+import hamburger from "../icons/hamburger-white.svg";
+import closeHamburger from "../icons/x-white.svg";
 
 // Styled Elements
-const Nav = styled.nav`
-  width: 80%;
+const SmallNav = styled.nav`
+  display: none;
+  height: 15rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  justify-content: space-between;
+  @media screen and (${(props) => props.theme.responsive.lg}) {
+    display: flex;
+  } ;
+`;
+
+const LargeNav = styled.nav`
+  width: 90%;
+  max-width: 150rem;
   margin: 0 auto;
   font-size: 1.6rem;
   font-weight: 500;
   display: grid;
   grid-template-columns: 1fr 240px 1fr;
+  @media screen and (${(props) => props.theme.responsive.lg}) {
+    display: none;
+  } ;
 `;
 
-const NavLinks = styled.div`
+const SmallNavLinks = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 50rem;
+  margin: 0 4rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    display: none;
+  } ;
+`;
+const NavLinksLeft = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 6rem;
+`;
+const NavLinksRight = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 6rem;
 `;
 
 const StyledLink = styled(Link)`
@@ -48,7 +83,17 @@ const LinkButton = styled(Link)`
   border-radius: 5px;
 `;
 
-const ImageContainer = styled.div`
+const SmallImageContainer = styled.div`
+  width: 12rem;
+  height: 15rem;
+  margin: 0 2rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    width: 8rem;
+    height: 10rem;
+  }
+`;
+
+const LargeImageContainer = styled.div`
   width: 16rem;
   height: 20rem;
   margin: 0 4rem;
@@ -60,23 +105,55 @@ const Logo = styled.img`
   height: 100%;
 `;
 
+const HamburgerOpenIcon = styled.img`
+  width: 6rem;
+  height: 6rem;
+  display: none;
+  margin-top: 2.5rem;
+  margin-right: 2rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    display: block;
+  } ;
+`;
+
 const Navbar = () => {
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
   return (
-    <Nav>
-      <NavLinks>
-        <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/about">About</StyledLink>
-        <StyledLink to="/listen">Listen</StyledLink>
-      </NavLinks>
-      <ImageContainer>
-        <Logo src={lightbulbWhite} />
-      </ImageContainer>
-      <NavLinks>
-        <StyledLink to="/contact">Contact</StyledLink>
-        <StyledLink to="/pricing">Pricing</StyledLink>
-        <LinkButton to="/hire">Hire</LinkButton>
-      </NavLinks>
-    </Nav>
+    <>
+      <SmallNav>
+        <SmallImageContainer>
+          <Logo src={lightbulbWhite} />
+        </SmallImageContainer>
+        <SmallNavLinks>
+          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/about">About</StyledLink>
+          <StyledLink to="/listen">Listen</StyledLink>
+          <StyledLink to="/contact">Contact</StyledLink>
+          <StyledLink to="/pricing">Pricing</StyledLink>
+          <LinkButton to="/hire">Hire</LinkButton>
+        </SmallNavLinks>
+        <HamburgerOpenIcon
+          onClick={() => setHamburgerOpen(!hamburgerOpen)}
+          src={hamburgerOpen ? closeHamburger : hamburger}
+          // src={hamburger}
+        />
+      </SmallNav>
+      <LargeNav>
+        <NavLinksLeft>
+          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/about">About</StyledLink>
+          <StyledLink to="/listen">Listen</StyledLink>
+        </NavLinksLeft>
+        <LargeImageContainer>
+          <Logo src={lightbulbWhite} />
+        </LargeImageContainer>
+        <NavLinksRight>
+          <StyledLink to="/contact">Contact</StyledLink>
+          <StyledLink to="/pricing">Pricing</StyledLink>
+          <LinkButton to="/hire">Hire</LinkButton>
+        </NavLinksRight>
+      </LargeNav>
+    </>
   );
 };
 

@@ -23,11 +23,25 @@ import {
 import { useMeasure } from "react-use";
 
 // SLIDER ELEMENTS
+const TopRow = styled.div`
+  width: 70%;
+  max-width: 110rem;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  @media screen and (${(props) => props.theme.responsive.md}) {
+    width: 92%;
+  }
+`;
 const TrackAndArrows = styled.div`
   width: 70%;
+  max-width: 110rem;
   margin: 2rem auto 5rem;
   display: flex;
   align-items: center;
+  @media screen and (${(props) => props.theme.responsive.md}) {
+    width: 92%;
+  }
 `;
 
 const LeftArrowSVG = styled.img`
@@ -44,19 +58,11 @@ const RightArrowSVG = styled.img`
   user-select: none;
 `;
 
-const TopRow = styled.div`
-  width: 70%;
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-`;
-
 const Bumper = styled.div`
   width: 50px;
 `;
 
 const TitleContainer = styled.div`
-  min-width: 600px;
   width: 81rem;
   margin: 0 auto;
 `;
@@ -71,13 +77,11 @@ const GenreTitle = styled.h3`
 // TRACK PLAYER ELEMENT
 const TrackContainer = styled.div`
   margin: 0 auto;
-  min-width: 600px;
   width: 81rem;
 `;
 
 const TrackDiv = styled(animated.div)`
   margin: 0 auto;
-  min-width: 600px;
   width: 100%;
   background: #eee;
   border-radius: 5px;
@@ -86,7 +90,6 @@ const TrackDiv = styled(animated.div)`
 
 const EmbedDiv = styled.div`
   width: 100%;
-  min-width: 340px;
 `;
 
 // Track info elements
@@ -239,7 +242,6 @@ const MusicSlider = ({ player, genre, tracks }) => {
 
               <animated.div style={expand}>
                 <TrackInfoDiv ref={heightRef}>
-                  {tracks[current].title}
                   <BasicsDiv>
                     <InfoPoint>{tracks[current].work}</InfoPoint>
                     <InfoPoint>{tracks[current].year}</InfoPoint>

@@ -12,4 +12,9 @@ export const theme = {
     textDark: "#2A2A2B",
     textLight: "#eee",
   },
+  responsive: {
+    lg: "max-width: 1200px",
+    md: "max-width: 1000px",
+    sm: "max-width: 750px",
+  },
 };

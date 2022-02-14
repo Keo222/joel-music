@@ -1,4 +1,5 @@
 import React from "react";
+import { useWindowSize } from "react-use";
 import styled from "styled-components";
 
 const AppleFrame = styled.iframe`
@@ -9,12 +10,14 @@ const AppleFrame = styled.iframe`
 `;
 
 const AppleEmbed = ({ title, src }) => {
+  const size = useWindowSize();
+  const big = size.width >= 450;
   return (
     <AppleFrame
       title={title}
       allow="autoplay *; encrypted-media *; fullscreen *"
       frameborder="0"
-      height="150"
+      height={big ? "150" : "120"}
       sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
       src={src}
     />
