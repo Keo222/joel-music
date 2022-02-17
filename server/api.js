@@ -1,33 +1,21 @@
 const express = require("express");
-const app = express();
-const cors = require("cors");
-const path = require("path");
 const pool = require("./db");
 
-const PORT = process.env.PORT || 3001;
-
-// Middleware
-app.use(express.static("public"));
-app.use(express.json());
-app.use(cors());
-
-// Bring in API
-// const apiRoutes = require("./api");
-// app.use("/api", apiRoutes);
+const router = express.Router();
 
 // GET ALL TRACKS --UNTESTED
-app.get("/api/tracks", async (req, res) => {
+router.get("/tracks", async (req, res) => {
   try {
     const allTracks = await pool.query("SELECT * FROM tracks");
     res.json(allTracks.rows);
   } catch (err) {
     console.error(err.message);
-    res.send("Error getting single track", err);
+    res.send("Error getting single track");
   }
 });
 
 // GET SINGLE TRACK -- UNTESTED
-app.get("/api/tracks/:id", async (req, res) => {
+router.get("/tracks/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const singleTrack = await pool.query(
@@ -42,7 +30,7 @@ app.get("/api/tracks/:id", async (req, res) => {
 });
 
 // UPDATE TRACK --UNTESTED
-app.put("/api/tracks/:id", async (req, res) => {
+router.put("/tracks/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const {
@@ -80,8 +68,8 @@ app.put("/api/tracks/:id", async (req, res) => {
   }
 });
 
-// UPDATED ADD TRACK
-app.post("/api/tracks", async (req, res) => {
+// NEW TRACK -- UNTESTED
+router.post("/tracks", async (req, res) => {
   try {
     const {
       name,
@@ -94,10 +82,9 @@ app.post("/api/tracks", async (req, res) => {
       spotify,
       apple,
       tidal,
-      album,
     } = req.body;
     await pool.query(
-      "INSERT INTO tracks (track_name, track_artist, track_work, track_about, track_year, track_genre, track_featured, track_spotify, track_apple, track_tidal, track_album) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)",
+      "INSERT INTO tracks (track_name, track_artist, track_work, track_about, track_year, track_genre, track_featured, track_spotify, track_apple, track_tidal) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
       [
         name,
         artist,
@@ -109,46 +96,29 @@ app.post("/api/tracks", async (req, res) => {
         spotify,
         apple,
         tidal,
-        album,
       ]
     );
-    res.send("New Track Added");
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send(`Error adding new track: ${err}`);
-  }
-});
-
-// DELETE TRACK -- UNTESTED
-app.delete("/api/tracks/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    await pool.query("DELETE FROM tracks WHERE track_id = $1", [id]);
-    res.send("Track Deleted");
+    res.json("New Track Added");
   } catch (err) {
     console.error(err.message);
     res.send("Error adding new track", err);
   }
 });
-// TEST
-app.post("/test", (req, res) => {
+// DELETE TRACK -- UNTESTED
+router.delete("/tracks/:id", async (req, res) => {
   try {
-    console.log("test");
-    console.log(req.body);
+    const { id } = req.params;
+    await pool.query("DELETE FROM tracks WHERE track_id = $1", [id]);
+    res.json("Track Deleted");
   } catch (err) {
     console.error(err.message);
   }
-  res.end();
 });
 
-// Request pages from client
-app.use(express.static(path.resolve(__dirname, "../client/build")));
+// TEXT API ******************************************
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+router.get("/text", async (req, res) => {
+  const allText = await pool.query("SELECT");
 });
 
-// Listen on PORT
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
-});
+module.exports = router;

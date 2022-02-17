@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // Image
 import lightbulbWhite from "../images/lightbulb-white.png";
@@ -10,6 +10,7 @@ import closeHamburger from "../icons/x-white.svg";
 
 // Components
 import DropdownNav from "./DropdownNav";
+import AdminDropdownNav from "./AdminDropdownNav";
 
 // Styled Elements
 const SmallNav = styled.nav`
@@ -34,6 +35,27 @@ const LargeNav = styled.nav`
   display: grid;
   grid-template-columns: 1fr 240px 1fr;
   @media screen and (${(props) => props.theme.responsive.lg}) {
+    display: none;
+  } ;
+`;
+
+const AdminNav = styled.nav`
+  width: 90%;
+  max-width: 150rem;
+  margin: 0 auto;
+  font-size: 1.6rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const AdminNavLinks = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 30rem;
+  margin: 0 4rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
     display: none;
   } ;
 `;
@@ -130,43 +152,69 @@ const HamburgerOpenIcon = styled.img`
 const Navbar = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
+  let location = useLocation();
+  const adminRegex = /^\/admin/;
+
   return (
     <>
-      <SmallNav>
-        <SmallImageContainer>
-          <Logo src={lightbulbWhite} />
-        </SmallImageContainer>
-        <SmallNavLinks>
-          <StyledLink to="/">Home</StyledLink>
-          <StyledLink to="/about">About</StyledLink>
-          <StyledLink to="/listen">Listen</StyledLink>
-          <StyledLink to="/contact">Contact</StyledLink>
-          <StyledLink to="/pricing">Pricing</StyledLink>
-          <LinkButton to="/hire">Hire</LinkButton>
-        </SmallNavLinks>
-        <HamburgerOpenIcon
-          onClick={() => setHamburgerOpen(!hamburgerOpen)}
-          src={hamburgerOpen ? closeHamburger : hamburger}
-          // src={hamburger}
-        />
-      </SmallNav>
-      <LargeNav>
-        <NavLinksLeft>
-          <StyledLink to="/">Home</StyledLink>
-          <StyledLink to="/about">About</StyledLink>
-          <StyledLink to="/listen">Listen</StyledLink>
-        </NavLinksLeft>
-        <LargeImageContainer>
-          <Logo src={lightbulbWhite} />
-        </LargeImageContainer>
-        <NavLinksRight>
-          <StyledLink to="/contact">Contact</StyledLink>
-          <StyledLink to="/pricing">Pricing</StyledLink>
-          <LinkButton to="/hire">Hire</LinkButton>
-        </NavLinksRight>
-      </LargeNav>
-      {hamburgerOpen && (
-        <DropdownNav setHamburgerOpen={setHamburgerOpen} />
+      {!adminRegex.test(location.pathname) ? (
+        <>
+          <SmallNav>
+            <SmallImageContainer>
+              <Logo src={lightbulbWhite} />
+            </SmallImageContainer>
+            <SmallNavLinks>
+              <StyledLink to="/">Home</StyledLink>
+              <StyledLink to="/about">About</StyledLink>
+              <StyledLink to="/listen">Listen</StyledLink>
+              <StyledLink to="/contact">Contact</StyledLink>
+              <StyledLink to="/pricing">Pricing</StyledLink>
+              <LinkButton to="/hire">Hire</LinkButton>
+            </SmallNavLinks>
+            <HamburgerOpenIcon
+              onClick={() => setHamburgerOpen(!hamburgerOpen)}
+              src={hamburgerOpen ? closeHamburger : hamburger}
+            />
+          </SmallNav>
+          <LargeNav>
+            <NavLinksLeft>
+              <StyledLink to="/">Home</StyledLink>
+              <StyledLink to="/about">About</StyledLink>
+              <StyledLink to="/listen">Listen</StyledLink>
+            </NavLinksLeft>
+            <LargeImageContainer>
+              <Logo src={lightbulbWhite} />
+            </LargeImageContainer>
+            <NavLinksRight>
+              <StyledLink to="/contact">Contact</StyledLink>
+              <StyledLink to="/pricing">Pricing</StyledLink>
+              <LinkButton to="/hire">Hire</LinkButton>
+            </NavLinksRight>
+          </LargeNav>
+          {hamburgerOpen && (
+            <DropdownNav setHamburgerOpen={setHamburgerOpen} />
+          )}
+        </>
+      ) : (
+        <>
+          <AdminNav>
+            <SmallImageContainer>
+              <Logo src={lightbulbWhite} />
+            </SmallImageContainer>
+            <AdminNavLinks>
+              <StyledLink to="/admin/">Home</StyledLink>
+              <StyledLink to="/admin/tracks">Tracks</StyledLink>
+              <StyledLink to="/admin/text">Text</StyledLink>
+            </AdminNavLinks>
+            <HamburgerOpenIcon
+              onClick={() => setHamburgerOpen(!hamburgerOpen)}
+              src={hamburgerOpen ? closeHamburger : hamburger}
+            />
+          </AdminNav>
+          {hamburgerOpen && (
+            <AdminDropdownNav setHamburgerOpen={setHamburgerOpen} />
+          )}
+        </>
       )}
     </>
   );

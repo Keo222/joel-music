@@ -15,6 +15,7 @@ import Pricing from "./pages/Pricing";
 import Hire from "./pages/Hire";
 import Admin from "./pages/Admin/AdminHome";
 import AdminTracks from "./pages/Admin/AdminTracks";
+import AdminNewTrack from "./pages/Admin/AdminNewTrack";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/hire" element={<Hire />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/tracks" element={<AdminTracks />} />
+          <Route path="/admin/tracks/new" element={<AdminNewTrack />} />
         </Routes>
       </Router>
     </ThemeProvider>

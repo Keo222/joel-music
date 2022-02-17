@@ -18,7 +18,7 @@ const Home = () => {
   });
   useEffect(() => {
     setShowItem(true);
-  });
+  }, []);
 
   return (
     <div>
