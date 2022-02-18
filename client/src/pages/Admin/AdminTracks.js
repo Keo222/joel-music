@@ -172,20 +172,6 @@ const Admin = () => {
           </TableRow>
         </thead>
         <tbody>
-          <TableRow>
-            <TableData>1</TableData>
-            <TableData>Song Title</TableData>
-            <TableData>Album Title</TableData>
-            <TableData>Musician Man</TableData>
-            <TableData>Rock & Roll</TableData>
-            <TableData>2018</TableData>
-            <TableIcon>
-              <Icon src={edit} alt="Edit Button" />
-            </TableIcon>
-            <TableIcon>
-              <Icon src={garbage} alt="Delete Button" />
-            </TableIcon>
-          </TableRow>
           {tracks !== null &&
             tracks.map((t) => (
               <TableRow key={t.track_id}>
