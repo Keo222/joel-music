@@ -27,9 +27,9 @@ app.get("/api/tracks", async (req, res) => {
 });
 
 // GET SINGLE TRACK -- UNTESTED
-app.get("/api/tracks/:id", async (req, res) => {
+app.get("/api/tracks/single", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
     const singleTrack = await pool.query(
       "SELECT * FROM tracks WHERE track_id = $1",
       [id]
@@ -42,10 +42,10 @@ app.get("/api/tracks/:id", async (req, res) => {
 });
 
 // UPDATE TRACK --UNTESTED
-app.put("/api/tracks/:id", async (req, res) => {
+app.put("/api/tracks/", async (req, res) => {
   try {
-    const { id } = req.params;
     const {
+      id,
       name,
       artist,
       work,
@@ -120,9 +120,11 @@ app.post("/api/tracks", async (req, res) => {
 });
 
 // DELETE TRACK -- UNTESTED
-app.delete("/api/tracks/:id", async (req, res) => {
+app.delete("/api/tracks/", async (req, res) => {
   try {
-    const { id } = req.params;
+    console.log(req);
+    const { id } = req.body;
+    console.log(id);
     await pool.query("DELETE FROM tracks WHERE track_id = $1", [id]);
     res.send("Track Deleted");
   } catch (err) {

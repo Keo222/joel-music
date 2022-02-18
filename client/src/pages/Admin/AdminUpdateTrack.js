@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -41,7 +41,7 @@ const SubmitButton = styled.button`
   }
 `;
 
-const AdminTracks = () => {
+const AdminTracks = ({ id }) => {
   const [name, setName] = useState("");
   const [album, setAlbum] = useState("");
   const [artist, setArtist] = useState("");
@@ -54,11 +54,34 @@ const AdminTracks = () => {
   const [tidal, setTidal] = useState("");
   const [apple, setApple] = useState("");
 
+  const getTrackInfo = async (id) => {
+    const response = await fetch("/api/tracks/single", {
+      body: { id: id },
+    });
+    const trackInfo = await response.json();
+    setName(trackInfo.track_name);
+    setAlbum(trackInfo.track_album);
+    setArtist(trackInfo.track_artist);
+    setWork(trackInfo.track_work);
+    setYear(trackInfo.track_year);
+    setAbout(trackInfo.track_about);
+    setGenre(trackInfo.track_genre);
+    setFeatured(trackInfo.track_featured);
+    setSpotify(trackInfo.track_spotify);
+    setTidal(trackInfo.track_tidal);
+    setApple(trackInfo.track_apple);
+  };
+
+  useEffect(() => {
+    getTrackInfo();
+  }, []);
+
   const navigate = useNavigate();
 
-  const addTrack = async (e) => {
+  const updateTrack = async (e) => {
     e.preventDefault();
     let data = {
+      id: id,
       name: name,
       artist: artist,
       work: work,
@@ -76,7 +99,7 @@ const AdminTracks = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify(data),
       });
       console.log(res.status);
@@ -87,8 +110,8 @@ const AdminTracks = () => {
   };
   return (
     <div>
-      <Header>Add Track</Header>
-      <StyledForm onSubmit={(e) => addTrack(e)}>
+      <Header>Update Track {id}</Header>
+      <StyledForm onSubmit={(e) => updateTrack(e)}>
         <label htmlFor="name">Track Name:</label>
         <input
           type="text"
@@ -193,7 +216,7 @@ const AdminTracks = () => {
           onChange={(e) => setApple(e.target.value)}
         />
 
-        <SubmitButton type="submit">Add Track</SubmitButton>
+        <SubmitButton type="submit">Update Track</SubmitButton>
       </StyledForm>
     </div>
   );

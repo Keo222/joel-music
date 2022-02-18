@@ -6,7 +6,6 @@
   "scripts": {
     "dev-start": "nodemon server/index.js",
     "start": "node server/index.js",
-    "heroku-postbuild": "",
     "build": "cd client && npm install && npm run build"
   },
   "author": "Kyle Olsen",

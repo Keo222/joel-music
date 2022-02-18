@@ -1,0 +1,1 @@
+CREATE TABLE tracks (track_name VARCHAR(255), track_artist VARCHAR(255), track_album VARCHAR(255), track_work VARCHAR(255), track_about VARCHAR(5000), track_year INTEGER, track_genre VARCHAR(255), track_featured BOOLEAN, track_spotify VARCHAR(255), track_tidal VARCHAR(255), track_apple VARCHAR(255))
