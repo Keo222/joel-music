@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 // Styled Elements
@@ -41,7 +41,7 @@ const SubmitButton = styled.button`
   }
 `;
 
-const AdminTracks = ({ id }) => {
+const AdminUpdateTrack = () => {
   const [name, setName] = useState("");
   const [album, setAlbum] = useState("");
   const [artist, setArtist] = useState("");
@@ -54,11 +54,13 @@ const AdminTracks = ({ id }) => {
   const [tidal, setTidal] = useState("");
   const [apple, setApple] = useState("");
 
+  const { id } = useParams();
+
   const getTrackInfo = async (id) => {
-    const response = await fetch("/api/tracks/single", {
-      body: { id: id },
-    });
+    const fetch_url = `/api/tracks/single?id=${id}`;
+    const response = await fetch(fetch_url);
     const trackInfo = await response.json();
+    console.log("got track info!");
     setName(trackInfo.track_name);
     setAlbum(trackInfo.track_album);
     setArtist(trackInfo.track_artist);
@@ -71,10 +73,9 @@ const AdminTracks = ({ id }) => {
     setTidal(trackInfo.track_tidal);
     setApple(trackInfo.track_apple);
   };
-
   useEffect(() => {
-    getTrackInfo();
-  }, []);
+    getTrackInfo(id);
+  }, [id]);
 
   const navigate = useNavigate();
 
@@ -117,6 +118,7 @@ const AdminTracks = ({ id }) => {
           type="text"
           name="name"
           id="name"
+          value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <label htmlFor="album">Album:</label>
@@ -124,6 +126,7 @@ const AdminTracks = ({ id }) => {
           type="text"
           name="album"
           id="album"
+          value={album}
           onChange={(e) => setAlbum(e.target.value)}
         />
 
@@ -132,6 +135,7 @@ const AdminTracks = ({ id }) => {
           type="text"
           name="artist"
           id="artist"
+          value={artist}
           onChange={(e) => setArtist(e.target.value)}
         />
 
@@ -140,6 +144,7 @@ const AdminTracks = ({ id }) => {
           type="text"
           name="work"
           id="work"
+          value={work}
           onChange={(e) => setWork(e.target.value)}
         />
 
@@ -151,6 +156,7 @@ const AdminTracks = ({ id }) => {
           step="1"
           name="year"
           id="year"
+          value={year}
           onChange={(e) => setYear(e.target.value)}
         />
 
@@ -158,6 +164,7 @@ const AdminTracks = ({ id }) => {
         <textarea
           name="about"
           id="about"
+          value={about}
           onChange={(e) => setAbout(e.target.value)}
         />
 
@@ -166,6 +173,7 @@ const AdminTracks = ({ id }) => {
           type="text"
           name="genre"
           id="genre"
+          value={genre}
           onChange={(e) => setGenre(e.target.value)}
         />
 
@@ -197,6 +205,7 @@ const AdminTracks = ({ id }) => {
           type="text"
           name="spotify"
           id="spotify"
+          value={spotify}
           onChange={(e) => setSpotify(e.target.value)}
         />
 
@@ -205,6 +214,7 @@ const AdminTracks = ({ id }) => {
           type="text"
           name="tidal"
           id="tidal"
+          value={tidal}
           onChange={(e) => setTidal(e.target.value)}
         />
 
@@ -213,6 +223,7 @@ const AdminTracks = ({ id }) => {
           type="text"
           name="apple"
           id="apple"
+          value={apple}
           onChange={(e) => setApple(e.target.value)}
         />
 
@@ -222,4 +233,4 @@ const AdminTracks = ({ id }) => {
   );
 };
 
-export default AdminTracks;
+export default AdminUpdateTrack;

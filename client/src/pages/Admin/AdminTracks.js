@@ -196,7 +196,9 @@ const Admin = () => {
                 <TableData>{t.track_genre}</TableData>
                 <TableData>{t.track_year}</TableData>
                 <TableIcon>
-                  <Icon src={edit} alt="Edit Button" />
+                  <Link to={`/admin/tracks/update/${t.track_id}`}>
+                    <Icon src={edit} alt="Edit Button" />
+                  </Link>
                 </TableIcon>
                 <TableIcon>
                   <Icon

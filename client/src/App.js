@@ -16,6 +16,7 @@ import Hire from "./pages/Hire";
 import Admin from "./pages/Admin/AdminHome";
 import AdminTracks from "./pages/Admin/AdminTracks";
 import AdminNewTrack from "./pages/Admin/AdminNewTrack";
+import AdminUpdateTrack from "./pages/Admin/AdminUpdateTrack";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -35,6 +36,10 @@ const App = () => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/tracks" element={<AdminTracks />} />
           <Route path="/admin/tracks/new" element={<AdminNewTrack />} />
+          <Route
+            path="/admin/tracks/update/:id"
+            element={<AdminUpdateTrack />}
+          />
         </Routes>
       </Router>
     </ThemeProvider>

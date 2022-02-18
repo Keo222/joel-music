@@ -29,7 +29,7 @@ app.get("/api/tracks", async (req, res) => {
 // GET SINGLE TRACK -- UNTESTED
 app.get("/api/tracks/single", async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.query;
     const singleTrack = await pool.query(
       "SELECT * FROM tracks WHERE track_id = $1",
       [id]
