@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 // Icons
 import garbage from "../../icons/garbage-red.svg";
 import edit from "../../icons/edit-yellow.svg";
+
+// Components
+import DeleteTrackPopup from "../../components/DeleteTrackPopup";
 
 // Styled Elements
 const AdminHomeDiv = styled.div`
@@ -116,12 +119,22 @@ const Icon = styled.img`
 
 const Admin = () => {
   const [tracks, setTracks] = useState(null);
+  const [deleteId, setDeleteId] = useState(null);
+  const [popupOpen, togglePopup] = useReducer(
+    (popupOpen) => !popupOpen,
+    true
+  );
 
   async function getTracks() {
     const response = await fetch("/api/tracks/");
     const allTracks = await response.json();
     setTracks(allTracks);
   }
+
+  const deletePopup = (id) => {
+    setDeleteId(id);
+    togglePopup();
+  };
 
   const deleteTrack = async (id) => {
     let data = { id: id };
@@ -145,59 +158,63 @@ const Admin = () => {
     getTracks();
   }, []);
   return (
-    <AdminHomeDiv>
-      <TrackHeading>Tracks</TrackHeading>
-      <NewTrackButton to="/admin/tracks/new">Add Track</NewTrackButton>
-      <Table>
-        <colgroup>
-          <ColNum span="1" />
-          <ColName span="1" />
-          <ColAlbum span="1" />
-          <ColArtist span="1" />
-          <ColGenre span="1" />
-          <ColYear span="1" />
-          <ColEdit span="1" />
-          <ColDelete span="1" />
-        </colgroup>
-        <thead>
-          <TableRow>
-            <TableHeading>#</TableHeading>
-            <TableHeading>Track Name</TableHeading>
-            <TableHeading>Album</TableHeading>
-            <TableHeading>Artist</TableHeading>
-            <TableHeading>Genre</TableHeading>
-            <TableHeading>Year</TableHeading>
-            <TableIconHeading>Edit</TableIconHeading>
-            <TableIconHeading>Delete</TableIconHeading>
-          </TableRow>
-        </thead>
-        <tbody>
-          {tracks !== null &&
-            tracks.map((t) => (
-              <TableRow key={t.track_id}>
-                <TableData>{t.track_id}</TableData>
-                <TableData>{t.track_name}</TableData>
-                <TableData>{t.track_album}</TableData>
-                <TableData>{t.track_artist}</TableData>
-                <TableData>{t.track_genre}</TableData>
-                <TableData>{t.track_year}</TableData>
-                <TableIcon>
-                  <Link to={`/admin/tracks/update/${t.track_id}`}>
-                    <Icon src={edit} alt="Edit Button" />
-                  </Link>
-                </TableIcon>
-                <TableIcon>
-                  <Icon
-                    src={garbage}
-                    alt="Delete Button"
-                    onClick={() => deleteTrack(t.track_id)}
-                  />
-                </TableIcon>
-              </TableRow>
-            ))}
-        </tbody>
-      </Table>
-    </AdminHomeDiv>
+    <>
+      {popupOpen && <DeleteTrackPopup />}
+      <AdminHomeDiv>
+        <TrackHeading>Tracks</TrackHeading>
+        <NewTrackButton to="/admin/tracks/new">Add Track</NewTrackButton>
+        <Table>
+          <colgroup>
+            <ColNum span="1" />
+            <ColName span="1" />
+            <ColAlbum span="1" />
+            <ColArtist span="1" />
+            <ColGenre span="1" />
+            <ColYear span="1" />
+            <ColEdit span="1" />
+            <ColDelete span="1" />
+          </colgroup>
+          <thead>
+            <TableRow>
+              <TableHeading>#</TableHeading>
+              <TableHeading>Track Name</TableHeading>
+              <TableHeading>Album</TableHeading>
+              <TableHeading>Artist</TableHeading>
+              <TableHeading>Genre</TableHeading>
+              <TableHeading>Year</TableHeading>
+              <TableIconHeading>Edit</TableIconHeading>
+              <TableIconHeading>Delete</TableIconHeading>
+            </TableRow>
+          </thead>
+          <tbody>
+            {tracks !== null &&
+              tracks.map((t) => (
+                <TableRow key={t.track_id}>
+                  <TableData>{t.track_id}</TableData>
+                  <TableData>{t.track_name}</TableData>
+                  <TableData>{t.track_album}</TableData>
+                  <TableData>{t.track_artist}</TableData>
+                  <TableData>{t.track_genre}</TableData>
+                  <TableData>{t.track_year}</TableData>
+                  <TableIcon>
+                    <Link to={`/admin/tracks/update/${t.track_id}`}>
+                      <Icon src={edit} alt="Edit Button" />
+                    </Link>
+                  </TableIcon>
+                  <TableIcon>
+                    <Icon
+                      src={garbage}
+                      alt="Delete Button"
+                      onClick={() => deletePopup(t.track_id)}
+                      // onClick={() => deleteTrack(t.track_id)}
+                    />
+                  </TableIcon>
+                </TableRow>
+              ))}
+          </tbody>
+        </Table>
+      </AdminHomeDiv>
+    </>
   );
 };
 

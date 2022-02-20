@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+// Components
+import AdminTrackInfo from "../../components/AdminTrackInfo";
+
 // Styled Elements
 const AdminHomeDiv = styled.div`
   color: white;
@@ -34,7 +37,7 @@ const Admin = () => {
   return (
     <AdminHomeDiv>
       <AdminHomeHeading>HOME</AdminHomeHeading>
-      <p>{numTracks}</p>
+      <AdminTrackInfo numTracks={numTracks} />
     </AdminHomeDiv>
   );
 };
