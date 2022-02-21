@@ -128,13 +128,13 @@ const Admin = () => {
     setTracks(allTracks);
   }
 
-  const deletePopup = (id) => {
+  const openDeletePopup = (id) => {
     setDeleteId(id);
     togglePopup();
   };
 
-  const deleteTrack = async (id) => {
-    let data = { id: id };
+  const deleteTrack = async () => {
+    let data = { id: deleteId };
     console.log(data);
     try {
       const response = await fetch("/api/tracks", {
@@ -157,7 +157,9 @@ const Admin = () => {
   return (
     <>
       <title>JG Admin | Tracks</title>
-      {popupOpen && <DeleteTrackPopup />}
+      {popupOpen && (
+        <DeleteTrackPopup togglePopup={togglePopup} deleteTrack={deleteTrack} />
+      )}
       <AdminHomeDiv>
         <TrackHeading>Tracks</TrackHeading>
         <NewTrackButton to="/admin/tracks/new">Add Track</NewTrackButton>
@@ -203,7 +205,7 @@ const Admin = () => {
                     <Icon
                       src={garbage}
                       alt="Delete Button"
-                      onClick={() => deletePopup(t.track_id)}
+                      onClick={() => openDeletePopup(t.track_id)}
                       // onClick={() => deleteTrack(t.track_id)}
                     />
                   </TableIcon>

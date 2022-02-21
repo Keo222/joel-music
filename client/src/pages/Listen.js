@@ -73,6 +73,7 @@ const Listen = () => {
   const featuredTracks = allTracks.filter((t) => t.featured);
   return (
     <PageDiv>
+      <title>Joel Gardella | Listen</title>
       <SelectPlayerDiv>
         <SelectPlayerLabel>Select Streaming Service:</SelectPlayerLabel>
         <SelectPlayerLogos>

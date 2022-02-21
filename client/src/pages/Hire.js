@@ -83,6 +83,7 @@ const Hire = () => {
   const [tracks, setTracks] = useState(1);
   return (
     <div>
+    <title>Joel Gardella | Hire</title>
       <ContactContainer>
         <Label htmlFor="name">Name:</Label>
         <Input type="text" name="name" id="name" />

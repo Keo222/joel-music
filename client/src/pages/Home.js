@@ -22,6 +22,7 @@ const Home = () => {
 
   return (
     <div>
+      <title>Joel Gardella | Audio Engineer</title>
       <SlideInItem style={slideIn}>WEEEEE!!!</SlideInItem>
     </div>
   );

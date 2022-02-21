@@ -68,6 +68,7 @@ const SubmitBtn = styled.button`
 const Contact = () => {
   return (
     <div>
+      <title>Joel Gardella | Contact</title>
       <ContactContainer>
         <Label htmlFor="name">Name:</Label>
         <Input type="text" name="name" id="name" />
