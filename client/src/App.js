@@ -17,6 +17,7 @@ import Admin from "./pages/Admin/AdminHome";
 import AdminTracks from "./pages/Admin/AdminTracks";
 import AdminNewTrack from "./pages/Admin/AdminNewTrack";
 import AdminUpdateTrack from "./pages/Admin/AdminUpdateTrack";
+import AdminText from "./pages/Admin/AdminText";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -40,6 +41,7 @@ const App = () => {
             path="/admin/tracks/update/:id"
             element={<AdminUpdateTrack />}
           />
+          <Route path="/admin/text" element={<AdminText />} />
         </Routes>
       </Router>
     </ThemeProvider>

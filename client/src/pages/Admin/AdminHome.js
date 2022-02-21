@@ -36,6 +36,7 @@ const Admin = () => {
   }, []);
   return (
     <AdminHomeDiv>
+      <title>JG Admin</title>
       <AdminHomeHeading>HOME</AdminHomeHeading>
       <AdminTrackInfo numTracks={numTracks} />
     </AdminHomeDiv>

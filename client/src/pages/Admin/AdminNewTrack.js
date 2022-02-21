@@ -87,6 +87,7 @@ const AdminTracks = () => {
   };
   return (
     <div>
+      <title>JG Admin | New Track</title>
       <Header>Add Track</Header>
       <StyledForm onSubmit={(e) => addTrack(e)}>
         <label htmlFor="name">Track Name:</label>

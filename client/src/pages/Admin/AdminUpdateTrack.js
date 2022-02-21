@@ -111,6 +111,7 @@ const AdminUpdateTrack = () => {
   };
   return (
     <div>
+      <title>JG Admin | Update Track</title>
       <Header>Update Track {id}</Header>
       <StyledForm onSubmit={(e) => updateTrack(e)}>
         <label htmlFor="name">Track Name:</label>

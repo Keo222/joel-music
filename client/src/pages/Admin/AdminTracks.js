@@ -120,10 +120,7 @@ const Icon = styled.img`
 const Admin = () => {
   const [tracks, setTracks] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
-  const [popupOpen, togglePopup] = useReducer(
-    (popupOpen) => !popupOpen,
-    true
-  );
+  const [popupOpen, togglePopup] = useReducer((popupOpen) => !popupOpen, true);
 
   async function getTracks() {
     const response = await fetch("/api/tracks/");
@@ -159,6 +156,7 @@ const Admin = () => {
   }, []);
   return (
     <>
+      <title>JG Admin | Tracks</title>
       {popupOpen && <DeleteTrackPopup />}
       <AdminHomeDiv>
         <TrackHeading>Tracks</TrackHeading>
