@@ -204,9 +204,9 @@ const Admin = () => {
           </thead>
           <tbody>
             {tracks !== null &&
-              tracks.map((t) => (
+              tracks.map((t, i) => (
                 <TableRow key={t.track_id}>
-                  <TableData>{t.track_id}</TableData>
+                  <TableData>{i + 1}</TableData>
                   <TableData>{t.track_name}</TableData>
                   <TableData>{t.track_album}</TableData>
                   <TableData>{t.track_artist}</TableData>

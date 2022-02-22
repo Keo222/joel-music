@@ -2,11 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 // Styled Elements
+const ContactHeader = styled.h1`
+  text-align: center;
+  font-size: 6rem;
+  font-weight: 200;
+  color: ${(props) => props.theme.color.highlight2};
+  letter-spacing: 1.6rem;
+  margin: 6vh 0 0;
+`;
 
 const ContactContainer = styled.div`
   width: 90%;
   max-width: 800px;
-  margin: 5rem auto;
+  margin: 6vh auto 3vh;
   transform: translateX(-80px);
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 1fr;
@@ -69,6 +77,7 @@ const Contact = () => {
   return (
     <div>
       <title>Joel Gardella | Contact</title>
+      <ContactHeader>Contact</ContactHeader>
       <ContactContainer>
         <Label htmlFor="name">Name:</Label>
         <Input type="text" name="name" id="name" />
