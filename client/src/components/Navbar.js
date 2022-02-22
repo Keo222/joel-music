@@ -167,7 +167,9 @@ const Navbar = () => {
         <>
           <SmallNav>
             <SmallImageContainer>
-              <Logo src={lightbulbWhite} />
+              <Link to="/">
+                <Logo src={lightbulbWhite} />
+              </Link>
             </SmallImageContainer>
             <SmallNavLinks>
               <StyledLink to="/">Home</StyledLink>
@@ -189,7 +191,9 @@ const Navbar = () => {
               <StyledLink to="/listen">Listen</StyledLink>
             </NavLinksLeft>
             <LargeImageContainer>
-              <Logo src={lightbulbWhite} />
+              <Link to="/">
+                <Logo src={lightbulbWhite} />
+              </Link>
             </LargeImageContainer>
             <NavLinksRight>
               <StyledLink to="/contact">Contact</StyledLink>
@@ -197,13 +201,17 @@ const Navbar = () => {
               <LinkButton to="/hire">Hire</LinkButton>
             </NavLinksRight>
           </LargeNav>
-          {hamburgerOpen && <DropdownNav setHamburgerOpen={setHamburgerOpen} />}
+          {hamburgerOpen && (
+            <DropdownNav setHamburgerOpen={setHamburgerOpen} />
+          )}
         </>
       ) : (
         <>
           <AdminNav>
             <SmallImageContainer>
-              <Logo src={lightbulbWhite} />
+              <Link to="/">
+                <Logo src={lightbulbWhite} />
+              </Link>
             </SmallImageContainer>
             <AdminNavLinks>
               <StyledLink to="/admin/">Home</StyledLink>

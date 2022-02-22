@@ -26,6 +26,16 @@ const PageDiv = styled.div`
   margin-bottom: 10rem;
 `;
 
+const ListenHeader = styled.h1`
+  text-align: center;
+  font-size: 6rem;
+  font-weight: 200;
+  color: ${(props) => props.theme.color.highlight2};
+  /* color: ${(props) => props.theme.color.textLight}; */
+  letter-spacing: 1.6rem;
+  margin: 2rem 0 5rem;
+`;
+
 const SelectPlayerDiv = styled.div`
   margin: 2rem 8% 5rem;
 `;
@@ -74,6 +84,7 @@ const Listen = () => {
   return (
     <PageDiv>
       <title>Joel Gardella | Listen</title>
+      <ListenHeader>Listen</ListenHeader>
       <SelectPlayerDiv>
         <SelectPlayerLabel>Select Streaming Service:</SelectPlayerLabel>
         <SelectPlayerLogos>

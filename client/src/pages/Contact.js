@@ -7,6 +7,7 @@ const ContactHeader = styled.h1`
   font-size: 6rem;
   font-weight: 200;
   color: ${(props) => props.theme.color.highlight2};
+  /* color: ${(props) => props.theme.color.textLight}; */
   letter-spacing: 1.6rem;
   margin: 6vh 0 0;
 `;
