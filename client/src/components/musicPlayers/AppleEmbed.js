@@ -9,9 +9,13 @@ const AppleFrame = styled.iframe`
   border: 0;
 `;
 
-const AppleEmbed = ({ title, src }) => {
+const AppleEmbed = ({ title, source }) => {
   const size = useWindowSize();
   const big = size.width >= 450;
+
+  const regex = /\/[\d\w-%&]+\/[\d]+[?i=]{3}[\d]+$/gm;
+  const found = source.match(regex);
+  const fullSrc = `https://embed.music.apple.com/us/album${found[0]}`;
   return (
     <AppleFrame
       title={title}
@@ -19,7 +23,7 @@ const AppleEmbed = ({ title, src }) => {
       frameborder="0"
       height={big ? "150" : "120"}
       sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-      src={src}
+      src={fullSrc}
     />
   );
 };

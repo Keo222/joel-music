@@ -141,33 +141,33 @@ const MusicSlider = ({ player, genre, tracks }) => {
       case "Spotify":
         return (
           <SpotifyEmbed
-            title={track.title}
-            src={track.spotifySrc}
-            artist={track.artist}
+            title={track.track_name}
+            source={track.track_spotify}
+            artist={track.track_artist}
           />
         );
       case "Apple":
         return (
           <AppleEmbed
-            title={track.title}
-            src={track.appleSrc}
-            artist={track.artist}
+            title={track.track_name}
+            source={track.track_apple}
+            artist={track.track_artist}
           />
         );
       case "Tidal":
         return (
           <TidalEmbed
-            title={track.title}
-            src={track.tidalSrc}
-            artist={track.artist}
+            title={track.track_name}
+            source={track.track_tidal}
+            artist={track.track_artist}
           />
         );
       default:
         return (
           <SpotifyEmbed
-            title={track.title}
-            src={track.spotifySrc}
-            artist={track.artist}
+            title={track.track_name}
+            src={track.track_spotify}
+            artist={track.track_artist}
           />
         );
     }

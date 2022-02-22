@@ -11,17 +11,20 @@ const TidalFrame = styled.iframe`
   border: 0;
 `;
 
-const TidalEmbed = ({ title, src }) => {
+const TidalEmbed = ({ title, source }) => {
   const size = useWindowSize();
   const big = size.width >= 550;
   const grid = big ? "" : "?layout=gridify";
+
+  const regex = /\/[\d]+$/gm;
+  const found = source.match(regex);
+  const fullSrc = `https://embed.tidal.com/tracks${found[0]}`;
   return (
     <TidalFrame
       big={big}
       title={title}
       artist="Eledy"
-      src={src + grid}
-      // frameBorder="0"
+      src={fullSrc + grid}
       allowfullscreen
       allow="encrypted-media;"
     />

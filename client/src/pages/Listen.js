@@ -71,6 +71,8 @@ const Listen = () => {
   const [player, setPlayer] = useState(
     localStorage.getItem("player") || "Spotify"
   );
+  const [tracks, setTracks] = useState(null);
+  const [genres, setGenres] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("player", player);
@@ -80,7 +82,20 @@ const Listen = () => {
     setPlayer(newPlayer);
   };
 
-  const featuredTracks = allTracks.filter((t) => t.featured);
+  async function getTracks() {
+    const response = await fetch("/api/tracks/");
+    const allTracks = await response.json();
+    setTracks(allTracks);
+
+    const genreSet = new Set();
+    allTracks.map((t) => genreSet.add(t.track_genre));
+    setGenres(Array.from(genreSet));
+  }
+
+  useEffect(() => {
+    getTracks();
+  }, []);
+
   return (
     <PageDiv>
       <title>Joel Gardella | Listen</title>
@@ -105,22 +120,20 @@ const Listen = () => {
           />
         </SelectPlayerLogos>
       </SelectPlayerDiv>
-      <MusicSlider
-        tracks={featuredTracks}
+      {/* <MusicSlider
+        tracks={tracks.filter((t) => t.track_featured)}
         player={player}
         genre="Featured"
-      />
-      <MusicSlider
-        tracks={girlfriend}
-        player={player}
-        genre="Girlfriend Music"
-      />
-      <MusicSlider
-        tracks={original}
-        player={player}
-        genre="Original Music"
-      />
-      <MusicSlider tracks={folk} player={player} genre="Folk" />
+      /> */}
+      {genres !== null &&
+        genres.map((g) => (
+          <MusicSlider
+            key={g}
+            tracks={tracks.filter((t) => t.track_genre === g)}
+            player={player}
+            genre={g}
+          />
+        ))}
     </PageDiv>
   );
 };

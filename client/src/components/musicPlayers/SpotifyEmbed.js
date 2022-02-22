@@ -9,14 +9,19 @@ const SpotifyFrame = styled.iframe`
   overflow: hidden;
 `;
 
-const SpotifyEmbed = ({ title, src }) => {
+const SpotifyEmbed = ({ title, source }) => {
   const size = useWindowSize();
   const big = size.width >= 450;
+
+  const regex = /\/[\d\w]+[?]/gm;
+  const found = source.match(regex);
+
+  const fullSrc = `https://open.spotify.com/embed/track${found[0]}utm_source=generator`;
 
   return (
     <SpotifyFrame
       title={title}
-      src={src}
+      src={fullSrc}
       width="100%"
       height={big ? "80" : "300"}
       frameBorder="0"
