@@ -38,7 +38,7 @@ const ConfirmHeader = styled.h2`
 const TrackInfoDiv = styled.div`
   width: 80%;
   max-width: 35rem;
-  margin: 0 auto;
+  margin: 5rem auto 0;
 `;
 
 const InfoPair = styled.div`
@@ -79,7 +79,11 @@ const DeleteButton = styled(CancelButton)`
   color: ${(props) => props.theme.color.textLight};
 `;
 
-const DeleteTrackPopup = ({ togglePopup, deleteTrack }) => {
+const DeleteTrackPopup = ({ togglePopup, deleteTrack, name, artist }) => {
+  const handleDelete = () => {
+    deleteTrack();
+    togglePopup();
+  };
   return (
     <BlurredBackground>
       <DeleteTrackModal>
@@ -89,17 +93,21 @@ const DeleteTrackPopup = ({ togglePopup, deleteTrack }) => {
           </ConfirmHeader>
           <TrackInfoDiv>
             <InfoPair>
-              <InfoLabel>Track Name:</InfoLabel>
-              <InfoData>Astronaut Man</InfoData>
+              <InfoLabel>Name:</InfoLabel>
+              <InfoData>{name}</InfoData>
             </InfoPair>
             <InfoPair>
               <InfoLabel>Artist:</InfoLabel>
-              <InfoData>Eledy</InfoData>
+              <InfoData>{artist}</InfoData>
             </InfoPair>
           </TrackInfoDiv>
           <ButtonDiv>
-            <CancelButton onClick={() => togglePopup()}>Cancel</CancelButton>
-            <DeleteButton onClick={() => deleteTrack()}>Delete</DeleteButton>
+            <CancelButton onClick={() => togglePopup()}>
+              Cancel
+            </CancelButton>
+            <DeleteButton onClick={() => handleDelete()}>
+              Delete
+            </DeleteButton>
           </ButtonDiv>
         </ModalInner>
       </DeleteTrackModal>

@@ -120,7 +120,11 @@ const Icon = styled.img`
 const Admin = () => {
   const [tracks, setTracks] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
-  const [popupOpen, togglePopup] = useReducer((popupOpen) => !popupOpen, true);
+  const [deleteTrackInfo, setDeleteTrackInfo] = useState({});
+  const [popupOpen, togglePopup] = useReducer(
+    (popupOpen) => !popupOpen,
+    false
+  );
 
   async function getTracks() {
     const response = await fetch("/api/tracks/");
@@ -154,11 +158,23 @@ const Admin = () => {
   useEffect(() => {
     getTracks();
   }, []);
+
+  useEffect(() => {
+    if (tracks && deleteId) {
+      const info = tracks.filter((t) => t.track_id === deleteId);
+      setDeleteTrackInfo(info[0] || {});
+    }
+  }, [deleteId, tracks]);
   return (
     <>
       <title>JG Admin | Tracks</title>
       {popupOpen && (
-        <DeleteTrackPopup togglePopup={togglePopup} deleteTrack={deleteTrack} />
+        <DeleteTrackPopup
+          togglePopup={togglePopup}
+          deleteTrack={deleteTrack}
+          name={deleteTrackInfo.track_name}
+          artist={deleteTrackInfo.track_artist}
+        />
       )}
       <AdminHomeDiv>
         <TrackHeading>Tracks</TrackHeading>
