@@ -68,6 +68,10 @@ const CancelButton = styled.button`
   font-size: 1.4rem;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.15s;
+  &:hover {
+    filter: brightness(0.8);
+  }
 `;
 
 const DeleteButton = styled(CancelButton)`

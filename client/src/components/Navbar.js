@@ -115,6 +115,12 @@ const LinkButton = styled(Link)`
   }
 `;
 
+const AdminLinkButton = styled(LinkButton)`
+  padding: 0.6rem 1.1rem;
+  font-weight: inherit;
+  font-size: 1.4rem;
+`;
+
 const SmallImageContainer = styled.div`
   width: 12rem;
   height: 15rem;
@@ -191,9 +197,7 @@ const Navbar = () => {
               <LinkButton to="/hire">Hire</LinkButton>
             </NavLinksRight>
           </LargeNav>
-          {hamburgerOpen && (
-            <DropdownNav setHamburgerOpen={setHamburgerOpen} />
-          )}
+          {hamburgerOpen && <DropdownNav setHamburgerOpen={setHamburgerOpen} />}
         </>
       ) : (
         <>
@@ -205,6 +209,7 @@ const Navbar = () => {
               <StyledLink to="/admin/">Home</StyledLink>
               <StyledLink to="/admin/tracks">Tracks</StyledLink>
               <StyledLink to="/admin/text">Text</StyledLink>
+              <AdminLinkButton to="/">Main Site</AdminLinkButton>
             </AdminNavLinks>
             <HamburgerOpenIcon
               onClick={() => setHamburgerOpen(!hamburgerOpen)}
