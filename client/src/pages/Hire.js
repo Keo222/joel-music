@@ -15,6 +15,16 @@ const ContactContainer = styled.div`
   line-height: 2.5rem;
 `;
 
+const HireHeader = styled.h1`
+  text-align: center;
+  font-size: 7rem;
+  font-weight: 200;
+  color: ${(props) => props.theme.color.highlight1};
+  /* color: ${(props) => props.theme.color.textLight}; */
+  letter-spacing: 2.2rem;
+  margin: 5vh 0 0;
+`;
+
 const Label = styled.label`
   text-align: right;
   margin-right: 3rem;
@@ -83,7 +93,8 @@ const Hire = () => {
   const [tracks, setTracks] = useState(1);
   return (
     <div>
-    <title>Joel Gardella | Hire</title>
+      <title>Joel Gardella | Hire</title>
+      <HireHeader>Hire</HireHeader>
       <ContactContainer>
         <Label htmlFor="name">Name:</Label>
         <Input type="text" name="name" id="name" />

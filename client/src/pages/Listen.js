@@ -13,14 +13,6 @@ import tidalColor from "../icons/tidal-color.png";
 import appleWhite from "../icons/apple-white.svg";
 import appleColor from "../icons/apple-color.svg";
 
-// Tracks
-import {
-  girlfriend,
-  allTracks,
-  original,
-  folk,
-} from "../temp_db/json-tracks";
-
 // Styled Elements
 const PageDiv = styled.div`
   margin-bottom: 10rem;

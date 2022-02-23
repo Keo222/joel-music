@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 // Theme Style
 import { theme } from "./styled/themes";
+import GlobalStyle from "./styled/GlobalStyle";
 
 // PAGES
 import Home from "./pages/Home";
@@ -25,6 +26,7 @@ import Navbar from "./components/Navbar";
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <Router>
         <Navbar />
         <Routes>

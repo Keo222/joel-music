@@ -1,4 +1,7 @@
-/* html {
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  html {
   font-size: 62.5%;
 }
 body {
@@ -14,4 +17,7 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-} */
+}
+`;
+
+export default GlobalStyle;

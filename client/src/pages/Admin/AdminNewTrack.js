@@ -17,6 +17,29 @@ const Header = styled.h1`
   text-align: center;
 `;
 
+const InputGroup = styled.div`
+  /* display: flex; */
+  width: 60%;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+`;
+
+const InputLabel = styled.label`
+  margin-right: 2rem;
+`;
+
+const TextAreaLabel = styled.label``;
+
+const ShortTextInput = styled.input`
+  /* flex: 1; */
+  width: 100%;
+`;
+
+const TextAreaInput = styled.textarea`
+  width: 100%;
+  height: 15rem;
+`;
+
 const RadioDiv = styled.div`
   display: flex;
   align-items: center;
@@ -90,62 +113,85 @@ const AdminTracks = () => {
       <title>JG Admin | New Track</title>
       <Header>Add Track</Header>
       <StyledForm onSubmit={(e) => addTrack(e)}>
-        <label htmlFor="name">Track Name:</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label htmlFor="album">Album:</label>
-        <input
-          type="text"
-          name="album"
-          id="album"
-          onChange={(e) => setAlbum(e.target.value)}
-        />
-
-        <label htmlFor="artist">Artist:</label>
-        <input
-          type="text"
-          name="artist"
-          id="artist"
-          onChange={(e) => setArtist(e.target.value)}
-        />
-
-        <label htmlFor="work">Type of Work:</label>
-        <input
-          type="text"
-          name="work"
-          id="work"
-          onChange={(e) => setWork(e.target.value)}
-        />
-
-        <label htmlFor="year">Year:</label>
-        <input
-          type="number"
-          min="1996"
-          max="2099"
-          step="1"
-          name="year"
-          id="year"
-          onChange={(e) => setYear(e.target.value)}
-        />
-
-        <label htmlFor="about">About:</label>
-        <textarea
-          name="about"
-          id="about"
-          onChange={(e) => setAbout(e.target.value)}
-        />
-
-        <label htmlFor="genre">Genre:</label>
-        <input
-          type="text"
-          name="genre"
-          id="genre"
-          onChange={(e) => setGenre(e.target.value)}
-        />
+        <InputGroup>
+          <InputLabel htmlFor="name">Track Name:</InputLabel>
+          <ShortTextInput
+            type="text"
+            name="name"
+            id="name"
+            placeholder='ex: "Bohemian Rhapsody"'
+            onChange={(e) => setName(e.target.value)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <InputLabel htmlFor="album">Album:</InputLabel>
+          <ShortTextInput
+            type="text"
+            name="album"
+            id="album"
+            placeholder='ex: "A Night at the Opera"'
+            onChange={(e) => setAlbum(e.target.value)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <InputLabel htmlFor="artist">Artist:</InputLabel>
+          <ShortTextInput
+            type="text"
+            name="artist"
+            id="artist"
+            placeholder='ex: "Queen"'
+            onChange={(e) => setArtist(e.target.value)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <InputLabel htmlFor="year">Year:</InputLabel>
+          <ShortTextInput
+            type="number"
+            min="1996"
+            max="2099"
+            step="1"
+            name="year"
+            id="year"
+            onChange={(e) => setYear(e.target.value)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <InputLabel htmlFor="genre">Genre:</InputLabel>
+          <select
+            type="text"
+            name="genre"
+            id="genre"
+            onChange={(e) => setGenre(e.target.value)}
+          >
+            <option value="Pop">Pop</option>
+            <option value="Folk">Folk</option>
+            <option value="Rock">Rock</option>
+            <option value="???">???</option>
+            <option value="Original Music">Original Music</option>
+          </select>
+        </InputGroup>
+        <InputGroup>
+          <InputLabel htmlFor="work">Type of Work:</InputLabel>
+          <select
+            type="text"
+            name="work"
+            id="work"
+            onChange={(e) => setWork(e.target.value)}
+          >
+            <option value="Mixed">Mixed</option>
+            <option value="Mastered">Mastered</option>
+            <option value="Mixed & Mastered">Mixed & Mastered</option>
+          </select>
+        </InputGroup>
+        <InputGroup>
+          <TextAreaLabel htmlFor="about">About:</TextAreaLabel>
+          <TextAreaInput
+            name="about"
+            id="about"
+            placeholder="About this track..."
+            onChange={(e) => setAbout(e.target.value)}
+          />
+        </InputGroup>
 
         <RadioDiv>
           <p>Featured:</p>
@@ -170,7 +216,7 @@ const AdminTracks = () => {
           <label htmlFor="not-featured">No</label>
         </RadioDiv>
 
-        <label htmlFor="spotify">Spotify Source:</label>
+        <InputLabel htmlFor="spotify">Spotify Source:</InputLabel>
         <input
           type="text"
           name="spotify"
@@ -178,7 +224,7 @@ const AdminTracks = () => {
           onChange={(e) => setSpotify(e.target.value)}
         />
 
-        <label htmlFor="tidal">Tidal Source:</label>
+        <InputLabel htmlFor="tidal">Tidal Source:</InputLabel>
         <input
           type="text"
           name="tidal"
@@ -186,7 +232,7 @@ const AdminTracks = () => {
           onChange={(e) => setTidal(e.target.value)}
         />
 
-        <label htmlFor="apple">Apple Music Source:</label>
+        <InputLabel htmlFor="apple">Apple Music Source:</InputLabel>
         <input
           type="text"
           name="apple"
