@@ -32,10 +32,10 @@ const SlideInItem = styled(animated.h3)`
 const HomeHeader = styled.h1`
   color: ${(props) => props.theme.color.highlight1};
   font-size: 5.5rem;
-  font-weight: 300;
+  font-weight: 600;
   text-align: center;
   letter-spacing: 1rem;
-  text-shadow: 2px 5px 7px rgba(255, 255, 255, 0.7);
+  /* text-shadow: 2px 5px 7px rgba(255, 255, 255, 0.7); */
 `;
 
 const DescriptorDiv = styled.div`
