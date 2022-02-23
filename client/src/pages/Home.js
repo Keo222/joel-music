@@ -105,6 +105,9 @@ const ButtonLink = styled(Link)`
 `;
 const LogosDiv = styled.div`
   width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 6rem;
 `;
 
 const SocialsDiv = styled.div`
