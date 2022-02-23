@@ -36,17 +36,22 @@ const HomeHeader = styled.h1`
   text-align: center;
   letter-spacing: 1rem;
   /* text-shadow: 2px 5px 7px rgba(255, 255, 255, 0.7); */
+  @media screen and (${(props) => props.theme.responsive.xs}) {
+    font-size: 4rem;
+  }
 `;
 
 const DescriptorDiv = styled.div`
   margin: 0 auto;
   width: 70%;
-  min-width: 400px;
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 12rem;
   align-items: center;
+  @media screen and (${(props) => props.theme.responsive.xs}) {
+    width: 80%;
+  }
 `;
 
 const DescriptorLink = styled(Link)`
@@ -61,20 +66,9 @@ const DescriptorLink = styled(Link)`
   &:hover {
     color: ${(props) => props.theme.color.highlight3};
   }
-`;
-
-const LogosDiv = styled.div`
-  width: 100%;
-`;
-
-const SocialsDiv = styled.div`
-  width: 10%;
-  min-width: 80px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-left: auto;
-  margin-right: 5vw;
+  @media screen and (${(props) => props.theme.responsive.xs}) {
+    font-size: 2.2rem;
+  }
 `;
 
 const ButtonDiv = styled.div`
@@ -85,6 +79,9 @@ const ButtonDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  @media screen and (${(props) => props.theme.responsive.xs}) {
+    height: 20vh;
+  }
 `;
 
 const ButtonLink = styled(Link)`
@@ -100,6 +97,27 @@ const ButtonLink = styled(Link)`
   &:hover,
   &:active {
     filter: brightness(0.7);
+  }
+  @media screen and (${(props) => props.theme.responsive.xs}) {
+    font-size: 1.8rem;
+    padding: 1.2rem 1.8rem;
+  }
+`;
+const LogosDiv = styled.div`
+  width: 100%;
+`;
+
+const SocialsDiv = styled.div`
+  width: 10%;
+  min-width: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 5vw;
+  @media screen and (${(props) => props.theme.responsive.xs}) {
+    width: 100%;
+    margin: 0;
   }
 `;
 

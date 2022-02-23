@@ -16,5 +16,6 @@ export const theme = {
     lg: "max-width: 1200px",
     md: "max-width: 1000px",
     sm: "max-width: 750px",
+    xs: "max-width: 500px",
   },
 };

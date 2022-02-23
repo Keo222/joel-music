@@ -23,6 +23,9 @@ const SmallNav = styled.nav`
   z-index: 100;
   @media screen and (${(props) => props.theme.responsive.lg}) {
     display: flex;
+  }
+  @media screen and (${(props) => props.theme.responsive.xs}) {
+    height: 10rem;
   } ;
 `;
 
