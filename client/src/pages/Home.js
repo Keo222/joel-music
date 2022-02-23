@@ -64,10 +64,7 @@ const DescriptorLink = styled(Link)`
 `;
 
 const LogosDiv = styled.div`
-  position: absolute;
-  bottom: 4vh;
   width: 100%;
-  justify-content: space-around;
 `;
 
 const SocialsDiv = styled.div`
