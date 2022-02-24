@@ -11,7 +11,17 @@ import soundcloudLogo from "../icons/soundcloud.svg";
 import studioImg from "../images/studio1.jpg";
 
 // Styled Elements
-const HomeDiv = styled.div``;
+const HomeDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 20rem);
+  @media screen and (${(props) => props.theme.responsive.lg}) {
+    min-height: calc(100vh - 15rem);
+  }
+  @media screen and (${(props) => props.theme.responsive.xs}) {
+    min-height: calc(100vh - 10rem);
+  }
+`;
 
 const WholeScreenDiv = styled.img`
   width: 100vw;
@@ -36,6 +46,9 @@ const HomeHeader = styled.h1`
   text-align: center;
   letter-spacing: 1rem;
   /* text-shadow: 2px 5px 7px rgba(255, 255, 255, 0.7); */
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    font-size: 4.5rem;
+  }
   @media screen and (${(props) => props.theme.responsive.xs}) {
     font-size: 4rem;
   }
@@ -58,6 +71,7 @@ const DescriptorLink = styled(Link)`
   text-decoration: none;
   color: ${(props) => props.theme.color.textLight};
   font-size: 2.6rem;
+  font-weight: 300;
   margin-bottom: 1.5rem;
   transition: color 0.3s;
   margin: auto;
@@ -105,23 +119,17 @@ const ButtonLink = styled(Link)`
 `;
 const LogosDiv = styled.div`
   width: 100%;
-  position: absolute;
-  bottom: 0;
   height: 6rem;
+  margin-top: auto;
 `;
 
 const SocialsDiv = styled.div`
-  width: 10%;
-  min-width: 80px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-left: auto;
-  margin-right: 5vw;
-  @media screen and (${(props) => props.theme.responsive.xs}) {
-    width: 100%;
-    margin: 0;
-  }
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
 `;
 
 const InstaIconDiv = styled.div`
@@ -166,7 +174,7 @@ const Home = () => {
       <title>Joel Gardella | Audio Engineer</title>
       <WholeScreenDiv src={studioImg} />
       {/* <SlideInItem style={slideIn}>WEEEEE!!!</SlideInItem> */}
-      <HomeHeader>Joel Gardella:</HomeHeader>
+      <HomeHeader>Joel Gardella</HomeHeader>
       <DescriptorDiv>
         <DescriptorLink span="2" to="/">
           Production
