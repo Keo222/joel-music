@@ -124,20 +124,31 @@ const AdminLinkButton = styled(LinkButton)`
   font-size: 1.4rem;
 `;
 
-const SmallImageContainer = styled.div`
+const ImageContainer = styled.div`
   width: 12rem;
   height: 15rem;
-  margin: 0 2rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  @media screen and (${(props) => props.theme.responsive.lg}) {
+    margin: 0 2rem;
+  }
   @media screen and (${(props) => props.theme.responsive.sm}) {
     width: 8rem;
     height: 10rem;
   }
 `;
 
-const LargeImageContainer = styled.div`
-  width: 16rem;
-  height: 20rem;
-  margin: 0 4rem;
+const AdminImageContainer = styled.div`
+  width: 12rem;
+  height: 15rem;
+  margin: 0 2rem;
+  display: flex;
+  align-items: center;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    width: 8rem;
+    height: 10rem;
+  }
 `;
 
 const Logo = styled.img`
@@ -169,11 +180,11 @@ const Navbar = () => {
       {!adminRegex.test(location.pathname) ? (
         <>
           <SmallNav>
-            <SmallImageContainer>
+            <ImageContainer>
               <Link to="/">
                 <Logo src={lightbulbWhite} />
               </Link>
-            </SmallImageContainer>
+            </ImageContainer>
             <SmallNavLinks>
               <StyledLink to="/">Home</StyledLink>
               <StyledLink to="/about">About</StyledLink>
@@ -193,29 +204,27 @@ const Navbar = () => {
               <StyledLink to="/about">About</StyledLink>
               <StyledLink to="/listen">Listen</StyledLink>
             </NavLinksLeft>
-            <LargeImageContainer>
+            <ImageContainer>
               <Link to="/">
                 <Logo src={lightbulbWhite} />
               </Link>
-            </LargeImageContainer>
+            </ImageContainer>
             <NavLinksRight>
               <StyledLink to="/contact">Contact</StyledLink>
               <StyledLink to="/pricing">Pricing</StyledLink>
               <LinkButton to="/hire">Hire</LinkButton>
             </NavLinksRight>
           </LargeNav>
-          {hamburgerOpen && (
-            <DropdownNav setHamburgerOpen={setHamburgerOpen} />
-          )}
+          {hamburgerOpen && <DropdownNav setHamburgerOpen={setHamburgerOpen} />}
         </>
       ) : (
         <>
           <AdminNav>
-            <SmallImageContainer>
+            <ImageContainer>
               <Link to="/">
                 <Logo src={lightbulbWhite} />
               </Link>
-            </SmallImageContainer>
+            </ImageContainer>
             <AdminNavLinks>
               <StyledLink to="/admin/">Home</StyledLink>
               <StyledLink to="/admin/tracks">Tracks</StyledLink>

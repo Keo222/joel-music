@@ -41,16 +41,17 @@ const SlideInItem = styled(animated.h3)`
 
 const HomeHeader = styled.h1`
   color: ${(props) => props.theme.color.highlight1};
-  font-size: 5.5rem;
+  font-size: 4.5rem;
   font-weight: 600;
   text-align: center;
   letter-spacing: 1rem;
+  margin: 3rem 0 1rem;
   /* text-shadow: 2px 5px 7px rgba(255, 255, 255, 0.7); */
   @media screen and (${(props) => props.theme.responsive.sm}) {
-    font-size: 4.5rem;
+    font-size: 4rem;
   }
   @media screen and (${(props) => props.theme.responsive.xs}) {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
 `;
 
@@ -60,7 +61,7 @@ const DescriptorDiv = styled.div`
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 12rem;
+  grid-auto-rows: 9rem;
   align-items: center;
   @media screen and (${(props) => props.theme.responsive.xs}) {
     width: 80%;
@@ -70,7 +71,7 @@ const DescriptorDiv = styled.div`
 const DescriptorLink = styled(Link)`
   text-decoration: none;
   color: ${(props) => props.theme.color.textLight};
-  font-size: 2.6rem;
+  font-size: 2.1rem;
   font-weight: 300;
   margin-bottom: 1.5rem;
   transition: color 0.3s;
@@ -81,14 +82,14 @@ const DescriptorLink = styled(Link)`
     color: ${(props) => props.theme.color.highlight3};
   }
   @media screen and (${(props) => props.theme.responsive.xs}) {
-    font-size: 2.2rem;
+    font-size: 1.3rem;
   }
 `;
 
 const ButtonDiv = styled.div`
   width: 100%;
   max-width: 800px;
-  height: 30vh;
+  height: 20vh;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
@@ -102,10 +103,10 @@ const ButtonLink = styled(Link)`
   background: ${(props) => props.theme.color.highlight2};
   color: ${(props) => props.theme.color.textDark};
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 1.6rem;
   letter-spacing: 1px;
   text-decoration: none;
-  padding: 1.5rem 2.2rem;
+  padding: 1.2rem 2.1rem;
   border-radius: 5px;
   transition: all 0.3s;
   &:hover,
@@ -113,7 +114,7 @@ const ButtonLink = styled(Link)`
     filter: brightness(0.7);
   }
   @media screen and (${(props) => props.theme.responsive.xs}) {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     padding: 1.2rem 1.8rem;
   }
 `;

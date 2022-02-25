@@ -19,7 +19,7 @@ const HireHeader = styled.h1`
   text-align: center;
   font-size: 7rem;
   font-weight: 200;
-  color: ${(props) => props.theme.color.highlight1};
+  color: ${(props) => props.theme.color.highlight2};
   /* color: ${(props) => props.theme.color.textLight}; */
   letter-spacing: 2.2rem;
   margin: 5vh 0 0;
