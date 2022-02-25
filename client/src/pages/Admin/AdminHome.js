@@ -17,7 +17,6 @@ const AdminHomeDiv = styled.div`
 
 const AdminHomeHeading = styled.h1`
   text-align: center;
-  margin-bottom: 3rem;
 `;
 
 // Styled Elements

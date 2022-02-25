@@ -56,8 +56,11 @@ const AdminNavLinks = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 30rem;
+  min-width: 30vw;
   margin: 0 4rem;
+  @media screen and (${(props) => props.theme.responsive.lg}) {
+    min-width: 50vw;
+  }
   @media screen and (${(props) => props.theme.responsive.sm}) {
     display: none;
   } ;
@@ -215,16 +218,18 @@ const Navbar = () => {
               <LinkButton to="/hire">Hire</LinkButton>
             </NavLinksRight>
           </LargeNav>
-          {hamburgerOpen && <DropdownNav setHamburgerOpen={setHamburgerOpen} />}
+          {hamburgerOpen && (
+            <DropdownNav setHamburgerOpen={setHamburgerOpen} />
+          )}
         </>
       ) : (
         <>
           <AdminNav>
-            <ImageContainer>
+            <AdminImageContainer>
               <Link to="/">
                 <Logo src={lightbulbWhite} />
               </Link>
-            </ImageContainer>
+            </AdminImageContainer>
             <AdminNavLinks>
               <StyledLink to="/admin/">Home</StyledLink>
               <StyledLink to="/admin/tracks">Tracks</StyledLink>

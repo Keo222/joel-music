@@ -19,7 +19,15 @@ const AboutImg = styled.img`
   width: 40vw;
   height: 100vh;
   filter: brightness(0.5) grayscale(0.2);
-  `;
+  @media screen and (${(props) => props.theme.responsive.lg}) {
+    width: 80vw;
+    filter: brightness(0.2) grayscale(0.6);
+  }
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    width: 100vw;
+    filter: brightness(0.12) grayscale(0.3);
+  }
+`;
 
 const ImgOverlay = styled.div`
   position: fixed;
@@ -28,11 +36,99 @@ const ImgOverlay = styled.div`
   z-index: -4;
   width: 40vw;
   height: 100vh;
-  background: linear-gradient(to right,  rgba(16, 12, 11, 0), rgba(16,12,11,0) 70%,  rgba(16, 12, 11, 1)),
-  linear-gradient(to bottom right,  rgba(16, 12, 11, 0), rgba(16,12,11,0) 50%,  rgba(16, 12, 11, 1)),
-  linear-gradient(to bottom,  rgba(16, 12, 11, 0), rgba(16,12,11,0) 70%,  rgba(16, 12, 11, 1))
-  ;
-  `;
+  background: linear-gradient(
+      to right,
+      rgba(16, 12, 11, 0),
+      rgba(16, 12, 11, 0) 70%,
+      rgba(16, 12, 11, 1)
+    ),
+    linear-gradient(
+      to bottom right,
+      rgba(16, 12, 11, 0),
+      rgba(16, 12, 11, 0) 50%,
+      rgba(16, 12, 11, 1)
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(16, 12, 11, 0),
+      rgba(16, 12, 11, 0) 70%,
+      rgba(16, 12, 11, 1)
+    ),
+    linear-gradient(
+      to bottom left,
+      rgba(16, 12, 11, 0),
+      rgba(16, 12, 11, 0) 70%,
+      rgba(16, 12, 11, 1)
+    ),
+    linear-gradient(
+      to left,
+      rgba(16, 12, 11, 0),
+      rgba(16, 12, 11, 0) 70%,
+      rgba(16, 12, 11, 1)
+    ),
+    linear-gradient(
+      to top left,
+      rgba(16, 12, 11, 0),
+      rgba(16, 12, 11, 0) 70%,
+      rgba(16, 12, 11, 1)
+    ),
+    linear-gradient(
+      to top,
+      rgba(16, 12, 11, 0),
+      rgba(16, 12, 11, 0) 70%,
+      rgba(16, 12, 11, 1)
+    ),
+    linear-gradient(
+      to top right,
+      rgba(16, 12, 11, 0),
+      rgba(16, 12, 11, 0) 70%,
+      rgba(16, 12, 11, 1)
+    );
+  @media screen and (${(props) => props.theme.responsive.lg}) {
+    width: 80vw;
+  }
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    width: 100vw;
+  }
+`;
+
+const AboutInfoContainer = styled.div`
+  width: 60vw;
+  margin-left: auto;
+  margin-bottom: 5rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    width: 100vw;
+  }
+`;
+const AboutHeader = styled.h1`
+  text-align: center;
+  font-size: 5rem;
+  color: ${(props) => props.theme.color.highlight2};
+  font-weight: 200;
+  margin-bottom: 3rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    font-size: 4rem;
+  }
+`;
+
+const AboutInfoDiv = styled.div`
+  width: 70%;
+  margin: 0 auto;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    width: 80vw;
+  }
+`;
+
+const AboutInfoParagraph = styled.p`
+  color: ${(props) => props.theme.color.textLight};
+  font-size: 1.6rem;
+  line-height: 2;
+  text-indent: 3.5rem;
+  margin-bottom: 4rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    font-size: 1.4rem;
+  }
+`;
 
 const InlineSocialsDiv = styled.div`
   width: 30rem;
@@ -41,6 +137,9 @@ const InlineSocialsDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    width: 20rem;
+  }
 `;
 
 const InstaIconDiv = styled.div`
@@ -64,62 +163,53 @@ const Icon = styled.img`
   }
 `;
 
-const AboutHeader = styled.h1`
-  text-align: center;
-  font-size: 5rem;
-  color: ${props => props.theme.color.highlight2};
-  font-weight: 200;
-  margin-bottom: 3rem;
-`;
-const AboutInfoContainer = styled.div`
-  width: 60vw;
-  margin-left: auto;
-  margin-bottom: 5rem;
-`;
-
-const AboutInfoDiv = styled.div`
-  width: 70%;
-  margin: 0 auto;
-`;
-
-const AboutInfoParagraph = styled.p`
-  color: ${props => props.theme.color.textLight};
-  font-size: 1.6rem;
-  line-height: 2;
-  text-indent: 5rem;
-  margin-bottom: 4rem;
-`
-
 const About = () => {
   return (
     <>
       <title>Joel Gardella | About</title>
       <ImgOverlay />
-      <AboutImg src={aboutFiller}/>
+      <AboutImg src={aboutFiller} />
       <AboutInfoContainer>
         <AboutInfoDiv>
           <AboutHeader>About</AboutHeader>
           <AboutInfoParagraph>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique et dolores eaque magni facilis sunt doloribus, obcaecati minima. Eius rem quos alias fugit facere, velit at maxime laboriosam voluptas quae. Culpa nulla tempore deleniti odio possimus mollitia autem quas dolores maiores excepturi vitae atque voluptatibus dolorum, consectetur qui sunt enim!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Similique et dolores eaque magni facilis sunt doloribus,
+            obcaecati minima. Eius rem quos alias fugit facere, velit at
+            maxime laboriosam voluptas quae. Culpa nulla tempore deleniti
+            odio possimus mollitia autem quas dolores maiores excepturi
+            vitae atque voluptatibus dolorum, consectetur qui sunt enim!
           </AboutInfoParagraph>
           <AboutInfoParagraph>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem voluptatem sint hic cum harum eaque obcaecati sequi ipsa fuga quam.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Dolorem voluptatem sint hic cum harum eaque obcaecati sequi
+            ipsa fuga quam.
           </AboutInfoParagraph>
           <AboutInfoParagraph>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis placeat dignissimos cum impedit, perspiciatis animi ea architecto explicabo atque ducimus odit delectus enim tempore expedita unde, eum laudantium vitae esse magni at rem, quia dolorem consequuntur! Sint sit, amet illo nemo enim maiores eum temporibus fugiat dolores reiciendis architecto tenetur veniam cupiditate quidem, rerum molestias unde, quas deserunt placeat dolore quo et repellendus accusantium assumenda. Quos minima aliquam aperiam! Neque?
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Officiis placeat dignissimos cum impedit, perspiciatis animi ea
+            architecto explicabo atque ducimus odit delectus enim tempore
+            expedita unde, eum laudantium vitae esse magni at rem, quia
+            dolorem consequuntur! Sint sit, amet illo nemo enim maiores eum
+            temporibus fugiat dolores reiciendis architecto tenetur veniam
+            cupiditate quidem, rerum molestias unde, quas deserunt placeat
+            dolore quo et repellendus accusantium assumenda. Quos minima
+            aliquam aperiam! Neque?
           </AboutInfoParagraph>
           <AboutInfoParagraph>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate voluptatem expedita ipsam obcaecati dolore accusantium.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Voluptate voluptatem expedita ipsam obcaecati dolore
+            accusantium.
           </AboutInfoParagraph>
         </AboutInfoDiv>
         <InlineSocialsDiv>
-        <InstaIconDiv>
-          <Icon src={instagramLogo}/>
-        </InstaIconDiv>
-        <SoundcloudIconDiv>
-          <Icon src={soundcloudLogo}/>
-        </SoundcloudIconDiv>
-      </InlineSocialsDiv>
+          <InstaIconDiv>
+            <Icon src={instagramLogo} />
+          </InstaIconDiv>
+          <SoundcloudIconDiv>
+            <Icon src={soundcloudLogo} />
+          </SoundcloudIconDiv>
+        </InlineSocialsDiv>
       </AboutInfoContainer>
     </>
   );

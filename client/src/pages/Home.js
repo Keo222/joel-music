@@ -12,21 +12,23 @@ import studioImg from "../images/studio1.jpg";
 
 // Styled Elements
 const HomeDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 20rem);
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr 4fr 1fr 1fr;
+  min-height: calc(100vh - 15rem);
   @media screen and (${(props) => props.theme.responsive.lg}) {
     min-height: calc(100vh - 15rem);
   }
   @media screen and (${(props) => props.theme.responsive.xs}) {
     min-height: calc(100vh - 10rem);
+    grid-template-rows: 1.6fr 3fr 1fr 1fr;
   }
 `;
 
 const WholeScreenDiv = styled.img`
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   object-fit: cover;
   z-index: -5;
@@ -43,25 +45,30 @@ const HomeHeader = styled.h1`
   color: ${(props) => props.theme.color.highlight1};
   font-size: 4.5rem;
   font-weight: 600;
-  text-align: center;
+  width: 80vw;
+  margin: 0 auto;
   letter-spacing: 1rem;
-  margin: 3rem 0 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  align-self: bottom;
   /* text-shadow: 2px 5px 7px rgba(255, 255, 255, 0.7); */
   @media screen and (${(props) => props.theme.responsive.sm}) {
     font-size: 4rem;
   }
   @media screen and (${(props) => props.theme.responsive.xs}) {
-    font-size: 3.5rem;
+    font-size: 3rem;
+    align-items: center;
   }
 `;
 
 const DescriptorDiv = styled.div`
   margin: 0 auto;
-  width: 70%;
+  width: 85%;
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 9rem;
   align-items: center;
   @media screen and (${(props) => props.theme.responsive.xs}) {
     width: 80%;
@@ -72,7 +79,7 @@ const DescriptorLink = styled(Link)`
   text-decoration: none;
   color: ${(props) => props.theme.color.textLight};
   font-size: 2.1rem;
-  font-weight: 300;
+  font-weight: 500;
   margin-bottom: 1.5rem;
   transition: color 0.3s;
   margin: auto;
@@ -89,14 +96,10 @@ const DescriptorLink = styled(Link)`
 const ButtonDiv = styled.div`
   width: 100%;
   max-width: 800px;
-  height: 20vh;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  @media screen and (${(props) => props.theme.responsive.xs}) {
-    height: 20vh;
-  }
 `;
 
 const ButtonLink = styled(Link)`
@@ -120,8 +123,8 @@ const ButtonLink = styled(Link)`
 `;
 const LogosDiv = styled.div`
   width: 100%;
-  height: 6rem;
-  margin-top: auto;
+  display: flex;
+  align-items: center;
 `;
 
 const SocialsDiv = styled.div`
@@ -134,12 +137,12 @@ const SocialsDiv = styled.div`
 `;
 
 const InstaIconDiv = styled.div`
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 3vh;
+  width: 3vh;
 `;
 const SoundcloudIconDiv = styled.div`
-  height: 4rem;
-  width: 4rem;
+  height: 5vh;
+  width: 5vh;
 `;
 
 const Icon = styled.img`
@@ -171,45 +174,47 @@ const Home = () => {
   // }, [showItem]);
 
   return (
-    <HomeDiv>
+    <>
       <title>Joel Gardella | Audio Engineer</title>
       <WholeScreenDiv src={studioImg} />
-      {/* <SlideInItem style={slideIn}>WEEEEE!!!</SlideInItem> */}
-      <HomeHeader>Joel Gardella</HomeHeader>
-      <DescriptorDiv>
-        <DescriptorLink span="2" to="/">
-          Production
-        </DescriptorLink>
-        <DescriptorLink to="/">Audio Engineer</DescriptorLink>
-        <DescriptorLink to="/">Mixing & Mastering</DescriptorLink>
-      </DescriptorDiv>
-      <ButtonDiv>
-        <ButtonLink to="/listen">Listen</ButtonLink>
-        <ButtonLink to="/pricing">Services</ButtonLink>
-      </ButtonDiv>
-      <LogosDiv>
-        <SocialsDiv>
-          <SoundcloudIconDiv>
-            <a
-              href="https://soundcloud.com/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Icon src={soundcloudLogo} />
-            </a>
-          </SoundcloudIconDiv>
-          <InstaIconDiv>
-            <a
-              href="https://www.instagram.com/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Icon src={instagramLogo} />
-            </a>
-          </InstaIconDiv>
-        </SocialsDiv>
-      </LogosDiv>
-    </HomeDiv>
+      <HomeDiv>
+        {/* <SlideInItem style={slideIn}>WEEEEE!!!</SlideInItem> */}
+        <HomeHeader>Joel Gardella</HomeHeader>
+        <DescriptorDiv>
+          <DescriptorLink span="2" to="/">
+            Production
+          </DescriptorLink>
+          <DescriptorLink to="/">Audio Engineer</DescriptorLink>
+          <DescriptorLink to="/">Mixing & Mastering</DescriptorLink>
+        </DescriptorDiv>
+        <ButtonDiv>
+          <ButtonLink to="/listen">Listen</ButtonLink>
+          <ButtonLink to="/pricing">Services</ButtonLink>
+        </ButtonDiv>
+        <LogosDiv>
+          <SocialsDiv>
+            <SoundcloudIconDiv>
+              <a
+                href="https://soundcloud.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <Icon src={soundcloudLogo} />
+              </a>
+            </SoundcloudIconDiv>
+            <InstaIconDiv>
+              <a
+                href="https://www.instagram.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <Icon src={instagramLogo} />
+              </a>
+            </InstaIconDiv>
+          </SocialsDiv>
+        </LogosDiv>
+      </HomeDiv>
+    </>
   );
 };
 
