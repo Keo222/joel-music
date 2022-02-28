@@ -32,7 +32,7 @@ const TracksHeading = styled.h1`
 
 const NewTrackButton = styled(Link)`
   color: ${(props) => props.theme.color.textDark};
-  background: ${(props) => props.theme.color.highlight2};
+  background: ${(props) => props.theme.color.highlight3};
   display: block;
   width: 7.3rem;
   text-align: center;
@@ -49,7 +49,7 @@ const NewTrackButton = styled(Link)`
   }
 
   @media screen and (${(props) => props.theme.responsive.md}) {
-    margin: 0 auto 2rem;
+    margin: 0 5rem 3rem auto;
   }
   @media screen and (${(props) => props.theme.responsive.sm}) {
     font-size: 1.2rem;
@@ -155,10 +155,6 @@ const Icon = styled.img`
   transition: filter 0.2s;
   &:hover {
     filter: brightness(0.6);
-  }
-  @media screen and (${(props) => props.theme.responsive.md}) {
-    height: 3.3rem;
-    width: 2rem;
   }
 `;
 
