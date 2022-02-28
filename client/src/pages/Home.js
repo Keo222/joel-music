@@ -15,19 +15,16 @@ const HomeDiv = styled.div`
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 1fr 4fr 1fr 1fr;
-  min-height: calc(100vh - 15rem);
-  @media screen and (${(props) => props.theme.responsive.lg}) {
-    min-height: calc(100vh - 15rem);
-  }
+  min-height: calc(100% - 15rem);
   @media screen and (${(props) => props.theme.responsive.xs}) {
     min-height: calc(100vh - 10rem);
-    grid-template-rows: 1.6fr 3fr 1fr 1fr;
+    grid-template-rows: 1.8fr 2fr 1fr 1fr;
   }
 `;
 
 const WholeScreenDiv = styled.img`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   top: 0;
   object-fit: cover;
@@ -117,8 +114,8 @@ const ButtonLink = styled(Link)`
     filter: brightness(0.7);
   }
   @media screen and (${(props) => props.theme.responsive.xs}) {
-    font-size: 1.5rem;
-    padding: 1.2rem 1.8rem;
+    font-size: 1.4rem;
+    padding: 1rem 1.5rem;
   }
 `;
 const LogosDiv = styled.div`
@@ -137,12 +134,12 @@ const SocialsDiv = styled.div`
 `;
 
 const InstaIconDiv = styled.div`
-  height: 3vh;
-  width: 3vh;
+  height: 2.7rem;
+  width: 2.7rem;
 `;
 const SoundcloudIconDiv = styled.div`
-  height: 5vh;
-  width: 5vh;
+  height: 4.3rem;
+  width: 4.3rem;
 `;
 
 const Icon = styled.img`
@@ -150,9 +147,9 @@ const Icon = styled.img`
   width: 100%;
   height: 100%;
   transition: all 0.3s;
-  filter: grayscale(50%);
+  filter: grayscale(20%);
   &:hover {
-    filter: unset;
+    filter: grayscale(0) brightness(1.5);
   }
 `;
 

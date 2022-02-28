@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+html, body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
 html {
   font-size: 62.5%;
 }
