@@ -21,11 +21,11 @@ const AboutImg = styled.img`
   filter: brightness(0.5) grayscale(0.2);
   @media screen and (${(props) => props.theme.responsive.lg}) {
     width: 80vw;
-    filter: brightness(0.2) grayscale(0.6);
+    filter: brightness(0.25) grayscale(0.6);
   }
   @media screen and (${(props) => props.theme.responsive.sm}) {
     width: 100vw;
-    filter: brightness(0.12) grayscale(0.3);
+    filter: brightness(0.22) grayscale(0.3);
   }
 `;
 
