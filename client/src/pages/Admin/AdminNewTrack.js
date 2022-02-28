@@ -28,16 +28,9 @@ const InputLabel = styled.label`
   margin-right: 2rem;
 `;
 
-const TextAreaLabel = styled.label``;
-
 const ShortTextInput = styled.input`
   /* flex: 1; */
   width: 100%;
-`;
-
-const TextAreaInput = styled.textarea`
-  width: 100%;
-  height: 15rem;
 `;
 
 const RadioDiv = styled.div`
@@ -70,7 +63,6 @@ const AdminTracks = () => {
   const [artist, setArtist] = useState("");
   const [work, setWork] = useState("");
   const [year, setYear] = useState("");
-  const [about, setAbout] = useState("");
   const [genre, setGenre] = useState("");
   const [featured, setFeatured] = useState(false);
   const [spotify, setSpotify] = useState("");
@@ -86,7 +78,6 @@ const AdminTracks = () => {
       artist: artist,
       work: work,
       year: year,
-      about: about,
       genre: genre,
       featured: featured,
       spotify: spotify,
@@ -182,15 +173,6 @@ const AdminTracks = () => {
             <option value="Mastered">Mastered</option>
             <option value="Mixed & Mastered">Mixed & Mastered</option>
           </select>
-        </InputGroup>
-        <InputGroup>
-          <TextAreaLabel htmlFor="about">About:</TextAreaLabel>
-          <TextAreaInput
-            name="about"
-            id="about"
-            placeholder="About this track..."
-            onChange={(e) => setAbout(e.target.value)}
-          />
         </InputGroup>
 
         <RadioDiv>

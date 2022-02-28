@@ -3,7 +3,7 @@ const pool = require("./db");
 
 const router = express.Router();
 
-// GET ALL TRACKS --UNTESTED
+// GET ALL TRACKS
 router.get("/tracks", async (req, res) => {
   try {
     const allTracks = await pool.query("SELECT * FROM tracks");
@@ -14,7 +14,7 @@ router.get("/tracks", async (req, res) => {
   }
 });
 
-// GET SINGLE TRACK -- UNTESTED
+// GET SINGLE TRACK
 router.get("/tracks/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -29,7 +29,7 @@ router.get("/tracks/:id", async (req, res) => {
   }
 });
 
-// UPDATE TRACK --UNTESTED
+// UPDATE TRACK
 router.put("/tracks/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -37,7 +37,6 @@ router.put("/tracks/:id", async (req, res) => {
       name,
       artist,
       work,
-      about,
       year,
       genre,
       featured,
@@ -46,12 +45,11 @@ router.put("/tracks/:id", async (req, res) => {
       tidal,
     } = req.body;
     await pool.query(
-      "UPDATE tracks SET track_name=$1, track_artist=$2, track_work=$3, track_about=$4, track_year=$5, track_genre=$6, track_featured=$7, track_spotify=$8, track_apple=$9, track_tidal=$10 WHERE track_id=$11",
+      "UPDATE tracks SET track_name=$1, track_artist=$2, track_work=$3, track_year=$5, track_genre=$6, track_featured=$7, track_spotify=$8, track_apple=$9, track_tidal=$10 WHERE track_id=$11",
       [
         name,
         artist,
         work,
-        about,
         year,
         genre,
         featured,
@@ -68,14 +66,13 @@ router.put("/tracks/:id", async (req, res) => {
   }
 });
 
-// NEW TRACK -- UNTESTED
+// NEW TRACK
 router.post("/tracks", async (req, res) => {
   try {
     const {
       name,
       artist,
       work,
-      about,
       year,
       genre,
       featured,
@@ -84,19 +81,8 @@ router.post("/tracks", async (req, res) => {
       tidal,
     } = req.body;
     await pool.query(
-      "INSERT INTO tracks (track_name, track_artist, track_work, track_about, track_year, track_genre, track_featured, track_spotify, track_apple, track_tidal) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
-      [
-        name,
-        artist,
-        work,
-        about,
-        year,
-        genre,
-        featured,
-        spotify,
-        apple,
-        tidal,
-      ]
+      "INSERT INTO tracks (track_name, track_artist, track_work, track_year, track_genre, track_featured, track_spotify, track_apple, track_tidal) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
+      [name, artist, work, year, genre, featured, spotify, apple, tidal]
     );
     res.json("New Track Added");
   } catch (err) {
@@ -104,7 +90,7 @@ router.post("/tracks", async (req, res) => {
     res.send("Error adding new track", err);
   }
 });
-// DELETE TRACK -- UNTESTED
+// DELETE TRACK
 router.delete("/tracks/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -112,6 +98,28 @@ router.delete("/tracks/:id", async (req, res) => {
     res.json("Track Deleted");
   } catch (err) {
     console.error(err.message);
+  }
+});
+
+// GENRES API ****************************************
+
+// GET GENRES
+router.get("/genres", async (req, res) => {
+  try {
+    const allGenres = await pool.query("SELECT * FROM genres");
+    res.json(allGenres.rows);
+  } catch (err) {
+    res.send("Error getting genres", err);
+  }
+});
+// DELETE GENRES
+router.delete("/genres", async (req, res) => {
+  try {
+    const { name } = req.body;
+    await pool.query("DELETE FROM genres WHERE genre_name = $1", [name]);
+    res.json("Genre Deleted");
+  } catch (err) {
+    res.send("Error getting genres", err);
   }
 });
 

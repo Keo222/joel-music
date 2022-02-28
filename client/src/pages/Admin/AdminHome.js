@@ -3,23 +3,32 @@ import styled from "styled-components";
 
 // Components
 import AdminTrackInfo from "../../components/AdminTrackInfo";
+import AdminGenreInfo from "../../components/AdminGenreInfo";
+import AdminTextInfo from "../../components/AdminTextInfo";
 
 // Styled Elements
 const AdminHomeDiv = styled.div`
-  color: white;
+  color: ${(props) => props.theme.color.textLight};
   font-size: 1.4rem;
-  width: 80%;
-  margin: 2rem auto;
+  width: 70%;
+  margin: 0 auto 5rem;
   @media screen and (${(props) => props.theme.responsive.md}) {
-    width: 100%;
+    width: 90%;
   }
 `;
 
 const AdminHomeHeading = styled.h1`
   text-align: center;
+  grid-column: span 2;
 `;
 
-// Styled Elements
+const EditAdminDiv = styled.div`
+  height: calc(100vh - 20rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 4fr 4fr;
+  gap: 2rem;
+`;
 
 const Admin = () => {
   const [numTracks, setNumTracks] = useState(0);
@@ -34,11 +43,17 @@ const Admin = () => {
     getNumTracks();
   }, []);
   return (
-    <AdminHomeDiv>
+    <>
       <title>JG Admin</title>
-      <AdminHomeHeading>Admin Home</AdminHomeHeading>
-      <AdminTrackInfo numTracks={numTracks} />
-    </AdminHomeDiv>
+      <AdminHomeDiv>
+        <EditAdminDiv>
+          <AdminHomeHeading>Admin Home</AdminHomeHeading>
+          <AdminGenreInfo />
+          <AdminTextInfo />
+          <AdminTrackInfo numTracks={numTracks} />
+        </EditAdminDiv>
+      </AdminHomeDiv>
+    </>
   );
 };
 

@@ -47,7 +47,6 @@ const AdminUpdateTrack = () => {
   const [artist, setArtist] = useState("");
   const [work, setWork] = useState("");
   const [year, setYear] = useState("");
-  const [about, setAbout] = useState("");
   const [genre, setGenre] = useState("");
   const [featured, setFeatured] = useState(false);
   const [spotify, setSpotify] = useState("");
@@ -66,7 +65,6 @@ const AdminUpdateTrack = () => {
     setArtist(trackInfo.track_artist);
     setWork(trackInfo.track_work);
     setYear(trackInfo.track_year);
-    setAbout(trackInfo.track_about);
     setGenre(trackInfo.track_genre);
     setFeatured(trackInfo.track_featured);
     setSpotify(trackInfo.track_spotify);
@@ -87,7 +85,6 @@ const AdminUpdateTrack = () => {
       artist: artist,
       work: work,
       year: year,
-      about: about,
       genre: genre,
       featured: featured,
       spotify: spotify,
@@ -159,14 +156,6 @@ const AdminUpdateTrack = () => {
           id="year"
           value={year}
           onChange={(e) => setYear(e.target.value)}
-        />
-
-        <label htmlFor="about">About:</label>
-        <textarea
-          name="about"
-          id="about"
-          value={about}
-          onChange={(e) => setAbout(e.target.value)}
         />
 
         <label htmlFor="genre">Genre:</label>

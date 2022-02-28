@@ -6,9 +6,8 @@ import { Link } from "react-router-dom";
 const TrackInfoDiv = styled.div`
   background: ${(props) => props.theme.color.textDark};
   color: ${(props) => props.theme.color.textLight};
-  border: 3px solid ${(props) => props.theme.color.highlight1};
+  border: 3px solid ${(props) => props.theme.color.highlight3};
   border-radius: 10px;
-  grid-column: span 2;
 `;
 
 const TrackInfoHeader = styled.h3`
@@ -22,13 +21,13 @@ const TrackNum = styled.p`
 `;
 
 const StyledLink = styled(Link)`
-  background: ${(props) => props.theme.color.highlight3};
+  background: ${(props) => props.theme.color.highlight2};
   color: ${(props) => props.theme.color.textDark};
   font-weight: 600;
   width: fit-content;
-  text-align: center;
   text-decoration: none;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem;
+  text-align: center;
   border-radius: 5px;
   transition: all 0.3s;
   margin: 3rem auto 1rem;
@@ -39,14 +38,14 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const AdminTrackInfo = ({ numTracks }) => {
+const AdminGenreInfo = () => {
   return (
     <TrackInfoDiv>
-      <TrackInfoHeader>Tracks</TrackInfoHeader>
-      <TrackNum>Number of tracks: {numTracks}</TrackNum>
-      <StyledLink to="/admin/tracks">Edit Tracks</StyledLink>
+      <TrackInfoHeader>Genres</TrackInfoHeader>
+      <TrackNum>Number of genres: 0</TrackNum>
+      <StyledLink to="/admin/tracks">Edit Genres</StyledLink>
     </TrackInfoDiv>
   );
 };
 
-export default AdminTrackInfo;
+export default AdminGenreInfo;

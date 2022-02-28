@@ -6,9 +6,8 @@ import { Link } from "react-router-dom";
 const TrackInfoDiv = styled.div`
   background: ${(props) => props.theme.color.textDark};
   color: ${(props) => props.theme.color.textLight};
-  border: 3px solid ${(props) => props.theme.color.highlight1};
+  border: 2px solid ${(props) => props.theme.color.highlight2};
   border-radius: 10px;
-  grid-column: span 2;
 `;
 
 const TrackInfoHeader = styled.h3`
@@ -22,7 +21,7 @@ const TrackNum = styled.p`
 `;
 
 const StyledLink = styled(Link)`
-  background: ${(props) => props.theme.color.highlight3};
+  background: ${(props) => props.theme.color.highlight1};
   color: ${(props) => props.theme.color.textDark};
   font-weight: 600;
   width: fit-content;
@@ -39,14 +38,14 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const AdminTrackInfo = ({ numTracks }) => {
+const AdminTextInfo = () => {
   return (
     <TrackInfoDiv>
-      <TrackInfoHeader>Tracks</TrackInfoHeader>
-      <TrackNum>Number of tracks: {numTracks}</TrackNum>
-      <StyledLink to="/admin/tracks">Edit Tracks</StyledLink>
+      <TrackInfoHeader>Text</TrackInfoHeader>
+      <TrackNum>Total word count: 0</TrackNum>
+      <StyledLink to="/admin/tracks">Edit Text</StyledLink>
     </TrackInfoDiv>
   );
 };
 
-export default AdminTrackInfo;
+export default AdminTextInfo;

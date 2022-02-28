@@ -10,26 +10,32 @@ import edit from "../../icons/edit-yellow.svg";
 import DeleteTrackPopup from "../../components/DeleteTrackPopup";
 
 // Styled Elements
-const AdminHomeDiv = styled.div`
-  color: white;
+
+const AdminTracksDiv = styled.div`
+  color: ${(props) => props.theme.color.textLight};
   font-size: 1.4rem;
   width: 80%;
   margin: 2rem auto;
   @media screen and (${(props) => props.theme.responsive.md}) {
-    width: 100%;
+    width: 100vw;
+    overflow-x: hidden;
   }
 `;
 
-const TrackHeading = styled.h1`
+const TracksHeading = styled.h1`
   text-align: center;
   margin-bottom: 3rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    font-size: 2.6rem;
+  }
 `;
 
 const NewTrackButton = styled(Link)`
   color: ${(props) => props.theme.color.textDark};
-  background: ${(props) => props.theme.color.highlight1};
+  background: ${(props) => props.theme.color.highlight2};
   display: block;
   width: 7.3rem;
+  text-align: center;
   margin-left: auto;
   margin-bottom: 4rem;
   font-weight: 600;
@@ -43,14 +49,22 @@ const NewTrackButton = styled(Link)`
   }
 
   @media screen and (${(props) => props.theme.responsive.md}) {
-    margin: 0 4rem 4rem auto;
+    margin: 0 auto 2rem;
+  }
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    font-size: 1.2rem;
+    width: 6.4rem;
   }
 `;
 
 const Table = styled.table`
   border-collapse: collapse;
-  width: 90%;
+  max-width: 90%;
   margin: 0 auto 8rem;
+  @media screen and (${(props) => props.theme.responsive.md}) {
+    width: 95%;
+    margin: 0 auto 4rem;
+  }
 `;
 
 const ColNum = styled.col`
@@ -61,15 +75,24 @@ const ColName = styled.col`
 `;
 const ColAlbum = styled.col`
   width: 16%;
+  @media screen and (${(props) => props.theme.responsive.md}) {
+    display: none;
+  }
 `;
 const ColArtist = styled.col`
   width: 16%;
 `;
 const ColGenre = styled.col`
   width: 16%;
+  @media screen and (${(props) => props.theme.responsive.md}) {
+    display: none;
+  }
 `;
 const ColYear = styled.col`
   width: 15%;
+  @media screen and (${(props) => props.theme.responsive.md}) {
+    display: none;
+  }
 `;
 const ColEdit = styled.col`
   width: 6%;
@@ -90,6 +113,15 @@ const TableHeading = styled.th`
   font-size: 1.8rem;
   padding: 1rem;
   color: ${(props) => props.theme.color.highlight1};
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    font-size: 1.4rem;
+  }
+`;
+
+const TableHeadingLgScreen = styled(TableHeading)`
+  @media screen and (${(props) => props.theme.responsive.md}) {
+    display: none;
+  }
 `;
 const TableIconHeading = styled.th`
   text-align: left;
@@ -100,11 +132,22 @@ const TableIconHeading = styled.th`
 
 const TableData = styled.td`
   padding: 1rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    font-size: 1.2rem;
+  }
 `;
+
+const TableDataLgScreen = styled(TableData)`
+  @media screen and (${(props) => props.theme.responsive.md}) {
+    display: none;
+  }
+`;
+
 const TableIcon = styled.td`
   padding: 1rem;
   align-items: center;
 `;
+
 const Icon = styled.img`
   height: 5rem;
   width: 3rem;
@@ -112,6 +155,10 @@ const Icon = styled.img`
   transition: filter 0.2s;
   &:hover {
     filter: brightness(0.6);
+  }
+  @media screen and (${(props) => props.theme.responsive.md}) {
+    height: 3.3rem;
+    width: 2rem;
   }
 `;
 
@@ -168,16 +215,16 @@ const Admin = () => {
   return (
     <>
       <title>JG Admin | Tracks</title>
-      {popupOpen && (
-        <DeleteTrackPopup
-          togglePopup={togglePopup}
-          deleteTrack={deleteTrack}
-          name={deleteTrackInfo.track_name}
-          artist={deleteTrackInfo.track_artist}
-        />
-      )}
-      <AdminHomeDiv>
-        <TrackHeading>Tracks</TrackHeading>
+      <AdminTracksDiv>
+        {popupOpen && (
+          <DeleteTrackPopup
+            togglePopup={togglePopup}
+            deleteTrack={deleteTrack}
+            name={deleteTrackInfo.track_name}
+            artist={deleteTrackInfo.track_artist}
+          />
+        )}
+        <TracksHeading>Tracks</TracksHeading>
         <NewTrackButton to="/admin/tracks/new">Add Track</NewTrackButton>
         <Table>
           <colgroup>
@@ -194,10 +241,10 @@ const Admin = () => {
             <TableRow>
               <TableHeading>#</TableHeading>
               <TableHeading>Track Name</TableHeading>
-              <TableHeading>Album</TableHeading>
+              <TableHeadingLgScreen>Album</TableHeadingLgScreen>
               <TableHeading>Artist</TableHeading>
-              <TableHeading>Genre</TableHeading>
-              <TableHeading>Year</TableHeading>
+              <TableHeadingLgScreen>Genre</TableHeadingLgScreen>
+              <TableHeadingLgScreen>Year</TableHeadingLgScreen>
               <TableIconHeading>Edit</TableIconHeading>
               <TableIconHeading>Delete</TableIconHeading>
             </TableRow>
@@ -208,10 +255,10 @@ const Admin = () => {
                 <TableRow key={t.track_id}>
                   <TableData>{i + 1}</TableData>
                   <TableData>{t.track_name}</TableData>
-                  <TableData>{t.track_album}</TableData>
+                  <TableDataLgScreen>{t.track_album}</TableDataLgScreen>
                   <TableData>{t.track_artist}</TableData>
-                  <TableData>{t.track_genre}</TableData>
-                  <TableData>{t.track_year}</TableData>
+                  <TableDataLgScreen>{t.track_genre}</TableDataLgScreen>
+                  <TableDataLgScreen>{t.track_year}</TableDataLgScreen>
                   <TableIcon>
                     <Link to={`/admin/tracks/update/${t.track_id}`}>
                       <Icon src={edit} alt="Edit Button" />
@@ -229,7 +276,7 @@ const Admin = () => {
               ))}
           </tbody>
         </Table>
-      </AdminHomeDiv>
+      </AdminTracksDiv>
     </>
   );
 };
