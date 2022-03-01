@@ -15,7 +15,7 @@ app.use(cors());
 // const apiRoutes = require("./api");
 // app.use("/api", apiRoutes);
 
-// GET ALL TRACKS --UNTESTED
+// GET ALL TRACKS --TESTED
 app.get("/api/tracks", async (req, res) => {
   try {
     const allTracks = await pool.query("SELECT * FROM tracks");
@@ -26,7 +26,7 @@ app.get("/api/tracks", async (req, res) => {
   }
 });
 
-// GET SINGLE TRACK -- UNTESTED
+// GET SINGLE TRACK -- TESTED
 app.get("/api/tracks/single", async (req, res) => {
   try {
     const { id } = req.query;
@@ -130,6 +130,43 @@ app.delete("/api/tracks/", async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.send("Error adding new track", err);
+  }
+});
+
+// GENRES API ****************************************
+
+// GET GENRES
+app.get("/api/genres", async (req, res) => {
+  try {
+    const allGenres = await pool.query("SELECT * FROM genres");
+    res.json(allGenres.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.send("Error getting genres");
+  }
+});
+
+// ADD NEW GENRE
+app.post("/api/genres", async (req, res) => {
+  try {
+    const { newGenre } = req.body;
+    await pool.query("INSERT INTO genres (genre_name) VALUES ($1)", [
+      newGenre,
+    ]);
+  } catch (err) {
+    console.error(err.message);
+    res.send("Error adding new genre", err);
+  }
+});
+
+// DELETE GENRES
+app.delete("/api/genres", async (req, res) => {
+  try {
+    const { name } = req.body;
+    await pool.query("DELETE FROM genres WHERE genre_name = $1", [name]);
+    res.json("Genre Deleted");
+  } catch (err) {
+    res.send("Error getting genres", err);
   }
 });
 // TEST

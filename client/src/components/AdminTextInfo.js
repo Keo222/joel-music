@@ -43,7 +43,7 @@ const AdminTextInfo = () => {
     <TrackInfoDiv>
       <TrackInfoHeader>Text</TrackInfoHeader>
       <TrackNum>Total word count: 0</TrackNum>
-      <StyledLink to="/admin/tracks">Edit Text</StyledLink>
+      <StyledLink to="/admin/text">Edit Text</StyledLink>
     </TrackInfoDiv>
   );
 };

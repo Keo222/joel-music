@@ -15,7 +15,7 @@ const HomeDiv = styled.div`
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 1fr 4fr 1fr 1fr;
-  min-height: calc(100% - 15rem);
+  min-height: calc(100vh - 15rem);
   @media screen and (${(props) => props.theme.responsive.xs}) {
     min-height: calc(100vh - 10rem);
     grid-template-rows: 1.8fr 2fr 1fr 1fr;

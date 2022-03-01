@@ -43,7 +43,7 @@ const AdminGenreInfo = () => {
     <TrackInfoDiv>
       <TrackInfoHeader>Genres</TrackInfoHeader>
       <TrackNum>Number of genres: 0</TrackNum>
-      <StyledLink to="/admin/tracks">Edit Genres</StyledLink>
+      <StyledLink to="/admin/genres">Edit Genres</StyledLink>
     </TrackInfoDiv>
   );
 };

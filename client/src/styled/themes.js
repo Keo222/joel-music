@@ -8,6 +8,15 @@ export const theme = {
     highlight2: "#9381FF",
     highlight3: "#FFAD05",
 
+    // Icon Colors
+    deleteRed: "#c70000",
+
+    // Misc
+    grayedOut: "#c2c2c2",
+
+    // Error Colors
+    errorRed: "#ff3333",
+
     // Text Colors
     textDark: "#2A2A2B",
     textLight: "#eee",
