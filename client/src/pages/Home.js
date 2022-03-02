@@ -10,6 +10,9 @@ import soundcloudLogo from "../icons/soundcloud.svg";
 // Images
 import studioImg from "../images/studio1.jpg";
 
+// Imported Styled Components
+import { PageHeading } from "../styled/typography";
+
 // Styled Elements
 const HomeDiv = styled.div`
   display: grid;
@@ -38,19 +41,10 @@ const SlideInItem = styled(animated.h3)`
   font-size: 2.4rem;
 `;
 
-const HomeHeader = styled.h1`
-  color: ${(props) => props.theme.color.highlight1};
-  font-size: 4.5rem;
-  font-weight: 600;
-  width: 80vw;
+const HomeHeader = styled(PageHeading)`
   margin: 0 auto;
-  letter-spacing: 1rem;
   display: flex;
   align-items: flex-end;
-  justify-content: center;
-  text-align: center;
-  align-self: bottom;
-  /* text-shadow: 2px 5px 7px rgba(255, 255, 255, 0.7); */
   @media screen and (${(props) => props.theme.responsive.sm}) {
     font-size: 4rem;
   }

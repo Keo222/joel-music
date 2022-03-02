@@ -13,19 +13,12 @@ import tidalColor from "../icons/tidal-color.png";
 import appleWhite from "../icons/apple-white.svg";
 import appleColor from "../icons/apple-color.svg";
 
-// Styled Elements
+// Imported Styled Components
+import { PageHeading } from "../styled/typography";
+
+// Styled Components
 const PageDiv = styled.div`
   margin-bottom: 10rem;
-`;
-
-const ListenHeader = styled.h1`
-  text-align: center;
-  font-size: 6rem;
-  font-weight: 200;
-  color: ${(props) => props.theme.color.highlight2};
-  /* color: ${(props) => props.theme.color.textLight}; */
-  letter-spacing: 1.6rem;
-  margin: 2rem 0 5rem;
 `;
 
 const SelectPlayerDiv = styled.div`
@@ -91,7 +84,7 @@ const Listen = () => {
   return (
     <PageDiv>
       <title>Joel Gardella | Listen</title>
-      <ListenHeader>Listen</ListenHeader>
+      <PageHeading>Listen</PageHeading>
       <SelectPlayerDiv>
         <SelectPlayerLabel>Select Streaming Service:</SelectPlayerLabel>
         <SelectPlayerLogos>

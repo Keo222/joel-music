@@ -13,15 +13,6 @@ const GenrePageDiv = styled.div`
   color: ${(props) => props.theme.color.textLight};
 `;
 
-// const PageHeader = styled.h1`
-//   text-align: center;
-//   font-size: 4.5rem;
-//   font-weight: 200;
-//   color: ${(props) => props.theme.color.highlight2};
-//   letter-spacing: 1.6rem;
-//   margin: 3vh 0;
-// `;
-
 const GenreDisplayToggle = styled.div`
   width: 280px;
   height: 5rem;

@@ -8,8 +8,10 @@ import aboutFiller from "../images/about_filler.jpg";
 import instagramLogo from "../icons/instagram.svg";
 import soundcloudLogo from "../icons/soundcloud.svg";
 
-// Styled Elements
+// Imported Styled Components
+import { PageHeading } from "../styled/typography";
 
+// Styled Components
 const AboutImg = styled.img`
   position: fixed;
   top: 0;
@@ -100,16 +102,6 @@ const AboutInfoContainer = styled.div`
     width: 100vw;
   }
 `;
-const AboutHeader = styled.h1`
-  text-align: center;
-  font-size: 5rem;
-  color: ${(props) => props.theme.color.highlight2};
-  font-weight: 200;
-  margin-bottom: 3rem;
-  @media screen and (${(props) => props.theme.responsive.sm}) {
-    font-size: 4rem;
-  }
-`;
 
 const AboutInfoDiv = styled.div`
   width: 70%;
@@ -171,7 +163,7 @@ const About = () => {
       <AboutImg src={aboutFiller} />
       <AboutInfoContainer>
         <AboutInfoDiv>
-          <AboutHeader>About</AboutHeader>
+          <PageHeading>About</PageHeading>
           <AboutInfoParagraph>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Similique et dolores eaque magni facilis sunt doloribus,
