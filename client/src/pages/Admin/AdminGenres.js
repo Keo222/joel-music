@@ -4,18 +4,23 @@ import styled from "styled-components";
 // Icons
 import garbage from "../../icons/garbage-red.svg";
 
+// Imported Styled Elements
+import { PageHeading } from "../../styled/typography";
+
+// Styled Elements
+
 const GenrePageDiv = styled.div`
   color: ${(props) => props.theme.color.textLight};
 `;
 
-const PageHeader = styled.h1`
-  text-align: center;
-  font-size: 4.5rem;
-  font-weight: 200;
-  color: ${(props) => props.theme.color.highlight2};
-  letter-spacing: 1.6rem;
-  margin: 3vh 0;
-`;
+// const PageHeader = styled.h1`
+//   text-align: center;
+//   font-size: 4.5rem;
+//   font-weight: 200;
+//   color: ${(props) => props.theme.color.highlight2};
+//   letter-spacing: 1.6rem;
+//   margin: 3vh 0;
+// `;
 
 const GenreDisplayToggle = styled.div`
   width: 280px;
@@ -282,7 +287,7 @@ const AdminGenres = () => {
   return (
     <GenrePageDiv>
       <title>JG Admin | Genres</title>
-      <PageHeader>Genres</PageHeader>
+      <PageHeading>Genres</PageHeading>
       <GenreDisplayToggle>
         <ViewGenresToggle
           displayList={displayList}

@@ -2,43 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-// Styled Elements
-const StyledForm = styled.form`
-  color: ${(props) => props.theme.color.textLight};
-  font-size: 1.6rem;
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  margin: 0 auto;
-`;
+// Imported Styled Components
+import { PageHeading } from "../../styled/typography";
+import {
+  StyledForm,
+  InputGroup,
+  InputLabel,
+  TextInput,
+  SelectDiv,
+  RadioDiv,
+  RadioGroup,
+  SubmitButton,
+} from "../../styled/forms";
 
-const Header = styled.h1`
-  color: ${(props) => props.theme.color.textLight};
-  text-align: center;
-`;
-
-const RadioDiv = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const SubmitButton = styled.button`
-  color: ${(props) => props.theme.color.textDark};
-  background: ${(props) => props.theme.color.highlight1};
-  border: none;
-  width: 20rem;
-  font-weight: 600;
-  font-size: 1.6rem;
-  margin: 3rem auto;
-  text-decoration: none;
-  padding: 1.5rem 2rem;
-  border-radius: 5px;
-  transition: all 0.3s;
-  cursor: pointer;
-  &:hover,
-  &:active {
-    filter: brightness(0.7);
-  }
+// Styled Components
+const UpdateHeading = styled(PageHeading)`
+  color: ${(props) => props.theme.color.highlight3};
 `;
 
 const AdminUpdateTrack = () => {
@@ -52,6 +31,20 @@ const AdminUpdateTrack = () => {
   const [spotify, setSpotify] = useState("");
   const [tidal, setTidal] = useState("");
   const [apple, setApple] = useState("");
+  const [genreList, setGenreList] = useState([]);
+
+  const getGenres = async () => {
+    const response = await fetch("/api/genres/");
+    const allGenres = await response.json();
+    const sortedGenres = allGenres.sort((a, b) =>
+      a.genre_name.toLowerCase() > b.genre_name.toLowerCase() ? 1 : -1
+    );
+    setGenreList(sortedGenres);
+  };
+
+  useEffect(() => {
+    getGenres();
+  }, []);
 
   const { id } = useParams();
 
@@ -109,113 +102,140 @@ const AdminUpdateTrack = () => {
   return (
     <div>
       <title>JG Admin | Update Track</title>
-      <Header>Update Track {id}</Header>
+      <UpdateHeading>Update Track</UpdateHeading>
+
       <StyledForm onSubmit={(e) => updateTrack(e)}>
-        <label htmlFor="name">Track Name:</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label htmlFor="album">Album:</label>
-        <input
-          type="text"
-          name="album"
-          id="album"
-          value={album}
-          onChange={(e) => setAlbum(e.target.value)}
-        />
+        <InputGroup>
+          <InputLabel htmlFor="name">Track Name:</InputLabel>
+          <TextInput
+            type="text"
+            name="name"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </InputGroup>
 
-        <label htmlFor="artist">Artist:</label>
-        <input
-          type="text"
-          name="artist"
-          id="artist"
-          value={artist}
-          onChange={(e) => setArtist(e.target.value)}
-        />
+        <InputGroup>
+          <InputLabel htmlFor="album">Album:</InputLabel>
+          <TextInput
+            type="text"
+            name="album"
+            id="album"
+            value={album}
+            onChange={(e) => setAlbum(e.target.value)}
+          />
+        </InputGroup>
 
-        <label htmlFor="work">Type of Work:</label>
-        <input
-          type="text"
-          name="work"
-          id="work"
-          value={work}
-          onChange={(e) => setWork(e.target.value)}
-        />
+        <InputGroup>
+          <InputLabel htmlFor="artist">Artist:</InputLabel>
+          <TextInput
+            type="text"
+            name="artist"
+            id="artist"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+          />
+        </InputGroup>
 
-        <label htmlFor="year">Year:</label>
-        <input
-          type="number"
-          min="1996"
-          max="2099"
-          step="1"
-          name="year"
-          id="year"
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-        />
-
-        <label htmlFor="genre">Genre:</label>
-        <input
-          type="text"
-          name="genre"
-          id="genre"
-          value={genre}
-          onChange={(e) => setGenre(e.target.value)}
-        />
+        <InputGroup>
+          <InputLabel htmlFor="year">Year:</InputLabel>
+          <TextInput
+            type="number"
+            min="1996"
+            max="2099"
+            step="1"
+            name="year"
+            id="year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+          />
+        </InputGroup>
+        <SelectDiv>
+          <InputGroup>
+            <InputLabel htmlFor="genre">Genre:</InputLabel>
+            <select
+              name="genre"
+              id="genre"
+              onChange={(e) => setGenre(e.target.value)}
+            >
+              {genreList.map((g) => (
+                <option value={g.genre_name}>{g.genre_name}</option>
+              ))}
+            </select>
+          </InputGroup>
+          <InputGroup>
+            <InputLabel htmlFor="work">Type of Work:</InputLabel>
+            <select
+              name="work"
+              id="work"
+              onChange={(e) => setWork(e.target.value)}
+            >
+              <option value="Mixed">Mixed</option>
+              <option value="Mastered">Mastered</option>
+              <option value="Mixed & Mastered">Mixed & Mastered</option>
+            </select>
+          </InputGroup>
+        </SelectDiv>
 
         <RadioDiv>
           <p>Featured:</p>
-          <input
-            type="radio"
-            id="featured"
-            name="featured"
-            value="yes"
-            checked={featured === true}
-            onChange={() => setFeatured(true)}
-          />
-          <label htmlFor="featured">Yes</label>
-
-          <input
-            type="radio"
-            id="not-featured"
-            name="featured"
-            value="no"
-            checked={featured === false}
-            onChange={() => setFeatured(false)}
-          />
-          <label htmlFor="not-featured">No</label>
+          <RadioGroup>
+            <input
+              type="radio"
+              id="featured"
+              name="featured"
+              value="yes"
+              checked={featured === true}
+              onChange={() => setFeatured(true)}
+            />
+            <label htmlFor="featured">Yes</label>
+          </RadioGroup>
+          <RadioGroup>
+            <input
+              type="radio"
+              id="not-featured"
+              name="featured"
+              value="no"
+              checked={featured === false}
+              onChange={() => setFeatured(false)}
+            />
+            <label htmlFor="not-featured">No</label>
+          </RadioGroup>
         </RadioDiv>
 
-        <label htmlFor="spotify">Spotify Source:</label>
-        <input
-          type="text"
-          name="spotify"
-          id="spotify"
-          value={spotify}
-          onChange={(e) => setSpotify(e.target.value)}
-        />
+        <InputGroup>
+          <InputLabel htmlFor="spotify">Spotify Source:</InputLabel>
+          <TextInput
+            type="text"
+            name="spotify"
+            id="spotify"
+            value={spotify}
+            onChange={(e) => setSpotify(e.target.value)}
+          />
+        </InputGroup>
 
-        <label htmlFor="tidal">Tidal Source:</label>
-        <input
-          type="text"
-          name="tidal"
-          id="tidal"
-          value={tidal}
-          onChange={(e) => setTidal(e.target.value)}
-        />
+        <InputGroup>
+          <InputLabel htmlFor="tidal">Tidal Source:</InputLabel>
+          <TextInput
+            type="text"
+            name="tidal"
+            id="tidal"
+            value={tidal}
+            onChange={(e) => setTidal(e.target.value)}
+          />
+        </InputGroup>
 
-        <label htmlFor="apple">Apple Music Source:</label>
-        <input
-          type="text"
-          name="apple"
-          id="apple"
-          value={apple}
-          onChange={(e) => setApple(e.target.value)}
-        />
+        <InputGroup>
+          <InputLabel htmlFor="apple">Apple Music Source:</InputLabel>
+          <TextInput
+            type="text"
+            name="apple"
+            id="apple"
+            value={apple}
+            onChange={(e) => setApple(e.target.value)}
+          />
+        </InputGroup>
 
         <SubmitButton type="submit">Update Track</SubmitButton>
       </StyledForm>

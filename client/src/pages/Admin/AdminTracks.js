@@ -9,6 +9,9 @@ import edit from "../../icons/edit-yellow.svg";
 // Components
 import DeleteTrackPopup from "../../components/DeleteTrackPopup";
 
+// Imported Styled Elements
+import { PageHeading } from "../../styled/typography";
+
 // Styled Elements
 
 const AdminTracksDiv = styled.div`
@@ -20,15 +23,6 @@ const AdminTracksDiv = styled.div`
     width: 100vw;
     overflow-x: hidden;
   }
-`;
-
-const PageHeading = styled.h1`
-  text-align: center;
-  font-size: 4.5rem;
-  font-weight: 200;
-  color: ${(props) => props.theme.color.highlight2};
-  letter-spacing: 1.6rem;
-  margin: 3vh 0;
 `;
 
 const NewTrackButton = styled(Link)`

@@ -6,6 +6,9 @@ import AdminTrackInfo from "../../components/AdminTrackInfo";
 import AdminGenreInfo from "../../components/AdminGenreInfo";
 import AdminTextInfo from "../../components/AdminTextInfo";
 
+// Imported Styled Elements
+import { PageHeading } from "../../styled/typography";
+
 // Styled Elements
 const AdminHomeDiv = styled.div`
   color: ${(props) => props.theme.color.textLight};
@@ -17,16 +20,7 @@ const AdminHomeDiv = styled.div`
   }
 `;
 
-const PageHeader = styled.h1`
-  text-align: center;
-  font-size: 4.5rem;
-  font-weight: 200;
-  color: ${(props) => props.theme.color.highlight2};
-  letter-spacing: 1.6rem;
-  margin: 3vh 0;
-`;
-
-const AdminHomeHeading = styled(PageHeader)`
+const AdminHomeHeading = styled(PageHeading)`
   grid-column: span 2;
 `;
 
