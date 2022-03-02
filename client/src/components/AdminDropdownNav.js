@@ -51,13 +51,25 @@ const AdminDropdownNav = ({ setHamburgerOpen }) => {
   return (
     <Nav>
       <Links>
-        <StyledLink onClick={() => setHamburgerOpen(false)} to="/">
+        <StyledLink onClick={() => setHamburgerOpen(false)} to="/admin">
           Home
         </StyledLink>
-        <StyledLink onClick={() => setHamburgerOpen(false)} to="/">
+        <StyledLink
+          onClick={() => setHamburgerOpen(false)}
+          to="/admin/tracks"
+        >
           Tracks
         </StyledLink>
-        <StyledLink onClick={() => setHamburgerOpen(false)} to="/">
+        <StyledLink
+          onClick={() => setHamburgerOpen(false)}
+          to="/admin/genres"
+        >
+          Genres
+        </StyledLink>
+        <StyledLink
+          onClick={() => setHamburgerOpen(false)}
+          to="/admin/text"
+        >
           Text
         </StyledLink>
         <StyledLink onClick={() => setHamburgerOpen(false)} to="/">

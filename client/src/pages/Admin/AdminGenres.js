@@ -175,6 +175,7 @@ const SvgDiv = styled.div`
 
 const SvgIcon = styled.svg`
   width: 1.5em;
+  height: 1.5em;
 `;
 
 const TableIconHeading = styled.th`
@@ -228,9 +229,13 @@ const AdminGenres = () => {
 
   let sortedGenres = reverseGenres
     ? genres
-        .sort((a, b) => (a.genre_name > b.genre_name ? 1 : -1))
+        .sort((a, b) =>
+          a.genre_name.toLowerCase() > b.genre_name.toLowerCase() ? 1 : -1
+        )
         .reverse()
-    : genres.sort((a, b) => (a.genre_name > b.genre_name ? 1 : -1));
+    : genres.sort((a, b) =>
+        a.genre_name.toLowerCase() > b.genre_name.toLowerCase() ? 1 : -1
+      );
 
   const addGenre = async (e) => {
     let data = {
@@ -303,7 +308,9 @@ const AdminGenres = () => {
             <thead>
               <TableRow>
                 <TableHeading
-                  onClick={() => setReverseGenres(!reverseGenres)}
+                  onClick={() =>
+                    setReverseGenres((currReverse) => !currReverse)
+                  }
                 >
                   <HeadingText>Genre</HeadingText>
                   {reverseGenres ? (

@@ -38,11 +38,11 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const AdminGenreInfo = () => {
+const AdminGenreInfo = ({ numGenres }) => {
   return (
     <TrackInfoDiv>
       <TrackInfoHeader>Genres</TrackInfoHeader>
-      <TrackNum>Number of genres: 0</TrackNum>
+      <TrackNum>Number of genres: {numGenres}</TrackNum>
       <StyledLink to="/admin/genres">Edit Genres</StyledLink>
     </TrackInfoDiv>
   );

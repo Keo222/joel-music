@@ -233,6 +233,7 @@ const Navbar = () => {
             <AdminNavLinks>
               <StyledLink to="/admin/">Home</StyledLink>
               <StyledLink to="/admin/tracks">Tracks</StyledLink>
+              <StyledLink to="/admin/genres">Genres</StyledLink>
               <StyledLink to="/admin/text">Text</StyledLink>
               <AdminLinkButton to="/">Main Site</AdminLinkButton>
             </AdminNavLinks>

@@ -17,8 +17,16 @@ const AdminHomeDiv = styled.div`
   }
 `;
 
-const AdminHomeHeading = styled.h1`
+const PageHeader = styled.h1`
   text-align: center;
+  font-size: 4.5rem;
+  font-weight: 200;
+  color: ${(props) => props.theme.color.highlight2};
+  letter-spacing: 1.6rem;
+  margin: 3vh 0;
+`;
+
+const AdminHomeHeading = styled(PageHeader)`
   grid-column: span 2;
 `;
 
@@ -32,23 +40,36 @@ const EditAdminDiv = styled.div`
 
 const Admin = () => {
   const [numTracks, setNumTracks] = useState(0);
+  const [numGenres, setNumGenres] = useState(0);
 
-  async function getNumTracks() {
+  const getNumTracks = async () => {
     const response = await fetch("/api/tracks");
     const allTracks = await response.json();
     setNumTracks(allTracks.length);
-  }
+  };
 
   useEffect(() => {
     getNumTracks();
   }, []);
+
+  const getNumGenres = async () => {
+    const response = await fetch("/api/genres");
+    const allGenres = await response.json();
+    console.log(allGenres);
+    setNumGenres(allGenres.length);
+  };
+
+  useEffect(() => {
+    getNumGenres();
+  }, []);
+
   return (
     <>
       <title>JG Admin</title>
       <AdminHomeDiv>
         <EditAdminDiv>
           <AdminHomeHeading>Admin Home</AdminHomeHeading>
-          <AdminGenreInfo />
+          <AdminGenreInfo numGenres={numGenres} />
           <AdminTextInfo />
           <AdminTrackInfo numTracks={numTracks} />
         </EditAdminDiv>

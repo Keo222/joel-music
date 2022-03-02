@@ -22,12 +22,13 @@ const AdminTracksDiv = styled.div`
   }
 `;
 
-const TracksHeading = styled.h1`
+const PageHeading = styled.h1`
   text-align: center;
-  margin-bottom: 3rem;
-  @media screen and (${(props) => props.theme.responsive.sm}) {
-    font-size: 2.6rem;
-  }
+  font-size: 4.5rem;
+  font-weight: 200;
+  color: ${(props) => props.theme.color.highlight2};
+  letter-spacing: 1.6rem;
+  margin: 3vh 0;
 `;
 
 const NewTrackButton = styled(Link)`
@@ -220,7 +221,7 @@ const Admin = () => {
             artist={deleteTrackInfo.track_artist}
           />
         )}
-        <TracksHeading>Tracks</TracksHeading>
+        <PageHeading>Tracks</PageHeading>
         <NewTrackButton to="/admin/tracks/new">Add Track</NewTrackButton>
         <Table>
           <colgroup>
