@@ -49,6 +49,7 @@ export const CardHeadingFront = styled.h4`
 
 export const CardHeadingBack = styled(CardHeadingFront)`
   color: ${(props) => props.theme.color.textLight};
+  font-weight: 300;
 `;
 
 const handleColorType = (color) => {
