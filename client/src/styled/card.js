@@ -1,30 +1,9 @@
 import styled from "styled-components";
 
+import { LinkButton } from "./buttons";
+
 // Helper Functions
-const handleColorType = (color) => {
-  switch (color) {
-    case "1":
-      return "#57D2DB";
-    case "2":
-      return "#9381FF";
-    case "3":
-      return "#FFAD05";
-    default:
-      return "#57D2DB";
-  }
-};
-const handleGlowType = (color) => {
-  switch (color) {
-    case "1":
-      return "#57D2DB";
-    case "2":
-      return "#9381FF";
-    case "3":
-      return "#FFAD05";
-    default:
-      return "#57D2DB";
-  }
-};
+import { handleColorType, handleGlowType } from "./styleHelperFuncs";
 
 // Styled Components
 export const Card = styled.div`
@@ -33,7 +12,6 @@ export const Card = styled.div`
   position: relative;
   height: 30rem;
   width: 25rem;
-  margin: 0 auto;
 
   &:hover div:nth-of-type(1) {
     transform: rotateY(-180deg);
@@ -59,7 +37,7 @@ const CardSide = styled.div`
 `;
 
 const SolidCardSide = styled(CardSide)`
-  box-shadow: 0 0 10rem rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 5rem 1rem ${({ color }) => handleGlowType(color)}; ;
 `;
 
 export const ColoredCardFront = styled(CardSide)`
@@ -90,17 +68,63 @@ export const SolidHeadingFront = styled(CardHeading)`
   letter-spacing: unset;
 `;
 
-export const CardHeadingBack = styled(CardHeading)`
-  color: ${(props) => props.theme.color.textLight};
-  font-weight: 300;
-`;
-
+// CARD BACK
 export const CardBack = styled(CardSide)`
   transform: rotateY(180deg);
   background-color: ${(props) => props.theme.color.textDark};
+  display: grid;
+  grid-template-rows: 20% 55% 25%;
+  align-items: center;
 `;
 
 export const SolidCardBack = styled(SolidCardSide)`
   transform: rotateY(180deg);
   background-color: ${(props) => props.theme.color.textDark};
+  display: grid;
+  grid-template-rows: 20% 60% 20%;
+  align-items: center;
+`;
+
+export const CardHeadingBack = styled(CardHeading)`
+  color: ${(props) => props.theme.color.textLight};
+  font-weight: 300;
+  margin: auto 0;
+`;
+
+export const CardBackBody = styled.ul`
+  color: ${(props) => props.theme.color.textLight};
+  width: 65%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0.5rem 0 0.5rem 2.8rem;
+  border: 2px solid ${({ color }) => handleColorType(color)};
+  border-radius: 5px;
+  overflow-y: hidden;
+  text-align: left;
+  font-size: 1.4rem;
+  list-style-type: circle;
+  list-style-position: outside;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${(props) => props.theme.color.background};
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${({ color }) => handleColorType(color)};
+    border-radius: 10px;
+  }
+
+  &:hover {
+    overflow-y: scroll;
+  }
+`;
+
+export const CardLinkButton = styled(LinkButton)`
+  margin: 0 auto;
+  width: fit-content;
+  block-size: fit-content;
+  padding: 0.8rem 1.5rem;
 `;

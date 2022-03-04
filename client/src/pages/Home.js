@@ -12,6 +12,7 @@ import studioImg from "../images/studio1.jpg";
 
 // Imported Styled Components
 import { PageHeading } from "../styled/typography";
+import { LinkButton } from "../styled/buttons";
 
 // Styled Elements
 const HomeDiv = styled.div`
@@ -93,25 +94,6 @@ const ButtonDiv = styled.div`
   align-items: center;
 `;
 
-const ButtonLink = styled(Link)`
-  background: ${(props) => props.theme.color.highlight2};
-  color: ${(props) => props.theme.color.textDark};
-  font-weight: 500;
-  font-size: 1.6rem;
-  letter-spacing: 1px;
-  text-decoration: none;
-  padding: 1.2rem 2.1rem;
-  border-radius: 5px;
-  transition: all 0.3s;
-  &:hover,
-  &:active {
-    filter: brightness(0.7);
-  }
-  @media screen and (${(props) => props.theme.responsive.xs}) {
-    font-size: 1.4rem;
-    padding: 1rem 1.5rem;
-  }
-`;
 const LogosDiv = styled.div`
   width: 100%;
   display: flex;
@@ -179,8 +161,12 @@ const Home = () => {
           <DescriptorLink to="/">Mixing & Mastering</DescriptorLink>
         </DescriptorDiv>
         <ButtonDiv>
-          <ButtonLink to="/listen">Listen</ButtonLink>
-          <ButtonLink to="/pricing">Services</ButtonLink>
+          <LinkButton to="/listen" color={"2"}>
+            Listen
+          </LinkButton>
+          <LinkButton to="/pricing" color={"2"}>
+            Services
+          </LinkButton>
         </ButtonDiv>
         <LogosDiv>
           <SocialsDiv>
