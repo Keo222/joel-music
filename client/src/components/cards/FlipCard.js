@@ -3,18 +3,18 @@ import React from "react";
 // Imported Styled Components
 import {
   Card,
-  CardFront,
-  CardHeadingFront,
+  ColoredCardFront,
+  ColoredHeadingFront,
   CardBack,
   CardHeadingBack,
-} from "../styled/card";
+} from "../../styled/card";
 
 const FlipCard = ({ color }) => {
   return (
     <Card>
-      <CardFront color={color}>
-        <CardHeadingFront>Card Front</CardHeadingFront>
-      </CardFront>
+      <ColoredCardFront color={color}>
+        <ColoredHeadingFront>Card Front</ColoredHeadingFront>
+      </ColoredCardFront>
       <CardBack>
         <CardHeadingBack>Card Back</CardHeadingBack>
       </CardBack>

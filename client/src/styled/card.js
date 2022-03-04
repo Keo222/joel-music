@@ -1,10 +1,37 @@
 import styled from "styled-components";
 
+// Helper Functions
+const handleColorType = (color) => {
+  switch (color) {
+    case "1":
+      return "#57D2DB";
+    case "2":
+      return "#9381FF";
+    case "3":
+      return "#FFAD05";
+    default:
+      return "#57D2DB";
+  }
+};
+const handleGlowType = (color) => {
+  switch (color) {
+    case "1":
+      return "#57D2DB";
+    case "2":
+      return "#9381FF";
+    case "3":
+      return "#FFAD05";
+    default:
+      return "#57D2DB";
+  }
+};
+
+// Styled Components
 export const Card = styled.div`
   perspective: 150rem;
   -moz-perspective: 150rem;
   position: relative;
-  height: 40rem;
+  height: 30rem;
   width: 25rem;
   margin: 0 auto;
 
@@ -19,7 +46,7 @@ export const Card = styled.div`
 const CardSide = styled.div`
   font-size: 2rem;
   text-align: center;
-  height: 40rem;
+  height: 30rem;
   transition: all 0.8s ease;
   position: absolute;
   top: 0;
@@ -31,7 +58,11 @@ const CardSide = styled.div`
   overflow: hidden;
 `;
 
-export const CardFront = styled(CardSide)`
+const SolidCardSide = styled(CardSide)`
+  box-shadow: 0 0 10rem rgba(255, 255, 255, 0.4);
+`;
+
+export const ColoredCardFront = styled(CardSide)`
   background-image: linear-gradient(
     to bottom,
     #eee,
@@ -40,32 +71,36 @@ export const CardFront = styled(CardSide)`
   );
 `;
 
-export const CardHeadingFront = styled.h4`
-  color: ${(props) => props.theme.color.textDark};
+export const SolidCardFront = styled(SolidCardSide)`
+  background: ${(props) => props.theme.color.textDark};
+`;
+
+const CardHeading = styled.h4`
   text-align: center;
   font-weight: 500;
   letter-spacing: 0.8rem;
 `;
 
-export const CardHeadingBack = styled(CardHeadingFront)`
+export const ColoredHeadingFront = styled(CardHeading)`
+  color: ${(props) => props.theme.color.textDark};
+`;
+
+export const SolidHeadingFront = styled(CardHeading)`
+  color: ${({ color }) => handleColorType(color)};
+  letter-spacing: unset;
+`;
+
+export const CardHeadingBack = styled(CardHeading)`
   color: ${(props) => props.theme.color.textLight};
   font-weight: 300;
 `;
 
-const handleColorType = (color) => {
-  switch (color) {
-    case "1":
-      return "#57D2DB";
-    case "2":
-      return "#9381FF";
-    case "3":
-      return "FFAD05";
-    default:
-      return "#57D2DB";
-  }
-};
-
 export const CardBack = styled(CardSide)`
+  transform: rotateY(180deg);
+  background-color: ${(props) => props.theme.color.textDark};
+`;
+
+export const SolidCardBack = styled(SolidCardSide)`
   transform: rotateY(180deg);
   background-color: ${(props) => props.theme.color.textDark};
 `;
