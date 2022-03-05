@@ -81,7 +81,7 @@ export const SolidCardBack = styled(SolidCardSide)`
   transform: rotateY(180deg);
   background-color: ${(props) => props.theme.color.textDark};
   display: grid;
-  grid-template-rows: 20% 60% 20%;
+  grid-template-rows: 20% 55% 25%;
   align-items: center;
 `;
 
