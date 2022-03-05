@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // Imported Stylec Components
@@ -72,7 +72,38 @@ const EstimatedCost = styled.p`
 `;
 
 const Hire = () => {
-  const [tracks, setTracks] = useState(1);
+  const [numTracks, setNumTracks] = useState(1);
+  const [work, setWork] = useState("Mix");
+
+  const handleWorkType = (work) => {
+    switch (work) {
+      case "Mix":
+        return "Mix";
+      case "Master":
+        return "Master";
+      case "MixMaster":
+        return "Mix/Master";
+      default:
+        return "Mix";
+    }
+  };
+
+  useEffect(() => {
+    const queries = window.location.search;
+    const params = new URLSearchParams(queries);
+
+    const tracksParam = params.get("tracks");
+    const workParam = params.get("work");
+
+    if (tracksParam) {
+      setNumTracks(parseInt(tracksParam));
+    }
+    if (workParam) {
+      console.log(handleWorkType(workParam));
+      setWork(handleWorkType(workParam));
+    }
+  }, []);
+
   return (
     <div>
       <title>Joel Gardella | Hire</title>
@@ -90,6 +121,8 @@ const Hire = () => {
           rowStart={1}
           rowEnd={2}
           colStart={4}
+          value={work}
+          onChange={(e) => setWork(e.target.value)}
         >
           <option value="Mix">Mix</option>
           <option value="Master">Master</option>
@@ -105,7 +138,8 @@ const Hire = () => {
           rowStart={2}
           rowEnd={3}
           colStart={4}
-          onChange={(e) => setTracks(e.target.value)}
+          value={numTracks}
+          onChange={(e) => setNumTracks(e.target.value)}
         >
           <option value={1}>1</option>
           <option value={2}>2</option>
@@ -135,7 +169,7 @@ const Hire = () => {
         <Label htmlFor="message">Message:</Label>
         <StyledTextArea colStart={2} colEnd={-1} />
         <EstimatedCost>
-          <BoldSpan>Estimate:</BoldSpan> ${tracks * 10000}.00
+          <BoldSpan>Estimate:</BoldSpan> ${numTracks * 10000}.00
         </EstimatedCost>
         <GridSubmitButton>Submit</GridSubmitButton>
       </GridForm>

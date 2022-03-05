@@ -10,7 +10,8 @@ import {
   CardBackBody,
   CardLinkButton,
 } from "../../styled/card";
-const SolidFlipCard = ({ color, numTracks }) => {
+const SolidFlipCard = ({ color, numTracks, work }) => {
+  const trackOrTracks = numTracks === "1" ? "Track" : "Tracks";
   return (
     <Card>
       <SolidCardFront color={color}>
@@ -19,7 +20,9 @@ const SolidFlipCard = ({ color, numTracks }) => {
         </SolidHeadingFront>
       </SolidCardFront>
       <SolidCardBack color={color}>
-        <CardHeadingBack>Card Back</CardHeadingBack>
+        <CardHeadingBack>
+          {numTracks} {trackOrTracks}
+        </CardHeadingBack>
         <CardBackBody color={color}>
           <li>One</li>
           <li>Two</li>
@@ -37,7 +40,10 @@ const SolidFlipCard = ({ color, numTracks }) => {
           <li>Fourteen</li>
           <li>Fifteen</li>
         </CardBackBody>
-        <CardLinkButton to="/hire" color={color}>
+        <CardLinkButton
+          to={`/hire?tracks=${numTracks}&work=${work}`}
+          color={color}
+        >
           Inquire
         </CardLinkButton>
       </SolidCardBack>

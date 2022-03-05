@@ -6,14 +6,18 @@ import FlipCard from "../components/cards/FlipCard";
 import SolidFlipCard from "../components/cards/SolidFlipCard";
 
 // Imported Styled Components
+import { handleColorType } from "../styled/styleHelperFuncs";
 import { PageHeading } from "../styled/typography";
 import { LinkButton } from "../styled/buttons";
 
 // Styled Components
 const SectionTitle = styled.h3`
   color: ${(props) => props.theme.color.textLight};
-  font-size: 2rem;
-  font-weight: 400;
+  font-size: 2.4rem;
+  font-weight: 200;
+  letter-spacing: 0.5ch;
+  margin-bottom: 1.5rem;
+  text-decoration: underline 1px ${({ color }) => handleColorType(color)};
 `;
 
 const AllCardsDiv = styled.div`
@@ -25,7 +29,7 @@ const FlipCardDiv = styled.div`
   display: flex;
   justify-content: space-between;
   height: 50rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 `;
 const MiddleDiv = styled.div``;
 
@@ -52,34 +56,38 @@ const Pricing = () => {
       <PageHeading>Pricing</PageHeading>
 
       <AllCardsDiv>
-        <SectionTitle>Mixing</SectionTitle>
+        <SectionTitle color={"1"}>Mixing</SectionTitle>
         <FlipCardDiv>
-          <FlipCard color={"3"} numTracks={"1"} />
+          <FlipCard color={"3"} numTracks={"1"} work={"Mix"} />
           <MiddleDiv>
             <BestDealText>Best Deal</BestDealText>
-            <SolidFlipCard color={"1"} numTracks={"12"} />
+            <SolidFlipCard color={"1"} numTracks={"12"} work={"Mix"} />
           </MiddleDiv>
-          <FlipCard color={"3"} numTracks={"5"} />
+          <FlipCard color={"3"} numTracks={"5"} work={"Mix"} />
         </FlipCardDiv>
 
-        <SectionTitle>Mastering</SectionTitle>
+        <SectionTitle color={"2"}>Mastering</SectionTitle>
         <FlipCardDiv>
-          <FlipCard color={"1"} numTracks={"1"} />
+          <FlipCard color={"1"} numTracks={"1"} work={"Master"} />
           <MiddleDiv>
             <BestDealText>Best Deal</BestDealText>
-            <SolidFlipCard color={"2"} numTracks={"12"} />
+            <SolidFlipCard color={"2"} numTracks={"12"} work={"Master"} />
           </MiddleDiv>
-          <FlipCard color={"1"} numTracks={"5"} />
+          <FlipCard color={"1"} numTracks={"5"} work={"Master"} />
         </FlipCardDiv>
 
-        <SectionTitle>Mixing & Mastering</SectionTitle>
+        <SectionTitle color={"3"}>Mixing & Mastering</SectionTitle>
         <FlipCardDiv>
-          <FlipCard color={"2"} numTracks={"1"} />
+          <FlipCard color={"2"} numTracks={"1"} work={"MixMaster"} />
           <MiddleDiv>
             <BestDealText>Best Deal</BestDealText>
-            <SolidFlipCard color={"3"} numTracks={"12"} />
+            <SolidFlipCard
+              color={"3"}
+              numTracks={"12"}
+              work={"MixMaster"}
+            />
           </MiddleDiv>
-          <FlipCard color={"2"} numTracks={"5"} />
+          <FlipCard color={"2"} numTracks={"5"} work={"MixMaster"} />
         </FlipCardDiv>
       </AllCardsDiv>
       <CenteringDiv>

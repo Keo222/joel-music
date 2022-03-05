@@ -17,7 +17,7 @@ export const handleGlowType = (color) => {
     case "2":
       return "rgba(147, 129, 255, 0.8)";
     case "3":
-      return "rgba(255, 173, 5, 0.5)";
+      return "rgba(255, 173, 5, 0.8)";
     default:
       return "#57D2DB";
   }
