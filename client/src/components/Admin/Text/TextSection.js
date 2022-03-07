@@ -48,8 +48,7 @@ const StyledTextArea = styled(animated.textarea)`
   display: block;
   width: 85%;
   max-width: 800px;
-  min-height: 150px;
-  height: fit-content;
+  min-height: 300px;
   margin: 0 auto;
   font-family: inherit;
   border: 4px solid ${({ color }) => handleColorType(color)};
@@ -95,7 +94,7 @@ const TextSection = ({
   const showRef = useSpringRef();
 
   const expand = useSpring({
-    config: config.gentle,
+    config: { ...config.gentle, bounce: 1.2 },
     height: showInner ? `${contentHeight}px` : defaultHeight,
     ref: expandRef,
   });

@@ -15,7 +15,6 @@ export const SectionTitle = styled.h3`
   font-size: 2.4rem;
   font-weight: 200;
   letter-spacing: 0.5ch;
-  margin-bottom: 1.5rem;
   text-decoration: underline 1px ${({ color }) => handleColorType(color)};
 `;
 
