@@ -205,7 +205,7 @@ app.put("/api/text/", async (req, res) => {
     res.send("Text Updated");
   } catch (err) {
     console.error(err.message);
-    res.send("Error updating text", err);
+    res.send("Error updating text -- server", err);
   }
 });
 

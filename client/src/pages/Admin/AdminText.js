@@ -1,36 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+// Imported Components
+import UpdateNotification from "../../components/UpdateNotification";
+import TextSection from "../../components/Admin/Text/TextSection";
+
 // Imported Styled Components
-import { PageHeading, SectionTitle } from "../../styled/typography";
-import { SubmitButton } from "../../styled/forms";
+import { PageHeading } from "../../styled/typography";
 
 const TextUpdateContainer = styled.div`
-  width: 70%;
+  width: clamp(200px, 60%, 900px);
   margin: 0 auto 5rem;
-`;
-
-const UpdateInner = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const StyledTextArea = styled.textarea`
-  display: block;
-  width: 60%;
-  max-width: 800px;
-  min-height: 150px;
-  height: fit-content;
-  margin: 0 auto;
-  font-family: inherit;
-  border-radius: 5px;
-`;
-
-const UpdateButton = styled(SubmitButton)`
-  font-weight: 500;
-  font-size: 1.4rem;
-  width: fit-content;
 `;
 
 const AdminText = () => {
@@ -38,6 +18,46 @@ const AdminText = () => {
   const [contactText, setContactText] = useState("Contact Text");
   const [pricingText, setPricingText] = useState("Pricing Text");
   const [hireText, setHireText] = useState("Hire Text");
+  const [updated, setUpdated] = useState(false);
+
+  const whichText = (textName) => {
+    switch (textName) {
+      case "about":
+        return aboutText;
+      case "contact":
+        return contactText;
+      case "pricing":
+        return pricingText;
+      case "hire":
+        return hireText;
+      default:
+        return null;
+    }
+  };
+
+  const updateText = async (e, textName) => {
+    e.preventDefault();
+    const data = { name: textName, text: whichText(textName) };
+    if (data.text) {
+      try {
+        await fetch("/api/text", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "PUT",
+          body: JSON.stringify(data),
+        });
+        setUpdated(true);
+        setTimeout(() => {
+          setUpdated(false);
+        }, 3000);
+      } catch (err) {
+        console.error("Error updating text", err);
+      }
+    } else {
+      console.error("Text not found");
+    }
+  };
 
   const setTexts = async () => {
     const res = await fetch("/api/text?name=all");
@@ -54,49 +74,50 @@ const AdminText = () => {
   };
   useEffect(() => {
     setTexts();
-    console.log("updated");
   }, []);
   return (
     <>
       <title>JG Admin | Site Text</title>
       <PageHeading>Site Text</PageHeading>
       <TextUpdateContainer>
-        <SectionTitle color={"1"}>About Text</SectionTitle>
-        <UpdateInner>
-          <StyledTextArea
-            value={aboutText}
-            onChange={(e) => setAboutText(e.target.value)}
-          />
-          <UpdateButton color={"1"}>Update About</UpdateButton>
-        </UpdateInner>
-
-        <SectionTitle color={"2"}>Contact Text</SectionTitle>
-        <UpdateInner>
-          <StyledTextArea
-            value={contactText}
-            onChange={(e) => setContactText(e.target.value)}
-          />
-          <UpdateButton color={"2"}>Update Contact</UpdateButton>
-        </UpdateInner>
-
-        <SectionTitle color={"3"}>Pricing Text</SectionTitle>
-        <UpdateInner>
-          <StyledTextArea
-            value={pricingText}
-            onChange={(e) => setPricingText(e.target.value)}
-          />
-          <UpdateButton color={"3"}>Update Pricing</UpdateButton>
-        </UpdateInner>
-
-        <SectionTitle color={"1"}>Hire Text</SectionTitle>
-        <UpdateInner>
-          <StyledTextArea
-            value={hireText}
-            onChange={(e) => setHireText(e.target.value)}
-          />
-          <UpdateButton color={"1"}>Update Hire</UpdateButton>
-        </UpdateInner>
+        {/* ABOUT TEXT */}
+        <TextSection
+          sectionTitle={"About Text"}
+          text={aboutText}
+          setAboutText={setAboutText}
+          updateText={updateText}
+          section={"about"}
+          color={"1"}
+        />
+        {/* CONTACT TEXT */}
+        <TextSection
+          sectionTitle={"Contact Text"}
+          text={contactText}
+          setAboutText={setContactText}
+          updateText={updateText}
+          section={"contact"}
+          color={"2"}
+        />
+        {/* PRICING TEXT */}
+        <TextSection
+          sectionTitle={"Pricing Text"}
+          text={pricingText}
+          setAboutText={setPricingText}
+          updateText={updateText}
+          section={"pricing"}
+          color={"3"}
+        />
+        {/* Hire Text */}
+        <TextSection
+          sectionTitle={"Hire Text"}
+          text={hireText}
+          setAboutText={setHireText}
+          updateText={updateText}
+          section={"hire"}
+          color={"1"}
+        />
       </TextUpdateContainer>
+      {updated && <UpdateNotification />}
     </>
   );
 };
