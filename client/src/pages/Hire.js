@@ -6,6 +6,19 @@ import { PageHeading, BoldSpan } from "../styled/typography";
 import { GridForm, GridSubmitButton } from "../styled/forms";
 
 // Styled Elements
+const InfoTextDiv = styled.div`
+  min-width: 200px;
+  width: 60%;
+  max-width: 700px;
+  border: 2px solid ${(props) => props.theme.color.highlight2};
+  border-radius: 10px;
+  margin: 0 auto;
+`;
+const InfoText = styled.p`
+  color: ${(props) => props.theme.color.textLight};
+  padding: 0 1rem;
+  font-size: 1.4rem;
+`;
 
 const Label = styled.label`
   text-align: right;
@@ -72,8 +85,23 @@ const EstimatedCost = styled.p`
 `;
 
 const Hire = () => {
+  const [text, setText] = useState("");
   const [numTracks, setNumTracks] = useState(1);
   const [work, setWork] = useState("Mix");
+
+  useEffect(() => {
+    const getText = async () => {
+      const fetch_url = "/api/text?name=hire";
+      try {
+        const response = await fetch(fetch_url);
+        const { stored_text } = await response.json();
+        setText(stored_text);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getText();
+  }, []);
 
   const handleWorkType = (work) => {
     switch (work) {
@@ -99,15 +127,17 @@ const Hire = () => {
       setNumTracks(parseInt(tracksParam));
     }
     if (workParam) {
-      console.log(handleWorkType(workParam));
       setWork(handleWorkType(workParam));
     }
   }, []);
 
   return (
-    <div>
+    <>
       <title>Joel Gardella | Hire</title>
       <PageHeading>Hire</PageHeading>
+      <InfoTextDiv>
+        <InfoText>{text}</InfoText>
+      </InfoTextDiv>
       <GridForm>
         <Label htmlFor="name">Name:</Label>
         <Input type="text" name="name" id="name" />
@@ -173,7 +203,7 @@ const Hire = () => {
         </EstimatedCost>
         <GridSubmitButton>Submit</GridSubmitButton>
       </GridForm>
-    </div>
+    </>
   );
 };
 

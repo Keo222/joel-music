@@ -169,6 +169,47 @@ app.delete("/api/genres", async (req, res) => {
     res.send("Error getting genres", err);
   }
 });
+
+// TEXT API **************************************
+
+// GET TEXT
+app.get("/api/text", async (req, res) => {
+  try {
+    const { name } = req.query;
+
+    // Get all text
+    if (name === "all") {
+      const text = await pool.query("SELECT * FROM text");
+      res.json(text.rows);
+    } else {
+      // Get single text
+      const text = await pool.query("SELECT * FROM text WHERE name = $1", [
+        name,
+      ]);
+      res.json(text.rows[0]);
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.send("Error getting text", err);
+  }
+});
+
+// UPDATE TEXT
+app.put("/api/text/", async (req, res) => {
+  try {
+    const { name, text } = req.body;
+    await pool.query("UPDATE text SET stored_text=$2 WHERE name=$1", [
+      name,
+      text,
+    ]);
+    res.send("Text Updated");
+  } catch (err) {
+    console.error(err.message);
+    res.send("Error updating text", err);
+  }
+});
+
+// GENERIC *****************************************
 // TEST
 app.post("/test", (req, res) => {
   try {

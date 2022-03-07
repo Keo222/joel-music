@@ -177,7 +177,6 @@ const Admin = () => {
 
   const deleteTrack = async () => {
     let data = { id: deleteId };
-    console.log(data);
     try {
       const response = await fetch("/api/tracks", {
         headers: {

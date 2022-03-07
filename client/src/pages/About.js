@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 // Images
@@ -156,6 +156,21 @@ const Icon = styled.img`
 `;
 
 const About = () => {
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    const getText = async () => {
+      const fetch_url = "/api/text?name=about";
+      try {
+        const response = await fetch(fetch_url);
+        const { stored_text } = await response.json();
+        setText(stored_text);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getText();
+  }, []);
   return (
     <>
       <title>Joel Gardella | About</title>
@@ -164,6 +179,7 @@ const About = () => {
       <AboutInfoContainer>
         <AboutInfoDiv>
           <PageHeading>About</PageHeading>
+          <AboutInfoParagraph>{text}</AboutInfoParagraph>
           <AboutInfoParagraph>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Similique et dolores eaque magni facilis sunt doloribus,

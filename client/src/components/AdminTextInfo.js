@@ -38,11 +38,11 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const AdminTextInfo = () => {
+const AdminTextInfo = ({ wordCount }) => {
   return (
     <TrackInfoDiv>
       <TrackInfoHeader>Text</TrackInfoHeader>
-      <TrackNum>Total word count: 0</TrackNum>
+      <TrackNum>Total word count: {wordCount}</TrackNum>
       <StyledLink to="/admin/text">Edit Text</StyledLink>
     </TrackInfoDiv>
   );

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { handleColorType } from "./styleHelperFuncs";
 
 export const StyledForm = styled.form`
   color: ${(props) => props.theme.color.textLight};
@@ -58,9 +59,10 @@ export const RadioGroup = styled.div``;
 
 export const SubmitButton = styled.button`
   color: ${(props) => props.theme.color.textDark};
-  background: ${(props) => props.theme.color.highlight1};
+  background: ${({ color }) => handleColorType(color)};
   border: none;
-  width: 20rem;
+  width: fit-content;
+  font-family: inherit;
   font-weight: 600;
   font-size: 1.6rem;
   margin: 3rem auto;

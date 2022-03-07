@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 // Components
@@ -11,6 +11,20 @@ import { PageHeading } from "../styled/typography";
 import { LinkButton } from "../styled/buttons";
 
 // Styled Components
+const InfoTextDiv = styled.div`
+  min-width: 200px;
+  width: 60%;
+  max-width: 700px;
+  border: 2px solid ${(props) => props.theme.color.highlight2};
+  border-radius: 10px;
+  margin: 0 auto;
+`;
+const InfoText = styled.p`
+  color: ${(props) => props.theme.color.textLight};
+  padding: 0 1rem;
+  font-size: 1.4rem;
+`;
+
 const SectionTitle = styled.h3`
   color: ${(props) => props.theme.color.textLight};
   font-size: 2.4rem;
@@ -50,10 +64,28 @@ const CenteringDiv = styled.div`
 `;
 
 const Pricing = () => {
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    const getText = async () => {
+      const fetch_url = "/api/text?name=pricing";
+      try {
+        const response = await fetch(fetch_url);
+        const { stored_text } = await response.json();
+        setText(stored_text);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getText();
+  }, []);
   return (
     <>
       <title>Joel Gardella | Pricing</title>
       <PageHeading>Pricing</PageHeading>
+      <InfoTextDiv>
+        <InfoText>{text}</InfoText>
+      </InfoTextDiv>
 
       <AllCardsDiv>
         <SectionTitle color={"1"}>Mixing</SectionTitle>

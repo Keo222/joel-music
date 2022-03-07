@@ -35,6 +35,7 @@ const EditAdminDiv = styled.div`
 const Admin = () => {
   const [numTracks, setNumTracks] = useState(0);
   const [numGenres, setNumGenres] = useState(0);
+  const [wordCount, setWordCount] = useState(0);
 
   const getNumTracks = async () => {
     const response = await fetch("/api/tracks");
@@ -49,12 +50,48 @@ const Admin = () => {
   const getNumGenres = async () => {
     const response = await fetch("/api/genres");
     const allGenres = await response.json();
-    console.log(allGenres);
     setNumGenres(allGenres.length);
   };
 
   useEffect(() => {
     getNumGenres();
+  }, []);
+
+  useEffect(() => {
+    const getText = async () => {
+      const fetch_url = "/api/text?name=all";
+      try {
+        const response = await fetch(fetch_url);
+        const texts = await response.json();
+        // About Text
+        const aboutTextLength = texts
+          .find((t) => t.name === "about")
+          .stored_text.split(" ").length;
+        // Contact Text
+        const contactTextLength = texts
+          .find((t) => t.name === "contact")
+          .stored_text.split(" ").length;
+        // Pricing Text
+        const pricingTextLength = texts
+          .find((t) => t.name === "pricing")
+          .stored_text.split(" ").length;
+        // Hire Text
+        const hireTextLength = texts
+          .find((t) => t.name === "hire")
+          .stored_text.split(" ").length;
+
+        const totalLength =
+          aboutTextLength +
+          contactTextLength +
+          pricingTextLength +
+          hireTextLength;
+
+        setWordCount(totalLength);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getText();
   }, []);
 
   return (
@@ -64,7 +101,7 @@ const Admin = () => {
         <EditAdminDiv>
           <AdminHomeHeading>Admin Home</AdminHomeHeading>
           <AdminGenreInfo numGenres={numGenres} />
-          <AdminTextInfo />
+          <AdminTextInfo wordCount={wordCount} />
           <AdminTrackInfo numTracks={numTracks} />
         </EditAdminDiv>
       </AdminHomeDiv>
