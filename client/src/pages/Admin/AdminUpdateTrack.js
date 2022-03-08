@@ -157,6 +157,7 @@ const AdminUpdateTrack = () => {
             <select
               name="genre"
               id="genre"
+              value={genre}
               onChange={(e) => setGenre(e.target.value)}
             >
               {genreList.map((g) => (

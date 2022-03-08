@@ -30,6 +30,10 @@ const EditAdminDiv = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 4fr 4fr;
   gap: 2rem;
+  margin-bottom: 5rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    gap: 1rem;
+  } ;
 `;
 
 const Admin = () => {

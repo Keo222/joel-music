@@ -9,7 +9,7 @@ import TextSection from "../../components/Admin/Text/TextSection";
 import { PageHeading } from "../../styled/typography";
 
 const TextUpdateContainer = styled.div`
-  width: clamp(200px, 60%, 900px);
+  width: clamp(275px, 60%, 900px);
   margin: 0 auto 5rem;
 `;
 

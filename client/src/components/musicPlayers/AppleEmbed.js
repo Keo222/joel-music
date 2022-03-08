@@ -13,7 +13,7 @@ const AppleEmbed = ({ title, source }) => {
   const size = useWindowSize();
   const big = size.width >= 450;
 
-  const regex = /\/[\d\w-%&]+\/[\d]+[?i=]{3}[\d]+$/gm;
+  const regex = /\/[\d\w-%&]+\/[\d]+[?i=]{3}[\d]+/gm;
   const found = source.match(regex);
   const fullSrc = `https://embed.music.apple.com/us/album${found[0]}`;
   return (

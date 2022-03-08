@@ -46,10 +46,10 @@ const UpdateInner = styled.div`
 
 const StyledTextArea = styled(animated.textarea)`
   display: block;
-  width: 85%;
+  width: 90%;
   max-width: 800px;
   min-height: 300px;
-  margin: 0 auto;
+  margin: 2rem auto 0;
   font-family: inherit;
   border: 4px solid ${({ color }) => handleColorType(color)};
   border-radius: 5px;

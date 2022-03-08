@@ -19,7 +19,7 @@ const AdminTracks = () => {
   const [artist, setArtist] = useState("");
   const [work, setWork] = useState("");
   const [year, setYear] = useState("");
-  const [genre, setGenre] = useState("");
+  const [genre, setGenre] = useState("Alternative");
   const [featured, setFeatured] = useState(false);
   const [spotify, setSpotify] = useState("");
   const [tidal, setTidal] = useState("");

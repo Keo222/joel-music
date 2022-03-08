@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 // Images
-import aboutFiller from "../images/about_filler.jpg";
+import aboutImgSrc from "../images/about_filler.jpg";
 
 // Social Logos
 import instagramLogo from "../icons/instagram.svg";
@@ -164,7 +164,7 @@ const About = () => {
     <>
       <title>Joel Gardella | About</title>
       <ImgOverlay />
-      <AboutImg src={aboutFiller} />
+      <AboutImg src={aboutImgSrc} />
       <AboutInfoContainer>
         <AboutInfoDiv>
           <PageHeading>About</PageHeading>
