@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 // Imported Styled Components
-import { PageHeading } from "../styled/typography";
+import {
+  PageHeading,
+  SmallFormattedParagraph,
+} from "../styled/typography";
 import {
   StyledForm,
   InputGroup,
@@ -12,6 +15,9 @@ import {
 } from "../styled/forms";
 
 // Styled Components
+const PageWrapper = styled.div`
+  margin-bottom: 4rem;
+`;
 const ContactInfoTextDiv = styled.div`
   min-width: 200px;
   width: 60%;
@@ -20,11 +26,6 @@ const ContactInfoTextDiv = styled.div`
   border-radius: 10px;
   margin: 0 auto 3rem;
 `;
-const InfoText = styled.p`
-  color: ${(props) => props.theme.color.textLight};
-  padding: 0 1rem;
-  font-size: 1.4rem;
-`;
 
 const StyledTextArea = styled.textarea`
   height: 15rem;
@@ -32,7 +33,7 @@ const StyledTextArea = styled.textarea`
 `;
 
 const Contact = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState([]);
 
   useEffect(() => {
     const getText = async () => {
@@ -48,11 +49,13 @@ const Contact = () => {
     getText();
   }, []);
   return (
-    <div>
+    <PageWrapper>
       <title>Joel Gardella | Contact</title>
       <PageHeading>Contact</PageHeading>
       <ContactInfoTextDiv>
-        <InfoText>{text}</InfoText>
+        {text.map((p, i) => (
+          <SmallFormattedParagraph key={i}>{p}</SmallFormattedParagraph>
+        ))}
       </ContactInfoTextDiv>
       <StyledForm>
         <InputGroup>
@@ -76,7 +79,7 @@ const Contact = () => {
         </InputGroup>
         <SubmitButton>Submit</SubmitButton>
       </StyledForm>
-    </div>
+    </PageWrapper>
   );
 };
 

@@ -37,8 +37,11 @@ const AdminText = () => {
 
   const updateText = async (e, textName) => {
     e.preventDefault();
-    const data = { name: textName, text: whichText(textName) };
-    if (data.text) {
+    const sectionText = whichText(textName);
+
+    const pArray = sectionText.split(/\n/g).filter((t) => t !== "");
+    const data = { name: textName, text: pArray };
+    if (data.text.length !== 0) {
       try {
         await fetch("/api/text", {
           headers: {
@@ -62,10 +65,18 @@ const AdminText = () => {
   const setTexts = async () => {
     const res = await fetch("/api/text?name=all");
     const allTexts = await res.json();
-    const about = allTexts.find((t) => t.name === "about").stored_text;
-    const contact = allTexts.find((t) => t.name === "contact").stored_text;
-    const pricing = allTexts.find((t) => t.name === "pricing").stored_text;
-    const hire = allTexts.find((t) => t.name === "hire").stored_text;
+    const about = allTexts
+      .find((t) => t.name === "about")
+      .stored_text.join("\n\n");
+    const contact = allTexts
+      .find((t) => t.name === "contact")
+      .stored_text.join("\n\n");
+    const pricing = allTexts
+      .find((t) => t.name === "pricing")
+      .stored_text.join("\n\n");
+    const hire = allTexts
+      .find((t) => t.name === "hire")
+      .stored_text.join("\n\n");
 
     setAboutText(about);
     setContactText(contact);

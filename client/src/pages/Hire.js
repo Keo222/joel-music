@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // Imported Stylec Components
-import { PageHeading, BoldSpan } from "../styled/typography";
+import {
+  PageHeading,
+  BoldSpan,
+  SmallFormattedParagraph,
+} from "../styled/typography";
 import { GridForm, GridSubmitButton } from "../styled/forms";
 
 // Styled Elements
@@ -13,11 +17,6 @@ const InfoTextDiv = styled.div`
   border: 2px solid ${(props) => props.theme.color.highlight2};
   border-radius: 10px;
   margin: 0 auto;
-`;
-const InfoText = styled.p`
-  color: ${(props) => props.theme.color.textLight};
-  padding: 0 1rem;
-  font-size: 1.4rem;
 `;
 
 const Label = styled.label`
@@ -85,7 +84,7 @@ const EstimatedCost = styled.p`
 `;
 
 const Hire = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState([]);
   const [numTracks, setNumTracks] = useState(1);
   const [work, setWork] = useState("Mix");
 
@@ -136,7 +135,9 @@ const Hire = () => {
       <title>Joel Gardella | Hire</title>
       <PageHeading>Hire</PageHeading>
       <InfoTextDiv>
-        <InfoText>{text}</InfoText>
+        {text.map((p, i) => (
+          <SmallFormattedParagraph key={i}>{p}</SmallFormattedParagraph>
+        ))}
       </InfoTextDiv>
       <GridForm>
         <Label htmlFor="name">Name:</Label>

@@ -9,7 +9,7 @@ import instagramLogo from "../icons/instagram.svg";
 import soundcloudLogo from "../icons/soundcloud.svg";
 
 // Imported Styled Components
-import { PageHeading } from "../styled/typography";
+import { PageHeading, FormattedParagraph } from "../styled/typography";
 
 // Styled Components
 const AboutImg = styled.img`
@@ -111,17 +111,6 @@ const AboutInfoDiv = styled.div`
   }
 `;
 
-const AboutInfoParagraph = styled.p`
-  color: ${(props) => props.theme.color.textLight};
-  font-size: 1.6rem;
-  line-height: 2;
-  text-indent: 3.5rem;
-  margin-bottom: 4rem;
-  @media screen and (${(props) => props.theme.responsive.sm}) {
-    font-size: 1.4rem;
-  }
-`;
-
 const InlineSocialsDiv = styled.div`
   width: 30rem;
   height: 8rem;
@@ -156,7 +145,7 @@ const Icon = styled.img`
 `;
 
 const About = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState([]);
 
   useEffect(() => {
     const getText = async () => {
@@ -179,36 +168,9 @@ const About = () => {
       <AboutInfoContainer>
         <AboutInfoDiv>
           <PageHeading>About</PageHeading>
-          <AboutInfoParagraph>{text}</AboutInfoParagraph>
-          <AboutInfoParagraph>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Similique et dolores eaque magni facilis sunt doloribus,
-            obcaecati minima. Eius rem quos alias fugit facere, velit at
-            maxime laboriosam voluptas quae. Culpa nulla tempore deleniti
-            odio possimus mollitia autem quas dolores maiores excepturi
-            vitae atque voluptatibus dolorum, consectetur qui sunt enim!
-          </AboutInfoParagraph>
-          <AboutInfoParagraph>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Dolorem voluptatem sint hic cum harum eaque obcaecati sequi
-            ipsa fuga quam.
-          </AboutInfoParagraph>
-          <AboutInfoParagraph>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Officiis placeat dignissimos cum impedit, perspiciatis animi ea
-            architecto explicabo atque ducimus odit delectus enim tempore
-            expedita unde, eum laudantium vitae esse magni at rem, quia
-            dolorem consequuntur! Sint sit, amet illo nemo enim maiores eum
-            temporibus fugiat dolores reiciendis architecto tenetur veniam
-            cupiditate quidem, rerum molestias unde, quas deserunt placeat
-            dolore quo et repellendus accusantium assumenda. Quos minima
-            aliquam aperiam! Neque?
-          </AboutInfoParagraph>
-          <AboutInfoParagraph>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Voluptate voluptatem expedita ipsam obcaecati dolore
-            accusantium.
-          </AboutInfoParagraph>
+          {text.map((p, i) => (
+            <FormattedParagraph key={i}>{p}</FormattedParagraph>
+          ))}
         </AboutInfoDiv>
         <InlineSocialsDiv>
           <InstaIconDiv>

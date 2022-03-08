@@ -7,7 +7,10 @@ import SolidFlipCard from "../components/cards/SolidFlipCard";
 
 // Imported Styled Components
 import { handleColorType } from "../styled/styleHelperFuncs";
-import { PageHeading } from "../styled/typography";
+import {
+  PageHeading,
+  SmallFormattedParagraph,
+} from "../styled/typography";
 import { LinkButton } from "../styled/buttons";
 
 // Styled Components
@@ -18,11 +21,6 @@ const InfoTextDiv = styled.div`
   border: 2px solid ${(props) => props.theme.color.highlight2};
   border-radius: 10px;
   margin: 0 auto;
-`;
-const InfoText = styled.p`
-  color: ${(props) => props.theme.color.textLight};
-  padding: 0 1rem;
-  font-size: 1.4rem;
 `;
 
 const SectionTitle = styled.h3`
@@ -64,7 +62,7 @@ const CenteringDiv = styled.div`
 `;
 
 const Pricing = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState([]);
 
   useEffect(() => {
     const getText = async () => {
@@ -84,7 +82,9 @@ const Pricing = () => {
       <title>Joel Gardella | Pricing</title>
       <PageHeading>Pricing</PageHeading>
       <InfoTextDiv>
-        <InfoText>{text}</InfoText>
+        {text.map((p, i) => (
+          <SmallFormattedParagraph key={i}>{p}</SmallFormattedParagraph>
+        ))}
       </InfoTextDiv>
 
       <AllCardsDiv>

@@ -22,3 +22,20 @@ export const BoldSpan = styled.span`
   font-weight: 700;
   color: ${(props) => props.theme.color.highlight3};
 `;
+
+export const FormattedParagraph = styled.p`
+  color: ${(props) => props.theme.color.textLight};
+  font-size: 1.6rem;
+  line-height: 2;
+  text-indent: 3.5rem;
+  margin-bottom: 4rem;
+  @media screen and (${(props) => props.theme.responsive.sm}) {
+    font-size: 1.4rem;
+  }
+`;
+
+export const SmallFormattedParagraph = styled(FormattedParagraph)`
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+`;
