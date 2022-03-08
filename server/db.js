@@ -1,12 +1,12 @@
 const Pool = require("pg").Pool;
-require("dotenv").config();
+require("dotenv").config({ path: __dirname + "/.env" });
 
 const devConfig = {
-  user: "postgres",
-  password: "k168127",
-  host: "localhost",
-  database: "joel_music",
-  port: 5432,
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  port: process.env.PG_PORT,
 };
 
 const prodConfig = {
