@@ -66,19 +66,23 @@ const Admin = () => {
         // About Text
         const aboutTextLength = texts
           .find((t) => t.name === "about")
-          .stored_text.split(" ").length;
+          .stored_text.join(" ")
+          .split(" ").length;
         // Contact Text
         const contactTextLength = texts
           .find((t) => t.name === "contact")
-          .stored_text.split(" ").length;
+          .stored_text.join(" ")
+          .split(" ").length;
         // Pricing Text
         const pricingTextLength = texts
           .find((t) => t.name === "pricing")
-          .stored_text.split(" ").length;
+          .stored_text.join(" ")
+          .split(" ").length;
         // Hire Text
         const hireTextLength = texts
           .find((t) => t.name === "hire")
-          .stored_text.split(" ").length;
+          .stored_text.join(" ")
+          .split(" ").length;
 
         const totalLength =
           aboutTextLength +

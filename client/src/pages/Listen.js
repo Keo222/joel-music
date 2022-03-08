@@ -111,14 +111,16 @@ const Listen = () => {
         genre="Featured"
       /> */}
       {genres !== null &&
-        genres.map((g) => (
-          <MusicSlider
-            key={g}
-            tracks={tracks.filter((t) => t.track_genre === g)}
-            player={player}
-            genre={g}
-          />
-        ))}
+        genres
+          .sort((a, b) => (a.toLowerCase() > b.toLowerCase() ? 1 : -1))
+          .map((g) => (
+            <MusicSlider
+              key={g}
+              tracks={tracks.filter((t) => t.track_genre === g)}
+              player={player}
+              genre={g}
+            />
+          ))}
     </PageDiv>
   );
 };

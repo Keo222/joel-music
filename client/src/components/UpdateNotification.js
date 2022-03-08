@@ -7,8 +7,8 @@ import checkmark from "../icons/checkmark.svg";
 // Styled Components
 const UpdateDiv = styled.div`
   position: fixed;
-  left: 0;
-  bottom: 0;
+  left: 3rem;
+  bottom: 2rem;
   min-width: 80px;
   width: 20vw;
   border: 3px solid #33f425;
