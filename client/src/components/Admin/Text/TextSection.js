@@ -69,6 +69,7 @@ const UpdateButton = styled(animated.button)`
   padding: 1.5rem 2rem;
   border-radius: 5px;
   transition: all 0.3s;
+  text-transform: capitalize;
   cursor: pointer;
   &:hover,
   &:active {
@@ -149,7 +150,7 @@ const TextSection = ({
             color={color}
             onClick={(e) => updateText(e, section)}
           >
-            Update About
+            Update {section}
           </UpdateButton>
         </UpdateInner>
       </animated.div>

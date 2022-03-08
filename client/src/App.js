@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Pricing from "./pages/Pricing";
 import Hire from "./pages/Hire";
 import Admin from "./pages/Admin/AdminHome";
+import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminTracks from "./pages/Admin/AdminTracks";
 import AdminNewTrack from "./pages/Admin/AdminNewTrack";
 import AdminUpdateTrack from "./pages/Admin/AdminUpdateTrack";
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/hire" element={<Hire />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/tracks" element={<AdminTracks />} />
           <Route path="/admin/tracks/new" element={<AdminNewTrack />} />
           <Route

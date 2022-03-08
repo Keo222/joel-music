@@ -63,11 +63,11 @@ export const SubmitButton = styled.button`
   border: none;
   width: fit-content;
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.6rem;
   margin: 3rem auto;
   text-decoration: none;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   border-radius: 5px;
   transition: all 0.3s;
   cursor: pointer;

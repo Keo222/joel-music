@@ -172,6 +172,33 @@ const HamburgerOpenIcon = styled.img`
   } ;
 `;
 
+const AdminNavComponent = ({ setHamburgerOpen, hamburgerOpen }) => {
+  return (
+    <>
+      <AdminNav>
+        <AdminImageContainer>
+          <Link to="/">
+            <Logo src={lightbulbWhite} />
+          </Link>
+        </AdminImageContainer>
+        <AdminNavLinks>
+          <StyledLink to="/admin/">Home</StyledLink>
+          <StyledLink to="/admin/tracks">Tracks</StyledLink>
+          <StyledLink to="/admin/genres">Genres</StyledLink>
+          <StyledLink to="/admin/text">Text</StyledLink>
+          <AdminLinkButton to="/">Main Site</AdminLinkButton>
+        </AdminNavLinks>
+        <HamburgerOpenIcon
+          onClick={() => setHamburgerOpen(!hamburgerOpen)}
+          src={hamburgerOpen ? closeHamburger : hamburger}
+        />
+      </AdminNav>
+      {hamburgerOpen && (
+        <AdminDropdownNav setHamburgerOpen={setHamburgerOpen} />
+      )}
+    </>
+  );
+};
 const Navbar = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
@@ -222,7 +249,7 @@ const Navbar = () => {
             <DropdownNav setHamburgerOpen={setHamburgerOpen} />
           )}
         </>
-      ) : (
+      ) : location.pathname !== "/admin/login" ? (
         <>
           <AdminNav>
             <AdminImageContainer>
@@ -246,6 +273,8 @@ const Navbar = () => {
             <AdminDropdownNav setHamburgerOpen={setHamburgerOpen} />
           )}
         </>
+      ) : (
+        <></>
       )}
     </>
   );
