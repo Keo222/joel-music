@@ -11,6 +11,7 @@ import DeleteTrackPopup from "../../components/DeleteTrackPopup";
 
 // Imported Styled Elements
 import { PageHeading } from "../../styled/typography";
+import { useForceUpdate } from "@react-spring/shared";
 
 // Styled Elements
 
@@ -107,7 +108,11 @@ const TableHeading = styled.th`
   text-align: left;
   font-size: 1.8rem;
   padding: 1rem;
-  color: ${(props) => props.theme.color.highlight1};
+  color: ${(props) =>
+    props.selected
+      ? props.theme.color.highlight3
+      : props.theme.color.highlight1};
+  cursor: pointer;
   @media screen and (${(props) => props.theme.responsive.sm}) {
     font-size: 1.4rem;
   }
@@ -156,18 +161,65 @@ const Icon = styled.img`
 // Styled Elements
 
 const Admin = () => {
-  const [tracks, setTracks] = useState(null);
+  const [tracks, setTracks] = useState([]);
   const [deleteId, setDeleteId] = useState(null);
   const [deleteTrackInfo, setDeleteTrackInfo] = useState({});
   const [popupOpen, togglePopup] = useReducer(
     (popupOpen) => !popupOpen,
     false
   );
+  const [sortBy, setSortBy] = useState("num");
+  const [reverse, setReverse] = useState(false);
+
+  const sortSwitch = (sortBy) => {
+    switch (sortBy) {
+      case "num":
+        return tracks.sort((a, b) => (a.track_id > b.track_id ? 1 : -1));
+      case "name":
+        return tracks.sort((a, b) =>
+          a.track_name > b.track_name ? 1 : -1
+        );
+      case "album":
+        return tracks.sort((a, b) =>
+          a.track_album > b.track_album ? 1 : -1
+        );
+      case "artist":
+        return tracks.sort((a, b) =>
+          a.track_artist > b.track_artist ? 1 : -1
+        );
+      case "genre":
+        return tracks.sort((a, b) =>
+          a.track_genre > b.track_genre ? 1 : -1
+        );
+      case "year":
+        return tracks.sort((a, b) =>
+          a.track_year > b.track_year ? 1 : -1
+        );
+      default:
+        return tracks.sort((a, b) => (a.track_id > b.track_id ? 1 : -1));
+    }
+  };
+
+  const sortedTracks = reverse
+    ? sortSwitch(sortBy).reverse()
+    : sortSwitch(sortBy);
+
+  const organizeTracks = (sortElem) => {
+    if (sortElem === sortBy) {
+      setReverse((r) => !r);
+    } else {
+      setReverse(false);
+      setSortBy(sortElem);
+    }
+  };
 
   async function getTracks() {
     const response = await fetch("/api/tracks/");
     const allTracks = await response.json();
-    setTracks(allTracks);
+    const sortedAndNumberedTracks = allTracks
+      .sort((a, b) => (a.track_id > b.track_id ? 1 : -1))
+      .map((t, i) => ({ ...t, numOrder: i + 1 }));
+    setTracks(sortedAndNumberedTracks);
   }
 
   const openDeletePopup = (id) => {
@@ -229,41 +281,70 @@ const Admin = () => {
           </colgroup>
           <thead>
             <TableRow>
-              <TableHeading>#</TableHeading>
-              <TableHeading>Track Name</TableHeading>
-              <TableHeadingLgScreen>Album</TableHeadingLgScreen>
-              <TableHeading>Artist</TableHeading>
-              <TableHeadingLgScreen>Genre</TableHeadingLgScreen>
-              <TableHeadingLgScreen>Year</TableHeadingLgScreen>
+              <TableHeading
+                selected={sortBy === "num"}
+                onClick={() => organizeTracks("num")}
+              >
+                #
+              </TableHeading>
+              <TableHeading
+                selected={sortBy === "name"}
+                onClick={() => organizeTracks("name")}
+              >
+                Track Name
+              </TableHeading>
+              <TableHeadingLgScreen
+                selected={sortBy === "album"}
+                onClick={() => organizeTracks("album")}
+              >
+                Album
+              </TableHeadingLgScreen>
+              <TableHeading
+                selected={sortBy === "artist"}
+                onClick={() => organizeTracks("artist")}
+              >
+                Artist
+              </TableHeading>
+              <TableHeadingLgScreen
+                selected={sortBy === "genre"}
+                onClick={() => organizeTracks("genre")}
+              >
+                Genre
+              </TableHeadingLgScreen>
+              <TableHeadingLgScreen
+                selected={sortBy === "year"}
+                onClick={() => organizeTracks("year")}
+              >
+                Year
+              </TableHeadingLgScreen>
               <TableIconHeading>Edit</TableIconHeading>
               <TableIconHeading>Delete</TableIconHeading>
             </TableRow>
           </thead>
           <tbody>
-            {tracks !== null &&
-              tracks.map((t, i) => (
-                <TableRow key={t.track_id}>
-                  <TableData>{i + 1}</TableData>
-                  <TableData>{t.track_name}</TableData>
-                  <TableDataLgScreen>{t.track_album}</TableDataLgScreen>
-                  <TableData>{t.track_artist}</TableData>
-                  <TableDataLgScreen>{t.track_genre}</TableDataLgScreen>
-                  <TableDataLgScreen>{t.track_year}</TableDataLgScreen>
-                  <TableIcon>
-                    <Link to={`/admin/tracks/update/${t.track_id}`}>
-                      <Icon src={edit} alt="Edit Button" />
-                    </Link>
-                  </TableIcon>
-                  <TableIcon>
-                    <Icon
-                      src={garbage}
-                      alt="Delete Button"
-                      onClick={() => openDeletePopup(t.track_id)}
-                      // onClick={() => deleteTrack(t.track_id)}
-                    />
-                  </TableIcon>
-                </TableRow>
-              ))}
+            {sortedTracks.map((t) => (
+              <TableRow key={t.track_id}>
+                <TableData>{t.numOrder}</TableData>
+                <TableData>{t.track_name}</TableData>
+                <TableDataLgScreen>{t.track_album}</TableDataLgScreen>
+                <TableData>{t.track_artist}</TableData>
+                <TableDataLgScreen>{t.track_genre}</TableDataLgScreen>
+                <TableDataLgScreen>{t.track_year}</TableDataLgScreen>
+                <TableIcon>
+                  <Link to={`/admin/tracks/update/${t.track_id}`}>
+                    <Icon src={edit} alt="Edit Button" />
+                  </Link>
+                </TableIcon>
+                <TableIcon>
+                  <Icon
+                    src={garbage}
+                    alt="Delete Button"
+                    onClick={() => openDeletePopup(t.track_id)}
+                    // onClick={() => deleteTrack(t.track_id)}
+                  />
+                </TableIcon>
+              </TableRow>
+            ))}
           </tbody>
         </Table>
       </AdminTracksDiv>
