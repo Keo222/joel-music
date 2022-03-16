@@ -22,7 +22,7 @@ const ContactInfoTextDiv = styled.div`
   min-width: 200px;
   width: 60%;
   max-width: 700px;
-  border: 2px solid ${(props) => props.theme.color.highlight3};
+  border: 2px solid ${(props) => props.theme.color.highlight2};
   border-radius: 10px;
   margin: 0 auto 3rem;
 `;
