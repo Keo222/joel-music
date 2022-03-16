@@ -6,6 +6,8 @@ import aboutImgSrc from "../images/about_filler.jpg";
 
 // Social Logos
 import instagramLogo from "../icons/instagram.svg";
+import fbLogo from "../icons/fb_logo_blue.svg";
+import mail from "../icons/mail.svg";
 import soundcloudLogo from "../icons/soundcloud.svg";
 
 // Imported Styled Components
@@ -123,24 +125,68 @@ const InlineSocialsDiv = styled.div`
   }
 `;
 
-const InstaIconDiv = styled.div`
+const IconDiv = styled.div`
+  position: relative;
+  &:hover > span {
+    visibility: visible;
+    opacity: 1;
+  }
+  cursor: pointer;
+`;
+
+const SocialIconDiv = styled(IconDiv)`
+  height: 2.7rem;
+  width: 2.7rem;
+`;
+
+const MailIconDiv = styled(IconDiv)`
   height: 3rem;
   width: 3rem;
 `;
-const SoundcloudIconDiv = styled.div`
-  height: 4.5rem;
-  width: 4.5rem;
+
+const Tooltip = styled.span`
+  visibility: hidden;
+  width: fit-content;
+  background-color: ${(props) => props.theme.color.textDark};
+  color: ${(props) => props.theme.color.textLight};
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+
+  /* Tooltip Text */
+  white-space: nowrap;
+  font-size: 1.2rem;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 30%;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #eee transparent transparent transparent;
+  }
 `;
 
 const Icon = styled.img`
   object-fit: contain;
   width: 100%;
   height: 100%;
-  transition: all 0.3s;
-  cursor: pointer;
-  filter: grayscale(50%);
+  transition: all 0.15s;
+  filter: grayscale(20%) brightness(0.8);
   &:hover {
-    filter: unset;
+    filter: grayscale(0) brightness(1.3);
   }
 `;
 
@@ -173,12 +219,18 @@ const About = () => {
           ))}
         </AboutInfoDiv>
         <InlineSocialsDiv>
-          <InstaIconDiv>
+          <SocialIconDiv>
+            <Tooltip>Instagram</Tooltip>
             <Icon src={instagramLogo} />
-          </InstaIconDiv>
-          <SoundcloudIconDiv>
-            <Icon src={soundcloudLogo} />
-          </SoundcloudIconDiv>
+          </SocialIconDiv>
+          <SocialIconDiv>
+            <Tooltip>Facebook</Tooltip>
+            <Icon src={fbLogo} />
+          </SocialIconDiv>
+          <MailIconDiv>
+            <Tooltip>Email Joel</Tooltip>
+            <Icon src={mail} />
+          </MailIconDiv>
         </InlineSocialsDiv>
       </AboutInfoContainer>
     </>
