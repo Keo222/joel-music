@@ -105,11 +105,13 @@ const Listen = () => {
           />
         </SelectPlayerLogos>
       </SelectPlayerDiv>
-      {/* <MusicSlider
-        tracks={tracks.filter((t) => t.track_featured)}
-        player={player}
-        genre="Featured"
-      /> */}
+      {genres !== null && (
+        <MusicSlider
+          tracks={tracks.filter((t) => t.track_featured)}
+          player={player}
+          genre="Featured"
+        />
+      )}
       {genres !== null &&
         genres
           .sort((a, b) => (a.toLowerCase() > b.toLowerCase() ? 1 : -1))

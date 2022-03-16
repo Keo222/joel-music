@@ -36,12 +36,16 @@ const TopRow = styled.div`
 const TrackAndArrows = styled.div`
   width: 70%;
   max-width: 110rem;
-  margin: 2rem auto 5rem;
+  margin: 0 auto 5rem;
   display: flex;
   align-items: center;
   @media screen and (${(props) => props.theme.responsive.md}) {
     width: 92%;
   }
+`;
+
+const NoArrowDiv = styled.div`
+  margin-left: 5rem;
 `;
 
 const LeftArrowSVG = styled.img`
@@ -65,6 +69,17 @@ const Bumper = styled.div`
 const TitleContainer = styled.div`
   width: 81rem;
   margin: 0 auto;
+`;
+
+const FeaturedTitle = styled.h3`
+  font-size: 2.8rem;
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: ${(props) => props.theme.color.highlight3};
+  margin-left: 3rem;
+  margin-bottom: 1rem;
+  width: 100%;
 `;
 
 const GenreTitle = styled.h3`
@@ -229,7 +244,11 @@ const MusicSlider = ({ player, genre, tracks }) => {
       <TopRow>
         <Bumper>&nbsp;</Bumper>
         <TitleContainer>
-          <GenreTitle>{genre}</GenreTitle>
+          {genre === "Featured" ? (
+            <FeaturedTitle>{genre}</FeaturedTitle>
+          ) : (
+            <GenreTitle>{genre}</GenreTitle>
+          )}
         </TitleContainer>
         <Bumper>&nbsp;</Bumper>
       </TopRow>
@@ -237,7 +256,7 @@ const MusicSlider = ({ player, genre, tracks }) => {
         {tracks.length > 1 ? (
           <LeftArrowSVG src={leftArrow} onClick={() => prevTrack()} />
         ) : (
-          <div>&nbsp;</div>
+          <NoArrowDiv>&nbsp;</NoArrowDiv>
         )}
         {transitions((styles, i) => (
           <TrackContainer>
@@ -247,8 +266,8 @@ const MusicSlider = ({ player, genre, tracks }) => {
               <animated.div style={expand}>
                 <TrackInfoDiv ref={heightRef}>
                   <BasicsDiv>
-                    <InfoPoint>{tracks[current].track_work}</InfoPoint>
-                    <InfoPoint>{tracks[current].track_year}</InfoPoint>
+                    <InfoPoint>{tracks[i].track_work}</InfoPoint>
+                    <InfoPoint>{tracks[i].track_year}</InfoPoint>
                   </BasicsDiv>
                 </TrackInfoDiv>
               </animated.div>
@@ -258,7 +277,7 @@ const MusicSlider = ({ player, genre, tracks }) => {
                   open={showInfo}
                   onClick={() => setShowInfo(!showInfo)}
                 >
-                  See Less
+                  Close Track Details
                   <ToggleArrowSVG
                     src={upArrow}
                     alt="arrow down to open dropdown"
@@ -269,7 +288,7 @@ const MusicSlider = ({ player, genre, tracks }) => {
                   open={showInfo}
                   onClick={() => setShowInfo(!showInfo)}
                 >
-                  See More
+                  See Track Details
                   <ToggleArrowSVG
                     src={downArrow}
                     alt="arrow down to open dropdown"
@@ -282,7 +301,7 @@ const MusicSlider = ({ player, genre, tracks }) => {
         {tracks.length > 1 ? (
           <RightArrowSVG src={rightArrow} onClick={() => nextTrack()} />
         ) : (
-          <div>&nbsp;</div>
+          <NoArrowDiv>&nbsp;</NoArrowDiv>
         )}
       </TrackAndArrows>
     </>
