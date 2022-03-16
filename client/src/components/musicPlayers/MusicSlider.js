@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 // Arrows
-import leftArrow from "../icons/left_arrow.svg";
-import rightArrow from "../icons/right_arrow.svg";
-import upArrow from "../icons/up_arrow.svg";
-import downArrow from "../icons/down_arrow.svg";
+import leftArrow from "../../icons/left_arrow.svg";
+import rightArrow from "../../icons/right_arrow.svg";
+import upArrow from "../../icons/up_arrow.svg";
+import downArrow from "../../icons/down_arrow.svg";
 
 // Music Players
-import AppleEmbed from "./musicPlayers/AppleEmbed";
-import SpotifyEmbed from "./musicPlayers/SpotifyEmbed";
-import TidalEmbed from "./musicPlayers/TidalEmbed";
+import AppleEmbed from "./AppleEmbed";
+import SpotifyEmbed from "./SpotifyEmbed";
+import TidalEmbed from "./TidalEmbed";
 
 import {
   animated,
@@ -234,7 +234,11 @@ const MusicSlider = ({ player, genre, tracks }) => {
         <Bumper>&nbsp;</Bumper>
       </TopRow>
       <TrackAndArrows>
-        <LeftArrowSVG src={leftArrow} onClick={() => prevTrack()} />
+        {tracks.length > 1 ? (
+          <LeftArrowSVG src={leftArrow} onClick={() => prevTrack()} />
+        ) : (
+          <div>&nbsp;</div>
+        )}
         {transitions((styles, i) => (
           <TrackContainer>
             <TrackDiv style={styles}>
@@ -275,7 +279,11 @@ const MusicSlider = ({ player, genre, tracks }) => {
             </TrackDiv>
           </TrackContainer>
         ))}
-        <RightArrowSVG src={rightArrow} onClick={() => nextTrack()} />
+        {tracks.length > 1 ? (
+          <RightArrowSVG src={rightArrow} onClick={() => nextTrack()} />
+        ) : (
+          <div>&nbsp;</div>
+        )}
       </TrackAndArrows>
     </>
   );

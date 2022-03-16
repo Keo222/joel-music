@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { animated } from "react-spring";
 
 // Components
-import MusicSlider from "../components/MusicSlider";
+import MusicSlider from "../components/musicPlayers/MusicSlider";
 
 // Icons
 import spotifyWhite from "../icons/spotify-white.png";
