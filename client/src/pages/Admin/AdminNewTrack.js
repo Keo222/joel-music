@@ -138,9 +138,11 @@ const AdminTracks = () => {
               id="work"
               onChange={(e) => setWork(e.target.value)}
             >
-              <option value="Mixed">Mixed</option>
-              <option value="Mastered">Mastered</option>
-              <option value="Mixed & Mastered">Mixed & Mastered</option>
+              <option value="Mix">Mix</option>
+              <option value="Mix + Edit">Mix + Edit</option>
+              <option value="Master">Master</option>
+              <option value="Mix & Master">Mix & Master</option>
+              <option value="Production">Production</option>
             </select>
           </InputGroup>
         </SelectDiv>

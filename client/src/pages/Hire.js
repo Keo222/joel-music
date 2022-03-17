@@ -156,8 +156,10 @@ const Hire = () => {
           onChange={(e) => setWork(e.target.value)}
         >
           <option value="Mix">Mix</option>
+          <option value="Mix + Edit">Mix + Edit</option>
           <option value="Master">Master</option>
-          <option value="Mix/Master">Mix & Master</option>
+          <option value="Mix & Master">Mix & Master</option>
+          <option value="Produce">Produce</option>
         </StyledSelect>
         <Label rowStart={2} rowEnd={3} colStart={3} htmlFor="numSongs">
           Tracks:
