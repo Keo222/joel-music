@@ -10,6 +10,7 @@ import mail from "../icons/mail.svg";
 
 // Images
 import studioImg from "../images/studio1.jpg";
+import joelHomeImg from "../images/JG_Website_Home_Background.JPG";
 
 // Imported Styled Components
 import { PageHeading } from "../styled/typography";
@@ -34,7 +35,7 @@ const WholeScreenDiv = styled.img`
   top: 0;
   object-fit: cover;
   z-index: -5;
-  filter: brightness(0.4);
+  filter: brightness(0.22);
 `;
 
 const SlideInItem = styled(animated.h3)`
@@ -216,7 +217,7 @@ const Home = () => {
   return (
     <>
       <title>Joel Gardella | Audio Engineer</title>
-      <WholeScreenDiv src={studioImg} />
+      <WholeScreenDiv src={joelHomeImg} />
       <HomeDiv>
         {/* <SlideInItem style={slideIn}>WEEEEE!!!</SlideInItem> */}
         <HomeHeader>Joel Gardella</HomeHeader>
