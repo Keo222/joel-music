@@ -21,8 +21,16 @@ const PageDiv = styled.div`
   margin-bottom: 10rem;
 `;
 
+const ContainerOfSelects = styled.div`
+  display: flex;
+  width: clamp(250px, 85%, 1400px);
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 const SelectPlayerDiv = styled.div`
-  margin: 2rem 8% 5rem;
+  margin: 2rem 0 5rem;
 `;
 
 const SelectPlayerLabel = styled.p`
@@ -52,12 +60,82 @@ const Logo = styled(animated.img)`
   }
 `;
 
+const WorkSelect = styled.div`
+  font-size: 1.4rem;
+  font-weight: 600;
+  height: 9rem;
+  width: 30%;
+  background: ${(props) => props.theme.color.textDark};
+  border-radius: 50px;
+  overflow: hidden;
+  & div:last-child:hover {
+    background: ${(props) => props.theme.color.textLight};
+  }
+`;
+
+const WorkTrio = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 15%;
+  outline: 1px solid ${(props) => props.theme.color.textDark};
+  overflow: hidden;
+  box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4);
+`;
+const TrioItem = styled.div`
+  display: flex;
+  height: 6rem;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  outline: 1px solid ${(props) => props.theme.color.textDark};
+  filter: initial;
+  transition: filter 0.15s;
+  &:hover {
+    filter: brightness(0.8);
+    cursor: pointer;
+  }
+`;
+const ProductionTrioItem = styled(TrioItem)`
+  background: ${(props) => props.theme.color.highlight1};
+`;
+const MixingTrioItem = styled(TrioItem)`
+  background: ${(props) => props.theme.color.highlight2};
+`;
+const MasteringTrioItem = styled(TrioItem)`
+  background: ${(props) => props.theme.color.highlight3};
+`;
+
+const AllWorkSelect = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${(props) => props.theme.color.highlight1};
+  height: 3rem;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const GenreSelectDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25rem;
+`;
+
+const GenreSelect = styled.select`
+  height: fit-content;
+`;
+
 const Listen = () => {
   const [player, setPlayer] = useState(
     localStorage.getItem("player") || "Spotify"
   );
   const [tracks, setTracks] = useState(null);
   const [genres, setGenres] = useState(null);
+  const [currentGenre, setCurrentGenre] = useState("All");
+  const [work, setWork] = useState("All");
 
   useEffect(() => {
     localStorage.setItem("player", player);
@@ -85,26 +163,47 @@ const Listen = () => {
     <PageDiv>
       <title>Joel Gardella | Listen</title>
       <PageHeading>Listen</PageHeading>
-      <SelectPlayerDiv>
-        <SelectPlayerLabel>Select Streaming Service:</SelectPlayerLabel>
-        <SelectPlayerLogos>
-          <Logo
-            src={player === "Spotify" ? spotifyColor : spotifyWhite}
-            alt="spotify logo unselected"
-            onClick={() => changePlayer("Spotify")}
-          />
-          <Logo
-            src={player === "Tidal" ? tidalColor : tidalWhite}
-            alt="apple logo unselected"
-            onClick={() => changePlayer("Tidal")}
-          />
-          <Logo
-            src={player === "Apple" ? appleColor : appleWhite}
-            alt="apple logo unselected"
-            onClick={() => changePlayer("Apple")}
-          />
-        </SelectPlayerLogos>
-      </SelectPlayerDiv>
+      <ContainerOfSelects>
+        <SelectPlayerDiv>
+          <SelectPlayerLabel>Select Streaming Service:</SelectPlayerLabel>
+          <SelectPlayerLogos>
+            <Logo
+              src={player === "Spotify" ? spotifyColor : spotifyWhite}
+              alt="spotify logo unselected"
+              onClick={() => changePlayer("Spotify")}
+            />
+            <Logo
+              src={player === "Tidal" ? tidalColor : tidalWhite}
+              alt="apple logo unselected"
+              onClick={() => changePlayer("Tidal")}
+            />
+            <Logo
+              src={player === "Apple" ? appleColor : appleWhite}
+              alt="apple logo unselected"
+              onClick={() => changePlayer("Apple")}
+            />
+          </SelectPlayerLogos>
+        </SelectPlayerDiv>
+        <WorkSelect>
+          <WorkTrio>
+            <ProductionTrioItem>Production</ProductionTrioItem>
+            <MixingTrioItem>Mixing</MixingTrioItem>
+            <MasteringTrioItem>Mastering</MasteringTrioItem>
+          </WorkTrio>
+          <AllWorkSelect>All</AllWorkSelect>
+        </WorkSelect>
+        <GenreSelectDiv>
+          <GenreSelect onChange={(e) => setCurrentGenre(e.target.value)}>
+            <option>All</option>
+            {genres !== null &&
+              genres.map((g) => (
+                <option key={g} value={g}>
+                  {g}
+                </option>
+              ))}
+          </GenreSelect>
+        </GenreSelectDiv>
+      </ContainerOfSelects>
       {genres !== null && (
         <MusicSlider
           tracks={tracks.filter((t) => t.track_featured)}
