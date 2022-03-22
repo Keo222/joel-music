@@ -11,7 +11,6 @@ import DeleteTrackPopup from "../../components/DeleteTrackPopup";
 
 // Imported Styled Elements
 import { PageHeading } from "../../styled/typography";
-import { useForceUpdate } from "@react-spring/shared";
 
 // Styled Elements
 
@@ -113,6 +112,9 @@ const TableHeading = styled.th`
       ? props.theme.color.highlight3
       : props.theme.color.highlight1};
   cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   @media screen and (${(props) => props.theme.responsive.sm}) {
     font-size: 1.4rem;
   }
@@ -128,6 +130,9 @@ const TableIconHeading = styled.th`
   font-size: 1.2rem;
   padding: 1rem;
   color: ${(props) => props.theme.color.highlight1};
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const TableData = styled.td`
@@ -153,6 +158,9 @@ const Icon = styled.img`
   width: 3rem;
   cursor: pointer;
   transition: filter 0.2s;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   &:hover {
     filter: brightness(0.6);
   }

@@ -65,20 +65,17 @@ const WorkSelect = styled.div`
   font-weight: 600;
   height: 9rem;
   width: 30%;
-  background: ${(props) => props.theme.color.textDark};
-  border-radius: 50px;
+  background: ${(props) => (props.selected ? "#404040" : "#606060")};
+  border-radius: 55px;
   overflow: hidden;
-  & div:last-child:hover {
-    background: ${(props) => props.theme.color.textLight};
-  }
 `;
 
 const WorkTrio = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border-radius: 15%;
-  outline: 1px solid ${(props) => props.theme.color.textDark};
+  border-radius: 12%;
+  border: 1px solid ${(props) => props.theme.color.textDark};
   overflow: hidden;
   box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.4);
 `;
@@ -90,30 +87,44 @@ const TrioItem = styled.div`
   flex: 1;
   outline: 1px solid ${(props) => props.theme.color.textDark};
   filter: initial;
-  transition: filter 0.15s;
+  transition: all 0.15s;
   &:hover {
-    filter: brightness(0.8);
+    filter: brightness(0.9);
     cursor: pointer;
   }
 `;
 const ProductionTrioItem = styled(TrioItem)`
-  background: ${(props) => props.theme.color.highlight1};
+  background: ${(props) =>
+    props.selected
+      ? props.theme.color.highlight1
+      : props.theme.color.textLight};
 `;
 const MixingTrioItem = styled(TrioItem)`
-  background: ${(props) => props.theme.color.highlight2};
+  background: ${(props) =>
+    props.selected
+      ? props.theme.color.highlight2
+      : props.theme.color.textLight};
 `;
 const MasteringTrioItem = styled(TrioItem)`
-  background: ${(props) => props.theme.color.highlight3};
+  background: ${(props) =>
+    props.selected
+      ? props.theme.color.highlight3
+      : props.theme.color.textLight};
 `;
 
 const AllWorkSelect = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${(props) => props.theme.color.highlight1};
+  color: ${(props) =>
+    props.selected
+      ? props.theme.color.highlight1
+      : props.theme.color.textLight};
   height: 3rem;
+  transition: all 0.15s;
   &:hover {
     cursor: pointer;
+    color: ${(props) => props.theme.color.highlight1};
   }
 `;
 
@@ -126,6 +137,13 @@ const GenreSelectDiv = styled.div`
 
 const GenreSelect = styled.select`
   height: fit-content;
+  font-family: inherit;
+  font-size: 1.4rem;
+  padding: 0.6rem;
+  border-radius: 5px;
+  &:focus {
+    outline: 3px solid ${(props) => props.theme.color.highlight1};
+  }
 `;
 
 const Listen = () => {
@@ -133,6 +151,7 @@ const Listen = () => {
     localStorage.getItem("player") || "Spotify"
   );
   const [tracks, setTracks] = useState(null);
+  const [filteredTracks, setFilteredTracks] = useState(null);
   const [genres, setGenres] = useState(null);
   const [currentGenre, setCurrentGenre] = useState("All");
   const [work, setWork] = useState("All");
@@ -148,6 +167,7 @@ const Listen = () => {
   async function getTracks() {
     const response = await fetch("/api/tracks/");
     const allTracks = await response.json();
+    console.table(allTracks);
     setTracks(allTracks);
 
     const genreSet = new Set();
@@ -158,6 +178,60 @@ const Listen = () => {
   useEffect(() => {
     getTracks();
   }, []);
+
+  useEffect(() => {
+    const filtered = getFilteredTracks();
+    setFilteredTracks(filtered);
+  }, [tracks, work, currentGenre]);
+
+  const trackWorkSwitch = (trackArray, work) => {
+    switch (work) {
+      case "Production":
+        return trackArray.filter((t) => t.track_work === "Production");
+      case "Mixing":
+        return trackArray.filter(
+          (t) =>
+            t.track_work === "Mix" ||
+            t.track_work === "Mixed" ||
+            t.track_work === "Mix + Edit" ||
+            t.track_work === "Mix & Master" ||
+            t.track_work === "Mixed & Mastered"
+        );
+      case "Mastering":
+        return trackArray.filter(
+          (t) =>
+            t.track_work === "Mastered" ||
+            t.track_work === "Master" ||
+            t.track_work === "Mix & Master"
+        );
+      case "All":
+        return trackArray;
+      default:
+        return trackArray;
+    }
+  };
+
+  const getFilteredTracks = () => {
+    let filtered;
+    if (currentGenre === "All" && work === "All") {
+      filtered = tracks;
+    } else if (work === "All") {
+      filtered = tracks.filter((t) => t.track_genre === currentGenre);
+    } else if (currentGenre === "All") {
+      filtered = trackWorkSwitch(tracks, work);
+    } else {
+      const genreFilteredTracks = tracks.filter(
+        (t) => t.track_genre === currentGenre
+      );
+      filtered = trackWorkSwitch(genreFilteredTracks, work);
+    }
+    console.log(filtered);
+    if (filtered !== null) {
+      return filtered;
+    } else {
+      return null;
+    }
+  };
 
   return (
     <PageDiv>
@@ -184,13 +258,33 @@ const Listen = () => {
             />
           </SelectPlayerLogos>
         </SelectPlayerDiv>
-        <WorkSelect>
+        <WorkSelect selected={work === "All"}>
           <WorkTrio>
-            <ProductionTrioItem>Production</ProductionTrioItem>
-            <MixingTrioItem>Mixing</MixingTrioItem>
-            <MasteringTrioItem>Mastering</MasteringTrioItem>
+            <ProductionTrioItem
+              onClick={() => setWork("Production")}
+              selected={work === "Production"}
+            >
+              Production
+            </ProductionTrioItem>
+            <MixingTrioItem
+              onClick={() => setWork("Mixing")}
+              selected={work === "Mixing"}
+            >
+              Mixing
+            </MixingTrioItem>
+            <MasteringTrioItem
+              onClick={() => setWork("Mastering")}
+              selected={work === "Mastering"}
+            >
+              Mastering
+            </MasteringTrioItem>
           </WorkTrio>
-          <AllWorkSelect>All</AllWorkSelect>
+          <AllWorkSelect
+            onClick={() => setWork("All")}
+            selected={work === "All"}
+          >
+            All
+          </AllWorkSelect>
         </WorkSelect>
         <GenreSelectDiv>
           <GenreSelect onChange={(e) => setCurrentGenre(e.target.value)}>
@@ -204,24 +298,42 @@ const Listen = () => {
           </GenreSelect>
         </GenreSelectDiv>
       </ContainerOfSelects>
-      {genres !== null && (
-        <MusicSlider
-          tracks={tracks.filter((t) => t.track_featured)}
-          player={player}
-          genre="Featured"
-        />
-      )}
       {genres !== null &&
-        genres
-          .sort((a, b) => (a.toLowerCase() > b.toLowerCase() ? 1 : -1))
-          .map((g) => (
+        filteredTracks !== null &&
+        currentGenre === "All" && (
+          <div>
+            {filteredTracks.filter((t) => t.track_featured).length > 0 && (
+              <MusicSlider
+                key={`${work} - Featured`}
+                tracks={filteredTracks.filter((t) => t.track_featured)}
+                player={player}
+                genre="Featured"
+              />
+            )}
+            {genres
+              .sort((a, b) => (a.toLowerCase() > b.toLowerCase() ? 1 : -1))
+              .map((g) => (
+                <MusicSlider
+                  key={g}
+                  tracks={tracks.filter((t) => t.track_genre === g)}
+                  player={player}
+                  genre={g}
+                />
+              ))}
+          </div>
+        )}
+      {filteredTracks !== null && currentGenre !== "All" && (
+        <div>
+          {filteredTracks.map((t) => (
             <MusicSlider
-              key={g}
-              tracks={tracks.filter((t) => t.track_genre === g)}
+              key={t.track_name}
+              tracks={[t]}
               player={player}
-              genre={g}
+              genre={`${t.track_name} - ${t.track_artist}`}
             />
           ))}
+        </div>
+      )}
     </PageDiv>
   );
 };

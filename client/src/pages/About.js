@@ -8,7 +8,6 @@ import aboutImgSrc from "../images/about_filler.jpg";
 import instagramLogo from "../icons/instagram.svg";
 import fbLogo from "../icons/fb_logo_blue.svg";
 import mail from "../icons/mail.svg";
-import soundcloudLogo from "../icons/soundcloud.svg";
 
 // Imported Styled Components
 import { PageHeading, FormattedParagraph } from "../styled/typography";

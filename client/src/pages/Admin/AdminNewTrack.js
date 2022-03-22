@@ -17,7 +17,7 @@ const AdminTracks = () => {
   const [name, setName] = useState("");
   const [album, setAlbum] = useState("");
   const [artist, setArtist] = useState("");
-  const [work, setWork] = useState("");
+  const [work, setWork] = useState("Mix");
   const [year, setYear] = useState("");
   const [genre, setGenre] = useState("Alternative");
   const [featured, setFeatured] = useState(false);

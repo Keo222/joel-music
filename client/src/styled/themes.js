@@ -19,6 +19,7 @@ export const theme = {
 
     // Text Colors
     textDark: "#2A2A2B",
+    textMedium: "#5c5c5c",
     textLight: "#eee",
   },
 

@@ -116,7 +116,7 @@ const TrackInfoDiv = styled(animated.div)`
 
 const BasicsDiv = styled.div`
   margin: 0 auto;
-  width: 50%;
+  width: 70%;
   display: flex;
   text-align: center;
 `;
@@ -124,7 +124,7 @@ const BasicsDiv = styled.div`
 const InfoPoint = styled.p`
   font-size: 1.4rem;
   font-weight: 600;
-  flex-basis: 50%;
+  flex-basis: 33%;
   margin: 2.2rem 0;
 `;
 
@@ -268,6 +268,7 @@ const MusicSlider = ({ player, genre, tracks }) => {
                   <BasicsDiv>
                     <InfoPoint>{tracks[i].track_work}</InfoPoint>
                     <InfoPoint>{tracks[i].track_year}</InfoPoint>
+                    <InfoPoint>{tracks[i].track_genre}</InfoPoint>
                   </BasicsDiv>
                 </TrackInfoDiv>
               </animated.div>
