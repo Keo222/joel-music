@@ -26,7 +26,7 @@ const InfoTextDiv = styled.div`
 const SectionTitle = styled.h3`
   color: ${(props) => props.theme.color.textLight};
   font-size: 2.4rem;
-  font-weight: 200;
+  font-weight: 400;
   letter-spacing: 0.5ch;
   margin-bottom: 1.5rem;
   text-decoration: underline 1px ${({ color }) => handleColorType(color)};
@@ -90,29 +90,57 @@ const Pricing = () => {
       <AllCardsDiv>
         <SectionTitle color={"1"}>Mixing</SectionTitle>
         <FlipCardDiv>
-          <FlipCard color={"3"} numTracks={"1"} work={"Mix"} />
+          <FlipCard
+            color={"3"}
+            cardTitle={"Mix Editing Add-Ons"}
+            backText={
+              "After 2 weeks in the studio you have all the material recorded, but the music isn’t tight and flowing like you want it to be. Editing includes everything to do with tuning, stitching takes together, timing/quantization and audio repair (e.g. using RX7 to get rid of mouth sounds or fretboard slides). Let me know the track-by-track specifics of what you need help with in the message section of your inquiry for a more accurate quote!"
+            }
+            work={"Mix"}
+          />
           <MiddleDiv>
-            <BestDealText>Best Deal</BestDealText>
+            <BestDealText>Hire Now</BestDealText>
             <SolidFlipCard color={"1"} numTracks={"12"} work={"Mix"} />
           </MiddleDiv>
-          <FlipCard color={"3"} numTracks={"5"} work={"Mix"} />
+          <FlipCard
+            color={"3"}
+            cardTitle={"LP Deal (7+ tracks)"}
+            backText={
+              "The magnum opus, the concept album to end all concept albums, or just a larger handful of songs that belong together. Higher track-count projects take a lot of time, love, and care and may end up costing more than the standard rate. Budget at least 2-4 months for the whole process! Test mixes are charged as a single Standard Mix."
+            }
+            work={"Mix"}
+          />
         </FlipCardDiv>
 
         <SectionTitle color={"2"}>Mastering</SectionTitle>
         <FlipCardDiv>
-          <FlipCard color={"1"} numTracks={"1"} work={"Master"} />
+          <FlipCard
+            color={"1"}
+            cardTitle={"DDP"}
+            backText={
+              "Some labels might ask for a DDP file for physical distribution. DDP files contain all the track data needed for CDs (title & artist related info, gaps between tracks etc) and require a specific application to create."
+            }
+            work={"Master"}
+          />
           <MiddleDiv>
-            <BestDealText>Best Deal</BestDealText>
+            <BestDealText>Hire Now</BestDealText>
             <SolidFlipCard color={"2"} numTracks={"12"} work={"Master"} />
           </MiddleDiv>
-          <FlipCard color={"1"} numTracks={"5"} work={"Master"} />
+          <FlipCard
+            color={"1"}
+            cardTitle={"Full album master (7+ tracks)"}
+            backText={
+              "Continuity and flow is crucial for a full album. It takes more work and a higher level of concentration & consistency to put together larger quantities of masters. Prices will be slightly higher and please allow at least 2 weeks turnaround."
+            }
+            work={"Master"}
+          />
         </FlipCardDiv>
 
-        <SectionTitle color={"3"}>Mixing & Mastering</SectionTitle>
+        {/* <SectionTitle color={"3"}>Mixing & Mastering</SectionTitle>
         <FlipCardDiv>
           <FlipCard color={"2"} numTracks={"1"} work={"MixMaster"} />
           <MiddleDiv>
-            <BestDealText>Best Deal</BestDealText>
+            <BestDealText>Hire Now</BestDealText>
             <SolidFlipCard
               color={"3"}
               numTracks={"12"}
@@ -120,7 +148,7 @@ const Pricing = () => {
             />
           </MiddleDiv>
           <FlipCard color={"2"} numTracks={"5"} work={"MixMaster"} />
-        </FlipCardDiv>
+        </FlipCardDiv> */}
       </AllCardsDiv>
       <CenteringDiv>
         <LinkButton to="/hire" color={"3"}>

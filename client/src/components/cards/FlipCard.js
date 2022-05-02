@@ -11,40 +11,16 @@ import {
   CardLinkButton,
 } from "../../styled/card";
 
-const FlipCard = ({ color, numTracks, work }) => {
-  const trackOrTracks = numTracks === "1" ? "Track" : "Tracks";
+const FlipCard = ({ color, work, cardTitle, backText }) => {
   return (
     <Card>
       <ColoredCardFront color={color}>
-        <ColoredHeadingFront>
-          {numTracks} {trackOrTracks}
-        </ColoredHeadingFront>
+        <ColoredHeadingFront>{cardTitle}</ColoredHeadingFront>
       </ColoredCardFront>
       <CardBack>
-        <CardHeadingBack>
-          {numTracks} {trackOrTracks}
-        </CardHeadingBack>
-        <CardBackBody color={color}>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-          <li>Four</li>
-          <li>Five</li>
-          <li>Six</li>
-          <li>Seven</li>
-          <li>Eight</li>
-          <li>Nine</li>
-          <li>Ten</li>
-          <li>Eleven</li>
-          <li>Twelve</li>
-          <li>Thirteen</li>
-          <li>Fourteen</li>
-          <li>Fifteen</li>
-        </CardBackBody>
-        <CardLinkButton
-          to={`/hire?tracks=${numTracks}&work=${work}`}
-          color={color}
-        >
+        <CardHeadingBack>{cardTitle}</CardHeadingBack>
+        <CardBackBody color={color}>{backText}</CardBackBody>
+        <CardLinkButton to={`/hire?work=${work}`} color={color}>
           Inquire
         </CardLinkButton>
       </CardBack>

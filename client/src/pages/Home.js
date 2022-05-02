@@ -217,10 +217,10 @@ const Home = () => {
   return (
     <>
       <title>Joel Gardella | Audio Engineer</title>
-      <WholeScreenDiv src={joelHomeImg} />
+      <WholeScreenDiv src={studioImg} />
       <HomeDiv>
         {/* <SlideInItem style={slideIn}>WEEEEE!!!</SlideInItem> */}
-        <HomeHeader>Joel Gardella</HomeHeader>
+        <HomeHeader>Audio Engineer</HomeHeader>
         <DescriptorDiv>
           <DescriptorLink to="/about">Audio Engineer</DescriptorLink>
           <DescriptorLink to="/">Production</DescriptorLink>

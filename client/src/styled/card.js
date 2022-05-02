@@ -24,7 +24,7 @@ export const Card = styled.div`
 const CardSide = styled.div`
   font-size: 2rem;
   text-align: center;
-  height: 30rem;
+  height: 35rem;
   transition: all 0.8s ease;
   position: absolute;
   top: 0;
@@ -72,16 +72,18 @@ export const SolidHeadingFront = styled(CardHeading)`
 export const CardBack = styled(CardSide)`
   transform: rotateY(180deg);
   background-color: ${(props) => props.theme.color.textDark};
-  display: grid;
-  grid-template-rows: 20% 55% 25%;
+  padding: 0.8rem 0;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 
 export const SolidCardBack = styled(SolidCardSide)`
   transform: rotateY(180deg);
   background-color: ${(props) => props.theme.color.textDark};
-  display: grid;
-  grid-template-rows: 20% 55% 25%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 
@@ -91,19 +93,18 @@ export const CardHeadingBack = styled(CardHeading)`
   margin: auto 0;
 `;
 
-export const CardBackBody = styled.ul`
+export const CardBackBody = styled.p`
   color: ${(props) => props.theme.color.textLight};
-  width: 65%;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0.5rem 0 0.5rem 2.8rem;
+  width: 75%;
+  flex: 1;
+  /* height: 100%; */
+  margin: 0.8rem auto;
+  padding: 0.5rem;
   border: 2px solid ${({ color }) => handleColorType(color)};
   border-radius: 5px;
   overflow-y: hidden;
   text-align: left;
   font-size: 1.4rem;
-  list-style-type: circle;
-  list-style-position: outside;
 
   &::-webkit-scrollbar {
     width: 5px;
