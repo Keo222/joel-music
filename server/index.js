@@ -22,7 +22,7 @@ app.get("/api/tracks", async (req, res) => {
     res.json(allTracks.rows);
   } catch (err) {
     console.error(err.message);
-    res.send("Error getting single track", err);
+    res.status(err).body("Error getting single track");
   }
 });
 
