@@ -21,7 +21,6 @@ const AdminTracksDiv = styled.div`
   margin: 2rem auto;
   @media screen and (${(props) => props.theme.responsive.md}) {
     width: 100vw;
-    overflow-x: hidden;
   }
 `;
 

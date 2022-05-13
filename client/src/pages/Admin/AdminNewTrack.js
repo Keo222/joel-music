@@ -39,9 +39,11 @@ const AdminTracks = () => {
   const getGenres = async () => {
     const response = await fetch("/api/genres/");
     const allGenres = await response.json();
-    const sortedGenres = allGenres.sort((a, b) =>
-      a.genre_name.toLowerCase() > b.genre_name.toLowerCase() ? 1 : -1
-    );
+    const sortedGenres = allGenres
+      .sort((a, b) =>
+        a.genre_name.toLowerCase() > b.genre_name.toLowerCase() ? 1 : -1
+      )
+      .map((g) => g.genre_name);
     setGenreList(sortedGenres);
   };
 
@@ -50,7 +52,10 @@ const AdminTracks = () => {
   }, []);
 
   useEffect(() => {
-    setGenre(genreList[0].genre_name);
+    if (genreList !== []) {
+      setGenre(genreList[0]);
+      console.log(genreList);
+    }
   }, [genreList]);
 
   const navigate = useNavigate();
@@ -190,8 +195,8 @@ const AdminTracks = () => {
               onChange={(e) => setGenre(e.target.value)}
             >
               {genreList.map((g) => (
-                <option key={g.genre_name} value={g.genre_name}>
-                  {g.genre_name}
+                <option key={g} value={g}>
+                  {g}
                 </option>
               ))}
             </select>
