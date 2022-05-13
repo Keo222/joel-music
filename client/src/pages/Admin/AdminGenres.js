@@ -6,6 +6,7 @@ import garbage from "../../icons/garbage-red.svg";
 
 // Imported Styled Elements
 import { PageHeading } from "../../styled/typography";
+import { ErrorMessage } from "../../styled/forms";
 
 // Styled Elements
 
@@ -107,11 +108,6 @@ const InputText = styled.input`
   flex: 1;
 `;
 
-const ErrorMessage = styled.p`
-  color: ${(props) => props.theme.color.errorRed};
-  font-size: 1.2rem;
-`;
-
 const SubmitButton = styled.button`
   margin: ${(props) => (props.errorPresent ? "0.5rem 0 3rem" : "3rem 0")};
   border: none;
@@ -209,6 +205,7 @@ const Icon = styled.img`
 const AdminGenres = () => {
   const [genres, setGenres] = useState([]);
   const [newGenre, setNewGenre] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const [error, setError] = useState(false);
   const [reverseGenres, setReverseGenres] = useState(false);
   const [displayList, setDisplayList] = useState(true);
@@ -239,22 +236,33 @@ const AdminGenres = () => {
     };
     try {
       if (
-        !genres ||
-        newGenre === "" ||
-        genres.some((g) => g.genre_name === newGenre)
+        genres &&
+        !(newGenre === "") &&
+        !genres.some((g) => g.genre_name === newGenre) &&
+        newGenre.length <= 255
       ) {
+        const res = await fetch("/api/genres/", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(data),
+        });
+        console.log(res);
+        setGenres((genres) => [...genres, { genre_name: newGenre }]);
+        setNewGenre("");
+      } else {
+        e.preventDefault();
+        if (newGenre === "") {
+          setErrorMsg("Genre name can not be blank.");
+        } else if (genres.some((g) => g.genre_name === newGenre)) {
+          setErrorMsg("Genre name must be unique.");
+        } else if (newGenre.length > 255) {
+          setErrorMsg("Genre name too long.");
+        }
         setError(true);
         return;
       }
-      const res = await fetch("/api/genres/", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-      console.log(res);
-      setNewGenre("");
     } catch (err) {
       console.error(err.message);
     }
@@ -372,10 +380,11 @@ const AdminGenres = () => {
                 onChange={(e) => setNewGenre(e.target.value)}
               />
             </InputGroup>
-            {error && (
-              <ErrorMessage>Genre name must be unique.</ErrorMessage>
-            )}
-            <SubmitButton errorPresent={error} onClick={() => addGenre()}>
+            {error && <ErrorMessage>{errorMsg}</ErrorMessage>}
+            <SubmitButton
+              errorPresent={error}
+              onClick={(e) => addGenre(e)}
+            >
               Add Genre
             </SubmitButton>
           </AddNewForm>

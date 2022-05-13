@@ -11,15 +11,25 @@ import {
   SelectDiv,
   RadioDiv,
   SubmitButton,
+  ErrorMessage,
 } from "../../styled/forms";
 
 const AdminTracks = () => {
+  // Error states
+  const [nameError, setNameError] = useState(false);
+  const [albumError, setAlbumError] = useState(false);
+  const [artistError, setArtistError] = useState(false);
+  const [spotifyError, setSpotifyError] = useState(false);
+  const [tidalError, setTidalError] = useState(false);
+  const [appleError, setAppleError] = useState(false);
+
+  // Info states
   const [name, setName] = useState("");
   const [album, setAlbum] = useState("");
   const [artist, setArtist] = useState("");
   const [work, setWork] = useState("Mix");
   const [year, setYear] = useState("");
-  const [genre, setGenre] = useState("Alternative");
+  const [genre, setGenre] = useState("");
   const [featured, setFeatured] = useState(false);
   const [spotify, setSpotify] = useState("");
   const [tidal, setTidal] = useState("");
@@ -39,6 +49,10 @@ const AdminTracks = () => {
     getGenres();
   }, []);
 
+  useEffect(() => {
+    setGenre(genreList[0].genre_name);
+  }, [genreList]);
+
   const navigate = useNavigate();
 
   const addTrack = async (e) => {
@@ -56,6 +70,46 @@ const AdminTracks = () => {
       album: album,
     };
     try {
+      let errorPresent = false;
+      if (name.length > 255) {
+        setNameError(true);
+        errorPresent = true;
+      } else {
+        setNameError(false);
+      }
+      if (album.length > 255) {
+        setAlbumError(true);
+        errorPresent = true;
+      } else {
+        setAlbumError(false);
+      }
+      if (artist.length > 255) {
+        setArtistError(true);
+        errorPresent = true;
+      } else {
+        setArtistError(false);
+      }
+      if (!/\/[\d\w]+[?]/gm.test(spotify)) {
+        setSpotifyError(true);
+        errorPresent = true;
+      } else {
+        setSpotifyError(false);
+      }
+      if (!/\/[\d]+$/gm.test(tidal)) {
+        setTidalError(true);
+        errorPresent = true;
+      } else {
+        setTidalError(false);
+      }
+      if (!/\/[\d\w-%&]+\/[\d]+[?i=]{3}[\d]+/gm.test(apple)) {
+        setAppleError(true);
+        errorPresent = true;
+      } else {
+        setAppleError(false);
+      }
+      if (errorPresent) {
+        return;
+      }
       const res = await fetch("/api/tracks", {
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +136,9 @@ const AdminTracks = () => {
             id="name"
             placeholder='ex: "Bohemian Rhapsody"'
             onChange={(e) => setName(e.target.value)}
+            required
           />
+          {nameError && <ErrorMessage>Track name too long.</ErrorMessage>}
         </InputGroup>
         <InputGroup>
           <InputLabel htmlFor="album">Album:</InputLabel>
@@ -92,7 +148,9 @@ const AdminTracks = () => {
             id="album"
             placeholder='ex: "A Night at the Opera"'
             onChange={(e) => setAlbum(e.target.value)}
+            required
           />
+          {albumError && <ErrorMessage>Album name too long.</ErrorMessage>}
         </InputGroup>
         <InputGroup>
           <InputLabel htmlFor="artist">Artist:</InputLabel>
@@ -102,19 +160,24 @@ const AdminTracks = () => {
             id="artist"
             placeholder='ex: "Queen"'
             onChange={(e) => setArtist(e.target.value)}
+            required
           />
+          {artistError && (
+            <ErrorMessage>Artist name too long.</ErrorMessage>
+          )}
         </InputGroup>
         <InputGroup>
           <InputLabel htmlFor="year">Year:</InputLabel>
           <TextInput
             type="number"
-            min="1996"
-            max="2099"
+            min="1900"
+            max="2200"
             step="1"
             name="year"
             id="year"
             placeholder='ex: "2000"'
             onChange={(e) => setYear(e.target.value)}
+            required
           />
         </InputGroup>
 
@@ -127,7 +190,9 @@ const AdminTracks = () => {
               onChange={(e) => setGenre(e.target.value)}
             >
               {genreList.map((g) => (
-                <option value={g.genre_name}>{g.genre_name}</option>
+                <option key={g.genre_name} value={g.genre_name}>
+                  {g.genre_name}
+                </option>
               ))}
             </select>
           </InputGroup>
@@ -179,6 +244,9 @@ const AdminTracks = () => {
             placeholder='ex: "https://open.spotify.com/track/5eIDxmWYxRA0HJBYM9bIIS?si=668accca5b864e0b"'
             onChange={(e) => setSpotify(e.target.value)}
           />
+          {spotifyError && (
+            <ErrorMessage>Invalid Spotify source.</ErrorMessage>
+          )}
         </InputGroup>
 
         <InputGroup>
@@ -190,6 +258,9 @@ const AdminTracks = () => {
             placeholder='ex: "https://tidal.com/browse/track/77814875"'
             onChange={(e) => setTidal(e.target.value)}
           />
+          {tidalError && (
+            <ErrorMessage>Invalid Tidal source.</ErrorMessage>
+          )}
         </InputGroup>
 
         <InputGroup>
@@ -201,6 +272,9 @@ const AdminTracks = () => {
             placeholder='ex: "https://music.apple.com/us/album/bohemian-rhapsody/1440806041?i=1440806768"'
             onChange={(e) => setApple(e.target.value)}
           />
+          {appleError && (
+            <ErrorMessage>Invalid Apple Music source.</ErrorMessage>
+          )}
         </InputGroup>
 
         <SubmitButton type="submit">Add Track</SubmitButton>

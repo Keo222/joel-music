@@ -80,3 +80,9 @@ export const SubmitButton = styled.button`
 export const GridSubmitButton = styled(SubmitButton)`
   grid-column: 1 / -1;
 `;
+
+export const ErrorMessage = styled.p`
+  color: ${(props) => props.theme.color.errorRed};
+  font-size: 1.2rem;
+  text-align: center;
+`;
