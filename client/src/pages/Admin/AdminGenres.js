@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 // Helper Functions
-import { getGenres } from "../../functions/trackCRUD";
+import { getGenres } from "../../functions/genreCRUD";
 
 // Icons
 import garbage from "../../icons/garbage-red.svg";
