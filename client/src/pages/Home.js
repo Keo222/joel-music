@@ -58,14 +58,15 @@ const HomeHeader = styled(PageHeading)`
 `;
 
 const DescriptorDiv = styled.div`
-  display: flex;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: auto;
   width: 85%;
-  flex: 1;
-  justify-content: space-evenly;
-  align-items: center;
   @media screen and (${(props) => props.theme.responsive.lg}) {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+    gap: 5rem;
   }
   @media screen and (${(props) => props.theme.responsive.xs}) {
     width: 80%;
@@ -77,7 +78,7 @@ const DescriptorLink = styled(Link)`
   color: ${(props) => props.theme.color.textLight};
   font-size: 2.4rem;
   font-weight: 200;
-  margin-bottom: 1.5rem;
+  margin: auto;
   transition: color 0.3s;
   grid-column: span ${(props) => (props.span ? props.span : 1)};
 
@@ -216,15 +217,15 @@ const Home = () => {
 
   return (
     <>
-      <title>Joel Gardella | Audio Engineer</title>
+      <title>Audio Engineer</title>
       <WholeScreenDiv src={studioImg} />
       <HomeDiv>
         {/* <SlideInItem style={slideIn}>WEEEEE!!!</SlideInItem> */}
         <HomeHeader>Audio Engineer</HomeHeader>
         <DescriptorDiv>
           <DescriptorLink to="/about">Audio Engineer</DescriptorLink>
-          <DescriptorLink to="/">Production</DescriptorLink>
-          <DescriptorLink to="/">Mixing & Mastering</DescriptorLink>
+          <DescriptorLink to="/pricing">Production</DescriptorLink>
+          <DescriptorLink to="/pricing">Mixing & Mastering</DescriptorLink>
         </DescriptorDiv>
         <ButtonDiv>
           <HomePgLinkButton to="/listen" color={"1"}>
