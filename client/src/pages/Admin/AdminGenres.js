@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+// Helper Functions
+import { getGenres } from "../../functions/trackCRUD";
+
 // Icons
 import garbage from "../../icons/garbage-red.svg";
 
@@ -210,14 +213,13 @@ const AdminGenres = () => {
   const [reverseGenres, setReverseGenres] = useState(false);
   const [displayList, setDisplayList] = useState(true);
 
-  const getGenres = async () => {
-    const response = await fetch("/api/genres/");
-    const allGenres = await response.json();
+  const fetchGenres = async () => {
+    const allGenres = await getGenres();
     setGenres(allGenres);
   };
 
   useEffect(() => {
-    getGenres();
+    fetchGenres();
   }, []);
 
   let sortedGenres = reverseGenres

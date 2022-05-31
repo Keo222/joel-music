@@ -4,14 +4,17 @@ import styled from "styled-components";
 // Styled Elements
 const BlurredBackground = styled.div`
   z-index: 200;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  position: fixed;
-  top: 0px;
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  /* display: flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: center; */
 `;
 const DeleteTrackModal = styled.div`
   width: 60%;

@@ -2,12 +2,15 @@ import React, { useState, useEffect, useReducer } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+// Helper Functions
+import { deleteTrack, getTracks } from "../../functions/trackCRUD";
+
 // Icons
 import garbage from "../../icons/garbage-red.svg";
 import edit from "../../icons/edit-yellow.svg";
 
 // Components
-import DeleteTrackPopup from "../../components/DeleteTrackPopup";
+import DeleteTrackPopup from "../../components/Admin/DeleteTrackPopup";
 
 // Imported Styled Elements
 import { PageHeading } from "../../styled/typography";
@@ -165,9 +168,8 @@ const Icon = styled.img`
   }
 `;
 
-// Styled Elements
-
 const Admin = () => {
+  // STATE HANDLERS
   const [tracks, setTracks] = useState([]);
   const [deleteId, setDeleteId] = useState(null);
   const [deleteTrackInfo, setDeleteTrackInfo] = useState({});
@@ -220,39 +222,31 @@ const Admin = () => {
     }
   };
 
-  async function getTracks() {
-    const response = await fetch("/api/tracks/");
-    const allTracks = await response.json();
+  // Get tracks and sort them by track id. Give them order number and then set to tracks state
+  const fetchTracks = async () => {
+    const allTracks = await getTracks();
     const sortedAndNumberedTracks = allTracks
       .sort((a, b) => (a.track_id > b.track_id ? 1 : -1))
       .map((t, i) => ({ ...t, numOrder: i + 1 }));
     setTracks(sortedAndNumberedTracks);
-  }
+  };
 
   const openDeletePopup = (id) => {
     setDeleteId(id);
     togglePopup();
   };
 
-  const deleteTrack = async () => {
-    let data = { id: deleteId };
-    try {
-      const response = await fetch("/api/tracks", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "DELETE",
-        body: JSON.stringify(data),
-      });
-      console.log(response);
-      getTracks();
-    } catch (err) {
-      console.error(err);
+  const removeTrack = async () => {
+    const res = await deleteTrack(deleteId);
+    if (res.ok) {
+      fetchTracks();
+    } else {
+      console.error("Error deleting track.");
     }
   };
 
   useEffect(() => {
-    getTracks();
+    fetchTracks();
   }, []);
 
   useEffect(() => {
@@ -264,15 +258,15 @@ const Admin = () => {
   return (
     <>
       <title>JG Admin | Tracks</title>
+      {popupOpen && (
+        <DeleteTrackPopup
+          togglePopup={togglePopup}
+          deleteTrack={removeTrack}
+          name={deleteTrackInfo.track_name}
+          artist={deleteTrackInfo.track_artist}
+        />
+      )}
       <AdminTracksDiv>
-        {popupOpen && (
-          <DeleteTrackPopup
-            togglePopup={togglePopup}
-            deleteTrack={deleteTrack}
-            name={deleteTrackInfo.track_name}
-            artist={deleteTrackInfo.track_artist}
-          />
-        )}
         <PageHeading>Tracks</PageHeading>
         <NewTrackButton to="/admin/tracks/new">Add Track</NewTrackButton>
         <Table>
@@ -347,7 +341,6 @@ const Admin = () => {
                     src={garbage}
                     alt="Delete Button"
                     onClick={() => openDeletePopup(t.track_id)}
-                    // onClick={() => deleteTrack(t.track_id)}
                   />
                 </TableIcon>
               </TableRow>
